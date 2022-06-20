@@ -33,6 +33,7 @@
  '(display-line-numbers-minor-tick 10)
  '(display-line-numbers-width 5)
  '(dynamic-completion-mode t)
+ '(global-flycheck-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
  '(helm-ag-base-command "ag --nocolor --nogroup --vimgrep")
@@ -50,7 +51,8 @@
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
 	 ("gnu" . "https://elpa.gnu.org/packages/")
 	 ("melpa" . "https://melpa.org/packages/")))
- '(package-selected-packages '(json-mode helm-ag helm-ls-git helm bind-key))
+ '(package-selected-packages
+   '(flycheck json-mode helm-ag helm-ls-git helm bind-key))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
