@@ -51,8 +51,7 @@
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
 	 ("gnu" . "https://elpa.gnu.org/packages/")
 	 ("melpa" . "https://melpa.org/packages/")))
- '(package-selected-packages
-   '(flycheck json-mode helm-ag helm-ls-git helm bind-key))
+ '(package-selected-packages '(json-mode helm-ag helm-ls-git helm bind-key))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
@@ -119,4 +118,15 @@
 (add-to-list 'auto-mode-alist '("\\.geom\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.glsl\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . c++-mode))
+
+(defun center-frame-on-screen (&optional frame)
+  ;; Center FRAME on the screen.
+  ;; Frame be a frame name, a terminal name, or a frame.
+  ;; If FRAME is omitted or nil, use currently selected frame.
+  (interactive)
+  (unless (eq 'maximised (frame-parameter nil 'fullscreen))
+    (modify-frame-parameters
+     frame '((user-position . t) (top . 0.5) (left . 0.5)))))
+
+(center-frame-on-screen (selected-frame))
 
