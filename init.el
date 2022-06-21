@@ -51,7 +51,7 @@
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
- '(package-selected-packages '(json-mode helm-ag helm-ls-git helm bind-key))
+ '(package-selected-packages '(glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
@@ -82,6 +82,10 @@
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
     (package-install package)))
+
+(setq load-path (cons "~/.emacs.d/local" load-path))
+
+(autoload 'hlsl-mode "hlsl-mode" nil t)
 
 (require 'bind-key)
 
@@ -115,11 +119,12 @@
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.vert\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.frag\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.geom\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.glsl\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.hlsl\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.geom\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.fx\\'" . hlsl-mode))
+(add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
 
 (defun center-frame-on-screen (&optional frame)
   ;; Center FRAME on the screen.
