@@ -88,7 +88,8 @@
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
-(setq helm-dabbrev-separator-regexp "\\s-\\|\t\\|[(\\[\\{\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)_\\?+]\\|\\s\\\\|^\n\\|^")
+(setq helm-dabbrev-separator-regexp
+      "\\s-\\|\t\\|[(\\[\\{\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)_\\?+]\\|\\s\\\\|^\n\\|^")
 
 (require 'helm-ls-git)
 
