@@ -89,7 +89,7 @@
 (require 'helm-config)
 (helm-mode 1)
 (setq helm-dabbrev-separator-regexp
-      "\\s-\\|\t\\|[(\\[\\{\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)_\\?+]\\|\\s\\\\|^\n\\|^")
+      "\\s-\\|\t\\|[(\\[\\{}\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)_\\?+]\\|\\s\\\\|^\n\\|^")
 
 (require 'helm-ls-git)
 
@@ -101,6 +101,7 @@
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
 
 ;; Bind keys.
+(unbind-key "C-\\" isearch-mode-map)
 (bind-key* "C-\\" 'undo)
 (bind-key "C-<f12>" 'other-window)
 (bind-key "C-z" nil)
