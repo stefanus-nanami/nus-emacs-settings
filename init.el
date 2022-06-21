@@ -13,16 +13,16 @@
  '(c-basic-offset 4)
  '(c-hanging-braces-alist
    '((block-close . c-snug-do-while)
-	 (statement-cont)
-	 (brace-list-open)
-	 (brace-entry-open)
-	 (extern-lang-open after)
-	 (namespace-open after)
-	 (module-open after)
-	 (composition-open after)
-	 (inexpr-class-open after)
-	 (inexpr-class-close before)
-	 (arglist-cont-nonempty)))
+     (statement-cont)
+     (brace-list-open)
+     (brace-entry-open)
+     (extern-lang-open after)
+     (namespace-open after)
+     (module-open after)
+     (composition-open after)
+     (inexpr-class-open after)
+     (inexpr-class-close before)
+     (arglist-cont-nonempty)))
  '(c-offsets-alist '((substatement-open . +)))
  '(completion-search-distance 0)
  '(completion-styles '(flex basic partial-completion emacs22))
@@ -49,8 +49,8 @@
  '(inhibit-startup-screen t)
  '(package-archives
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
-	 ("gnu" . "https://elpa.gnu.org/packages/")
-	 ("melpa" . "https://melpa.org/packages/")))
+     ("gnu" . "https://elpa.gnu.org/packages/")
+     ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages '(json-mode helm-ag helm-ls-git helm bind-key))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
@@ -64,7 +64,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "outline" :slant normal :weight normal :height 98 :width normal))))
  '(line-number ((t (:foreground "PaleVioletRed4"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "red"))))
  '(line-number-major-tick ((t (:background "gray17" :foreground "white"))))
@@ -89,6 +88,7 @@
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
+(setq helm-dabbrev-separator-regexp "\\s-\\|\t\\|[(\\[\\{\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)_\\?+]\\|\\s\\\\|^\n\\|^")
 
 (require 'helm-ls-git)
 
@@ -100,16 +100,16 @@
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
 
 ;; Bind keys.
-(bind-key "C-\\" 'undo)
+(bind-key* "C-\\" 'undo)
 (bind-key "C-<f12>" 'other-window)
 (bind-key "C-z" nil)
 (bind-key "C-;" 'complete)
 (bind-key "C-'" 'helm-dabbrev)
 (bind-key "M-x" 'helm-M-x)
-(bind-key "C-c o" 'helm-find-files)
+(bind-key "C-x C-f" 'helm-find-files)
 (bind-key "C-c g" 'helm-do-ag)
 (bind-key "C-c b" 'helm-do-ag-buffers)
-(bind-key "\<f2>" 'helm-buffers-list)
+(bind-key "<f2>" 'helm-buffers-list)
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -129,4 +129,8 @@
      frame '((user-position . t) (top . 0.5) (left . 0.5)))))
 
 (center-frame-on-screen (selected-frame))
+
+;; Local Variables:
+;; indent-tabs-mode: nil
+;; End:
 
