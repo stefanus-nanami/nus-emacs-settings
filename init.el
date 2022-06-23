@@ -101,6 +101,8 @@
 
 (require 'json-mode)
 
+(require 'nus)
+
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
 
