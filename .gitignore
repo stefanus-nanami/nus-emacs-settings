@@ -3,5 +3,6 @@ backups/
 elpa/
 completions
 network-security.data
-
 server/
+local/*.elc
+
