@@ -93,7 +93,7 @@
 (require 'helm-config)
 (helm-mode 1)
 (setq helm-dabbrev-separator-regexp
-      "\\s-\\|\t\\|[(\\[\\{}\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)_\\?+]\\|\\s\\\\|^\n\\|^")
+      "\\s-\\|\t\\|[(\\[\\{}\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)\\?+]\\|\\s\\\\|^\n\\|^")
 
 (require 'helm-ls-git)
 
@@ -102,6 +102,8 @@
 (require 'json-mode)
 
 (require 'nus)
+
+(require 'wnd-pos)
 
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
@@ -127,15 +129,6 @@
 (add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.fx\\'" . hlsl-mode))
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
-
-(defun center-frame-on-screen (&optional frame)
-  ;; Center FRAME on the screen.
-  ;; Frame be a frame name, a terminal name, or a frame.
-  ;; If FRAME is omitted or nil, use currently selected frame.
-  (interactive)
-  (unless (eq 'maximised (frame-parameter nil 'fullscreen))
-    (modify-frame-parameters
-     frame '((user-position . t) (top . 0.5) (left . 0.5)))))
 
 (center-frame-on-screen (selected-frame))
 
