@@ -23,7 +23,7 @@
      (inexpr-class-open after)
      (inexpr-class-close before)
      (arglist-cont-nonempty)))
- '(c-offsets-alist '((substatement-open . +)))
+ '(c-offsets-alist '((substatement-open . 0)))
  '(completion-search-distance 0)
  '(completion-styles '(flex basic partial-completion emacs22))
  '(current-language-environment "Japanese")
@@ -130,7 +130,8 @@
 (add-to-list 'auto-mode-alist '("\\.fx\\'" . hlsl-mode))
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
 
-(center-frame-on-screen (selected-frame))
+;; Center current window.
+(arrange-frame-center (selected-frame))
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil
