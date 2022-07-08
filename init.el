@@ -51,7 +51,8 @@
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
- '(package-selected-packages '(glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+ '(package-selected-packages
+   '(csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
