@@ -43,11 +43,11 @@
  '(helm-ag-insert-at-point 'symbol)
  '(helm-ag-use-agignore 1)
  '(helm-boring-buffer-regexp-list
-   '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*Customize" "\\`\\*Messages" "\\`\\*info"))
+   '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc"))
  '(helm-buffer-max-length nil)
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
-   '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*Customize \\*"))
+   '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
  '(inhibit-startup-screen t)
  '(lsp-keymap-prefix "C-c l")
  '(package-archives
