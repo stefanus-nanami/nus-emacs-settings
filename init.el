@@ -1,4 +1,4 @@
-;; Nus' init.el
+;; Nus' init.el  -*- lexical-binding: t; -*-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -23,6 +23,7 @@
      (inexpr-class-open after)
      (inexpr-class-close before)
      (arglist-cont-nonempty)))
+ '(c-mode-common-hook '(lsp))
  '(c-offsets-alist '((substatement-open . 0)))
  '(completion-search-distance 0)
  '(completion-styles '(flex basic partial-completion emacs22))
@@ -33,6 +34,7 @@
  '(display-line-numbers-minor-tick 10)
  '(display-line-numbers-width 5)
  '(dynamic-completion-mode t)
+ '(electric-pair-mode t)
  '(global-flycheck-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
@@ -47,12 +49,13 @@
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*Customize \\*"))
  '(inhibit-startup-screen t)
+ '(lsp-keymap-prefix "C-c l")
  '(package-archives
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
@@ -65,6 +68,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(line-number ((t (:foreground "PaleVioletRed4"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "red"))))
  '(line-number-major-tick ((t (:background "gray17" :foreground "white"))))
@@ -90,6 +94,8 @@
 
 (require 'bind-key)
 
+(require 'lsp-mode)
+
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
@@ -97,14 +103,18 @@
       "\\s-\\|\t\\|[(\\[\\{}\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)\\?+]\\|\\s\\\\|^\n\\|^")
 
 (require 'helm-ls-git)
-
 (require 'helm-ag)
+(require 'helm-xref)
+(require 'helm-lsp)
 
 (require 'json-mode)
 
 (require 'nus)
 
 (require 'wnd-pos)
+
+(require 'function-args)
+(fa-config-default)
 
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
@@ -113,14 +123,18 @@
 (unbind-key "C-\\" isearch-mode-map)
 (bind-key* "C-\\" 'undo)
 (bind-key "C-<f12>" 'other-window)
-(bind-key "C-z" nil)
-(bind-key "C-;" 'complete)
+(unbind-key "C-z" global-map)
+(bind-key "C-;" 'completion-at-point)
 (bind-key "C-'" 'helm-dabbrev)
-(bind-key "M-x" 'helm-M-x)
-(bind-key "C-x C-f" 'helm-find-files)
 (bind-key "C-c g" 'helm-do-ag)
 (bind-key "C-c b" 'helm-do-ag-buffers)
 (bind-key "<f2>" 'helm-buffers-list)
+(bind-keys :map lsp-mode-map
+           ([remap xref-find-apropos] . helm-lsp-workspace-symbol))
+(bind-keys :map global-map
+           ([remap find-file] . helm-find-files)
+           ([remap execute-extended-command] . helm-M-x)
+           ([remap switch-to-buffer] . helm-mini))
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
