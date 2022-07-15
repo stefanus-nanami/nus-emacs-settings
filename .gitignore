@@ -6,3 +6,5 @@ network-security.data
 server/
 local/*.elc
 
+.lsp-session*
+semanticdb

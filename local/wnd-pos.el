@@ -24,8 +24,9 @@
                 wnd-pos-f-double-width (* (frame-pixel-width) 2)
                 wnd-pos-margin (/ (- wnd-pos-wa-width wnd-pos-f-double-width) 3)
                 wnd-pos-mr (- 1.0 (/ (float wnd-pos-margin) (float wnd-pos-width)))
+                wnd-pos (min 1.0 wnd-pos-mr)
                 wnd-pos-frame-parameters '((user-position . t) (top . 0.5)))
-    (add-to-list 'wnd-pos-frame-parameters `(left . ,wnd-pos-mr))
+    (add-to-list 'wnd-pos-frame-parameters `(left . ,wnd-pos))
     (modify-frame-parameters frame wnd-pos-frame-parameters)))
 
 (defun arrange-frame-left (&optional frame)
@@ -41,8 +42,9 @@
                 wnd-pos-f-double-width (* (frame-pixel-width) 2)
                 wnd-pos-margin (/ (- wnd-pos-wa-width wnd-pos-f-double-width) 3)
                 wnd-pos-mr (/ (float wnd-pos-margin) (float wnd-pos-width))
+                wnd-pos (max 0.0 wnd-pos-mr)
                 wnd-pos-frame-parameters '((user-position . t) (top . 0.5)))
-    (add-to-list 'wnd-pos-frame-parameters `(left . ,wnd-pos-mr))
+    (add-to-list 'wnd-pos-frame-parameters `(left . ,wnd-pos))
     (modify-frame-parameters frame wnd-pos-frame-parameters)))
 
 ;; Local Variables:
