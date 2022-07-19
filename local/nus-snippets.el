@@ -1,6 +1,8 @@
-; Nus専用の関数
+;;; nus-snippets.el --- Snippets
+;;; Commentary:
+;;; My snippets.
 
-(provide 'nus)
+;;; Code:
 
 (defun nus-class (name)
   "C++ class snippet."
@@ -15,8 +17,7 @@
   (insert "\n")
   (insert "private:\n")
   (insert "\n")
-  (insert "};\n")
-  )
+  (insert "};\n"))
 
 (defun nus-doxyfile (name)
   "Insert file header comment."
@@ -29,8 +30,7 @@
   (insert "//!  @brief  \n")
   (insert "//!  @author \n")
   (insert "//!\n")
-  (insert "//=============================================================================\n")
-  )
+  (insert "//=============================================================================\n"))
 
 (defun nus-header (def)
   "Insert header guard."
@@ -44,8 +44,7 @@
   (insert "\n")
   (insert "\n")
   (insert "\n")
-  (insert "#endif\n")
-  )
+  (insert "#endif\n"))
 
 (defun nus-namesp (name)
   "C++ namespace snippet"
@@ -57,8 +56,7 @@
   (insert "\n")
   (insert "\n")
   (insert "\n")
-  (insert "}\n")
-  )
+  (insert "}\n"))
 
 (defun nus-doxyclass (name)
   "Insert class comment."
@@ -68,8 +66,7 @@
   (insert name)
   (insert "\n")
   (insert " * @brief \n")
-  (insert " */\n")
-  )
+  (insert " */\n"))
 
 (defun nus-doxynamesp (name)
   "Insert namespace comment."
@@ -79,18 +76,15 @@
   (insert name)
   (insert "\n")
   (insert " * @brief \n")
-  (insert " */\n")
-  )
+  (insert " */\n"))
 
 (defun nus-ctor ()
-  (interactive)
-  (insert "//! @brief Default constructor.\n")
-  )
+  (insert "//! @brief Default constructor.\n"))
 
 (defun nus-dtor ()
-  (interactive)
-  (insert "//! @brief Default destructor.\n")
-  )
+  (insert "//! @brief Default destructor.\n"))
+
+(provide 'nus-snippets)
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil

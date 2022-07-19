@@ -1,8 +1,8 @@
-;; hlsl-mode.el
-;; My hlsl-mode.
+;;; hlsl-mode.el --- HLSL mode
+;;; Commentary:
+;;; Basically just add keyword syntax highlighting.
 
-
-(provide 'hlsl-mode)
+;;; Code:
 
 (eval-when-compile
   (require 'cc-mode))
@@ -62,6 +62,8 @@
   "HLSL"
   "Major mode for editing HLSL shader files."
   (font-lock-add-keywords nil hlsl-keyword-list))
+
+(provide 'hlsl-mode)
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil

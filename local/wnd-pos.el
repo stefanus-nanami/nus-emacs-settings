@@ -1,6 +1,8 @@
-;; Window positioning functions.
+;;; wnd-pos.el --- Window positioning
+;;; Commentary:
+;;; Arrange window functions.
 
-(provide 'wnd-pos)
+;;; Code:
 
 (defun arrange-frame-center (&optional frame)
   ;; Center FRAME on the screen.
@@ -46,6 +48,8 @@
                 wnd-pos-frame-parameters '((user-position . t) (top . 0.5)))
     (add-to-list 'wnd-pos-frame-parameters `(left . ,wnd-pos))
     (modify-frame-parameters frame wnd-pos-frame-parameters)))
+
+(provide 'wnd-pos)
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil

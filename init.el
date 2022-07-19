@@ -1,5 +1,8 @@
-;; Nus' init.el  -*- lexical-binding: t; -*-
+;;; init.el --- init elisp script.
+;;; Commentary:
+;;; My initialization script.
 
+;;; Code:
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -24,7 +27,7 @@
      (inexpr-class-close before)
      (arglist-cont-nonempty)))
  '(c-mode-common-hook '(lsp))
- '(c-offsets-alist '((substatement-open . 0)))
+ '(c-offsets-alist '((substatement-open . +)))
  '(completion-search-distance 0)
  '(completion-styles '(flex basic partial-completion emacs22))
  '(current-language-environment "Japanese")
@@ -48,14 +51,20 @@
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
+ '(helm-dabbrev-separator-regexp
+   '("\\s-\\|\t\\|[(\\[\\{}\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)\\?+]\\|\\s\\\\|^\n\\|^"))
  '(inhibit-startup-screen t)
+ '(lsp-enable-file-watchers nil)
+ '(lsp-enable-indentation nil)
+ '(lsp-enable-on-type-formatting nil)
+ '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
  '(package-archives
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
@@ -89,18 +98,24 @@
     (package-install package)))
 
 (setq load-path (cons "~/.emacs.d/local" load-path))
-
 (autoload 'hlsl-mode "hlsl-mode" nil t)
+(autoload 'nus-snippets "nus-snippets" nil t)
+(autoload 'wnd-pos "wnd-pos" nil t)
+
+(require 'hlsl-mode)
+(require 'nus-snippets)
+(require 'wnd-pos)
 
 (require 'bind-key)
+
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (require 'lsp-mode)
 
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
-(setq helm-dabbrev-separator-regexp
-      "\\s-\\|\t\\|[(\\[\\{}\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)\\?+]\\|\\s\\\\|^\n\\|^")
 
 (require 'helm-ls-git)
 (require 'helm-ag)
@@ -108,10 +123,6 @@
 (require 'helm-lsp)
 
 (require 'json-mode)
-
-(require 'nus)
-
-(require 'wnd-pos)
 
 (require 'function-args)
 (fa-config-default)
@@ -129,12 +140,14 @@
 (bind-key "C-c g" 'helm-do-ag)
 (bind-key "C-c b" 'helm-do-ag-buffers)
 (bind-key "<f2>" 'helm-buffers-list)
+(bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-keys :map lsp-mode-map
            ([remap xref-find-apropos] . helm-lsp-workspace-symbol))
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x)
            ([remap switch-to-buffer] . helm-mini))
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -144,9 +157,6 @@
 (add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.fx\\'" . hlsl-mode))
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
-
-;; Center current window.
-(arrange-frame-center (selected-frame))
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil
