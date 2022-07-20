@@ -1,4 +1,4 @@
-;;; init.el --- init elisp script.
+﻿;;; init.el --- init elisp script.
 ;;; Commentary:
 ;;; My initialization script.
 
@@ -52,9 +52,9 @@
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
  '(helm-dabbrev-separator-regexp
-   '("\\s-\\|\t\\|[(\\[\\{}\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)\\?+]\\|\\s\\\\|^\n\\|^"))
+   '("\\s-\\|	\\|[(\\[\\{}\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)\\?+]\\|\\s\\\\|^
+\\|^"))
  '(inhibit-startup-screen t)
- '(lsp-enable-file-watchers nil)
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
@@ -141,13 +141,13 @@
 (bind-key "C-c b" 'helm-do-ag-buffers)
 (bind-key "<f2>" 'helm-buffers-list)
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
+(bind-key (concat lsp-keymap-prefix " g p") 'lsp-clangd-find-other-file)
 (bind-keys :map lsp-mode-map
            ([remap xref-find-apropos] . helm-lsp-workspace-symbol))
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x)
            ([remap switch-to-buffer] . helm-mini))
-(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
