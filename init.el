@@ -51,9 +51,7 @@
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
- '(helm-dabbrev-separator-regexp
-   '("\\s-\\|	\\|[(\\[\\{}\"'`=<>$;:,@.#\\*\\/\\+-&~%\\(\\)\\?+]\\|\\s\\\\|^
-\\|^"))
+ '(helm-dabbrev-separator-regexp "\\s-\\|	\\|[(\\[\\{\"'`=<$;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(inhibit-startup-screen t)
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
@@ -70,6 +68,7 @@
  '(tab-width 4)
  '(tool-bar-mode nil)
  '(truncate-lines t)
+ '(warning-suppress-log-types '((lsp-mode)))
  '(whitespace-style '(face trailing tabs tab-mark)))
 
 (custom-set-faces
