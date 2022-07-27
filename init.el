@@ -27,7 +27,7 @@
      (inexpr-class-close before)
      (arglist-cont-nonempty)))
  '(c-mode-common-hook '(lsp))
- '(c-offsets-alist '((substatement-open . +)))
+ '(c-offsets-alist nil)
  '(completion-search-distance 0)
  '(completion-styles '(flex basic partial-completion emacs22))
  '(current-language-environment "Japanese")
@@ -51,7 +51,7 @@
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
- '(helm-dabbrev-separator-regexp "\\s-\\|	\\|[(\\[\\{\"'`=<$;,@.#+]\\|\\s\\\\|^\\|^" t)
+ '(helm-dabbrev-separator-regexp "\\s-\\|	\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(inhibit-startup-screen t)
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
