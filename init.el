@@ -132,7 +132,7 @@
 ;; Bind keys.
 (unbind-key "C-\\" isearch-mode-map)
 (bind-key* "C-\\" 'undo)
-(bind-key "C-<f12>" 'other-window)
+;; (bind-key "C-<f12>" 'other-window)
 (unbind-key "C-z" global-map)
 (bind-key "C-;" 'completion-at-point)
 (bind-key "C-'" 'helm-dabbrev)
