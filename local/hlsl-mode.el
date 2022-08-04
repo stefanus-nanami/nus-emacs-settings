@@ -11,52 +11,17 @@
   "HLSL major mode version number.")
 
 (defconst hlsl-keywords
-  '("AppendStructuredBuffer"
-    "BlendState"
-    "Buffer"
-    "ByteAddressBuffer"
-    "CompileShader"
-    "ComputeShader"
-    "ConsumeStructuredBuffer"
-    "DepthStencilState"
-    "DepthStencilView"
-    "DomainShader"
-    "GeometryShader"
-    "Hullshader"
-    "InputPatch"
-    "LineStream"
-    "OutputPatch"
-    "PixelShader"
-    "PointStream"
-    "RasterizerState"
-    "RenderTargetView"
-    "RWBuffer"
-    "RWByteAddressBuffer"
-    "RWStructuredBuffer"
-    "RWTexture1D"
-    "RWTexture1DArray"
-    "RWTexture2D"
-    "RWTexture2DArray"
-    "RWTexture3D"
-    "SamplerState"
-    "SamplerComparisonState"
-    "StructuredBuffer"
-    "Texture1D"
-    "Texture1DArray"
-    "Texture2D"
-    "Texture2DArray"
-    "Texture2DMS"
-    "Texture2DMSArray"
-    "Texture3D"
-    "TextureCube"
-    "TextureCubeArray"
-    "TriangleStream"
-    "VertexShader"))
+"\\(\\b\\(\\(Append\\|Consume\\)?Structured\\|ByteAddress\\)?Buffer\\b\\)\\|\
+\\(\\bRW\\(ByteAddress\\|Structured\\)?Buffer\\b\\)\\|\
+\\(\\b\\(Compile\\|Compute\\|Domain\\|Geometry\\|Pixel\\|Hull\\|Vertex\\)Shader\\b\\)\\|\
+\\(\\b\\(\\(Sampler\\(Comparison\\)?\\)\\|\\(Blend\\|DepthStencil\\|Rasterizer\\)\\)State\\b\\)\\|\
+\\(\\b\\(DepthStencil\\|RenderTarget\\)View\\b\\)\\|\
+\\(\\b\\(In\\|Out\\)putPatch\\b\\)\\|\
+\\(\\b\\(Line\\|Point\\|Triangle\\)Stream\\b\\)\\|\
+\\(\\b\\(RW\\)?Texture\\([123]D\\|Cube\\)\\(\\(MS\\)?Array\\)?\\b\\)")
 
 (defconst hlsl-keyword-list
-  `(
-    (,(regexp-opt hlsl-keywords) . font-lock-keyword-face)
-    ))
+  `((,hlsl-keywords . font-lock-keyword-face)))
 
 (define-derived-mode hlsl-mode c-mode
   "HLSL"
