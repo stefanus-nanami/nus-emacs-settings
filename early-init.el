@@ -13,6 +13,13 @@
 (add-to-list 'default-frame-alist `(height . ,frame-height))
 (add-to-list 'default-frame-alist `(width . ,frame-width))
 
+(setq load-prefer-newer t)
+(add-to-list 'load-path "~/.emacs.d/local")
+
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
+
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:

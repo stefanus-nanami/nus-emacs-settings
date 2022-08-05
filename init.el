@@ -1,4 +1,4 @@
-﻿;;; init.el --- init elisp script.
+﻿;;; init.el --- init elisp script. -*- no-byte-compile: t -*-
 ;;; Commentary:
 ;;; My initialization script.
 
@@ -62,7 +62,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
@@ -140,6 +140,7 @@
 (bind-key "C-c b" 'helm-do-ag-buffers)
 (bind-key "<f2>" 'helm-buffers-list)
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
+(bind-key "C-|" 'undo-redo)
 (bind-key (concat lsp-keymap-prefix " g p") 'lsp-clangd-find-other-file)
 (bind-keys :map lsp-mode-map
            ([remap xref-find-apropos] . helm-lsp-workspace-symbol))
