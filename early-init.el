@@ -1,26 +1,28 @@
 ;; Set default window position and  size.
 
-(setq-local localhost-name (nth 0 (split-string system-name "\\."))
-            frame-width 140
-            frame-height 90)
+(setq-local localhost-name (nth 0 (split-string system-name "\\.")))
+
+(setq default-frame-alist
+      (append '((font . "Bitstream Vera Sans Mono-10"))
+              default-frame-alist))
+
+(add-to-list 'default-frame-alist '(tool-bar-lines . 0))
+(add-to-list 'default-frame-alist `(left . 0.5))
+(add-to-list 'default-frame-alist `(top . 0.5))
 
 (cond ((string= localhost-name "CT043472")
-       (setq-local frame-height 68 frame-width 120))
+       (add-to-list 'default-frame-alist `(width . 120))
+       (add-to-list 'default-frame-alist '(fullscreen . fullheight)))
       ((string= localhost-name "CT046608")
-       (setq-local frame-height 100 frame-width 140)))
-
-(setq default-frame-alist '((font . "Bitstream Vera Sans Mono-10")))
-(add-to-list 'default-frame-alist `(height . ,frame-height))
-(add-to-list 'default-frame-alist `(width . ,frame-width))
+       (add-to-list 'default-frame-alist `(height . 100))
+       (add-to-list 'default-frame-alist `(width . 140)))
+      (t
+       (add-to-list 'default-frame-alist `(height . 90))
+       (add-to-list 'default-frame-alist `(width . 140))))
 
 (setq load-prefer-newer t)
 (add-to-list 'load-path "~/.emacs.d/local")
 
-(require 'auto-compile)
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
-
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
-

@@ -87,6 +87,11 @@
 ;; Activate all the packages.
 (package-initialize)
 
+;; Auto compile everything.
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
+
 ;; Fetch the list of packages available.
 (unless package-archive-contents
   (package-refresh-contents))
