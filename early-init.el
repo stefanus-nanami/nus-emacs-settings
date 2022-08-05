@@ -7,16 +7,18 @@
               default-frame-alist))
 
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
-(add-to-list 'default-frame-alist `(left . 0.5))
-(add-to-list 'default-frame-alist `(top . 0.5))
 
 (cond ((string= localhost-name "CT043472")
+       (add-to-list 'default-frame-alist `(left . 0.5))
+       (add-to-list 'default-frame-alist `(top . 0.5))
        (add-to-list 'default-frame-alist `(width . 120))
        (add-to-list 'default-frame-alist '(fullscreen . fullheight)))
       ((string= localhost-name "CT046608")
        (add-to-list 'default-frame-alist `(height . 100))
        (add-to-list 'default-frame-alist `(width . 140)))
       (t
+       (add-to-list 'default-frame-alist `(left . 0))
+       (add-to-list 'default-frame-alist `(top . 0))
        (add-to-list 'default-frame-alist `(height . 90))
        (add-to-list 'default-frame-alist `(width . 140))))
 
