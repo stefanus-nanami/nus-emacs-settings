@@ -62,13 +62,15 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+ '(projectile-completion-system 'helm)
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
  '(tool-bar-mode nil)
  '(truncate-lines t)
  '(warning-suppress-log-types '((lsp-mode)))
+ '(warning-suppress-types '((emacs)))
  '(whitespace-style '(face trailing tabs tab-mark)))
 
 (custom-set-faces
@@ -117,6 +119,8 @@
 
 (require 'lsp-mode)
 
+(require 'projectile)
+
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
@@ -125,11 +129,17 @@
 (require 'helm-ag)
 (require 'helm-xref)
 (require 'helm-lsp)
+(require 'helm-projectile)
 
 (require 'json-mode)
 
 (require 'function-args)
 (fa-config-default)
+
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+(helm-projectile-on)
 
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
@@ -143,7 +153,7 @@
 (bind-key "C-'" 'helm-dabbrev)
 (bind-key "C-c g" 'helm-do-ag)
 (bind-key "C-c b" 'helm-do-ag-buffers)
-(bind-key "<f2>" 'helm-buffers-list)
+(bind-key "<f2>" 'helm-mini)
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-|" 'undo-redo)
 (bind-key (concat lsp-keymap-prefix " g p") 'lsp-clangd-find-other-file)
@@ -151,8 +161,7 @@
            ([remap xref-find-apropos] . helm-lsp-workspace-symbol))
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
-           ([remap execute-extended-command] . helm-M-x)
-           ([remap switch-to-buffer] . helm-mini))
+           ([remap execute-extended-command] . helm-M-x))
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
