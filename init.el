@@ -87,11 +87,6 @@
 ;; Activate all the packages.
 (package-initialize)
 
-;; Auto compile everything.
-(require 'auto-compile)
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
-
 ;; Fetch the list of packages available.
 (unless package-archive-contents
   (package-refresh-contents))
@@ -100,6 +95,11 @@
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
     (package-install package)))
+
+;; Auto compile everything.
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
 
 (setq load-path (cons "~/.emacs.d/local" load-path))
 (autoload 'hlsl-mode "hlsl-mode" nil t)
