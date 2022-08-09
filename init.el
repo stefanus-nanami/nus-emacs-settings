@@ -64,6 +64,7 @@
  '(package-selected-packages
    '(helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
+ '(projectile-globally-ignored-file-suffixes '(".exe" ".dll" ".pdb" ".lib" ".obj"))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
