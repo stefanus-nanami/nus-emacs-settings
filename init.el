@@ -41,8 +41,6 @@
  '(global-flycheck-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
- '(helm-ag-base-command "ag --nocolor --nogroup --vimgrep")
- '(helm-ag-command-option "--all-text")
  '(helm-ag-insert-at-point 'symbol)
  '(helm-ag-use-agignore 1)
  '(helm-boring-buffer-regexp-list
