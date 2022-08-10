@@ -8,3 +8,6 @@ local/*.elc
 
 .lsp-session*
 semanticdb
+*.eld
+*.cache
+recentf
