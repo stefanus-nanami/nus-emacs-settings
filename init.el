@@ -49,12 +49,13 @@
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
- '(helm-dabbrev-separator-regexp "\\s-\\|	\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
+ '(helm-dabbrev-separator-regexp "\\s-\\|\\t\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(inhibit-startup-screen t)
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
+ '(menu-bar-mode nil)
  '(ns-alternate-modifier 'super)
  '(ns-command-modifier 'meta)
  '(package-archives
