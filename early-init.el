@@ -8,6 +8,9 @@
 
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
 
+(cond ((string= system-type "windows-nt")
+       (add-to-list 'default-frame-alist '(menu-bar-mode . nil))))
+
 (cond ((string= localhost-name "CT043472")
        (add-to-list 'default-frame-alist `(left . 0.5))
        (add-to-list 'default-frame-alist `(top . 0.5))

@@ -55,6 +55,7 @@
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
+ '(menu-bar-mode nil)
  '(ns-alternate-modifier 'super)
  '(ns-command-modifier 'meta)
  '(package-archives
@@ -66,7 +67,8 @@
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
- '(projectile-globally-ignored-file-suffixes '(".exe" ".dll" ".pdb" ".lib" ".obj" ".diff"))
+ '(projectile-globally-ignored-file-suffixes
+   '(".exe" ".dll" ".pdb" ".lib" ".obj" ".diff" ".o" ".a" ".dylib" ".so"))
  '(projectile-globally-ignored-files '("TAGS" ".git*"))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
@@ -89,9 +91,6 @@
  '(line-number-minor-tick ((t (:foreground "white"))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray36")))))
-
-(cond ((string= system-type "windows-nt")
-       (menu-bar-mode nil)))
 
 ;; Activate all the packages.
 (package-initialize)
