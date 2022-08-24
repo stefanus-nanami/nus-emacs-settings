@@ -55,7 +55,6 @@
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
- '(menu-bar-mode nil)
  '(ns-alternate-modifier 'super)
  '(ns-command-modifier 'meta)
  '(package-archives
@@ -90,6 +89,9 @@
  '(line-number-minor-tick ((t (:foreground "white"))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray36")))))
+
+(cond ((string= system-type "windows-nt")
+       (menu-bar-mode nil)))
 
 ;; Activate all the packages.
 (package-initialize)
