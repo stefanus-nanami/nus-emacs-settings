@@ -55,7 +55,6 @@
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
- '(menu-bar-mode nil)
  '(ns-alternate-modifier 'super)
  '(ns-command-modifier 'meta)
  '(package-archives
@@ -70,10 +69,10 @@
  '(projectile-globally-ignored-file-suffixes
    '(".exe" ".dll" ".pdb" ".lib" ".obj" ".diff" ".o" ".a" ".dylib" ".so"))
  '(projectile-globally-ignored-files '("TAGS" ".git*"))
- '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(tab-width 4)
  '(tool-bar-mode nil)
+ '(scroll-bar-mode nil)
  '(truncate-lines t)
  '(warning-suppress-log-types '((lsp-mode)))
  '(warning-suppress-types '((emacs)))

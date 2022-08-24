@@ -6,10 +6,8 @@
       (append '((font . "Bitstream Vera Sans Mono-10"))
               default-frame-alist))
 
-(add-to-list 'default-frame-alist '(tool-bar-lines . 0))
-
 (cond ((string= system-type "windows-nt")
-       (add-to-list 'default-frame-alist '(menu-bar-mode . nil))))
+       (add-to-list 'default-frame-alist '(menu-bar-lines . 0))))
 
 (cond ((string= localhost-name "CT043472")
        (add-to-list 'default-frame-alist `(left . 0.5))
