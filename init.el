@@ -170,6 +170,9 @@
            ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x))
 
+(cond ((string= system-type "darwin")
+       (bind-key "M-," 'customize)))
+
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
