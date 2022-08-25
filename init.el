@@ -73,6 +73,7 @@
  '(projectile-globally-ignored-files '("TAGS" ".git*"))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
+ '(sml/shorten-modes t)
  '(sml/theme 'dark)
  '(tab-width 4)
  '(truncate-lines t)
@@ -90,6 +91,10 @@
  '(line-number-current-line ((t (:inherit line-number :foreground "red"))))
  '(line-number-major-tick ((t (:background "gray17" :foreground "white"))))
  '(line-number-minor-tick ((t (:foreground "white"))))
+ '(sml/filename ((t (:weight normal :foreground "#eab700" :inherit sml/global))))
+ '(sml/global ((t (:foreground "gray50" :inverse-video nil :family "Bitstream Vera Sans"))))
+ '(sml/line-number ((t (:inherit sml/modes))))
+ '(sml/modified ((t (:foreground "Red" :inherit sml/not-modified))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray36")))))
 
