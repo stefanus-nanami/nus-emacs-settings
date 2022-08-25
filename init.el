@@ -86,11 +86,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(header-line ((t (:background "#666" :family "Bitstream Vera Sans"))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(line-number ((t (:foreground "PaleVioletRed4"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "red"))))
  '(line-number-major-tick ((t (:background "gray17" :foreground "white"))))
  '(line-number-minor-tick ((t (:foreground "white"))))
+ '(lsp-headerline-breadcrumb-project-prefix-face ((t (:inherit font-lock-string-face))))
+ '(lsp-headerline-breadcrumb-symbols-face ((t (:inherit font-lock-doc-face))))
  '(sml/filename ((t (:weight normal :foreground "#eab700" :inherit sml/global))))
  '(sml/global ((t (:foreground "gray50" :inverse-video nil :family "Bitstream Vera Sans"))))
  '(sml/line-number ((t (:inherit sml/modes))))
