@@ -9,6 +9,8 @@
 (cond ((string= system-type "windows-nt")
        (add-to-list 'default-frame-alist '(menu-bar-lines . 0))))
 
+(add-to-list 'default-frame-alist '(tool-bar-lines . 0))
+
 (cond ((string= localhost-name "CT043472")
        (add-to-list 'default-frame-alist `(left . 0.5))
        (add-to-list 'default-frame-alist `(top . 0.5))
@@ -22,6 +24,8 @@
        (add-to-list 'default-frame-alist `(top . 0))
        (add-to-list 'default-frame-alist `(height . 90))
        (add-to-list 'default-frame-alist `(width . 140))))
+
+(setq initial-frame-alist default-frame-alist)
 
 (setq load-prefer-newer t)
 (add-to-list 'load-path "~/.emacs.d/local")

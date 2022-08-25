@@ -1,4 +1,4 @@
-﻿;;; init.el --- init elisp script. -*- no-byte-compile: t -*-
+;;; init.el --- init elisp script. -*- no-byte-compile: t -*-
 ;;; Commentary:
 ;;; My initialization script.
 
@@ -32,6 +32,8 @@
  '(completion-styles '(flex basic partial-completion emacs22))
  '(current-language-environment "Japanese")
  '(custom-enabled-themes '(tango-dark))
+ '(custom-safe-themes
+   '("ed68393e901a88b9feefea1abfa9a9c5983e166e4378c71bb92e636423bd94fd" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(display-line-numbers t)
  '(display-line-numbers-major-tick 50)
  '(display-line-numbers-minor-tick 10)
@@ -49,7 +51,7 @@
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
- '(helm-dabbrev-separator-regexp "\\s-\\|\\t\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
+ '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(inhibit-startup-screen t)
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
@@ -62,17 +64,17 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(smart-mode-line-atom-one-dark-theme atom-one-dark-theme smart-mode-line swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
  '(projectile-globally-ignored-file-suffixes
    '(".exe" ".dll" ".pdb" ".lib" ".obj" ".diff" ".o" ".a" ".dylib" ".so"))
  '(projectile-globally-ignored-files '("TAGS" ".git*"))
- '(show-trailing-whitespace t)
- '(tab-width 4)
- '(tool-bar-mode nil)
  '(scroll-bar-mode nil)
+ '(show-trailing-whitespace t)
+ '(sml/theme 'dark)
+ '(tab-width 4)
  '(truncate-lines t)
  '(warning-suppress-log-types '((lsp-mode)))
  '(warning-suppress-types '((emacs)))
@@ -116,6 +118,8 @@
 (require 'hlsl-mode)
 (require 'nus-snippets)
 (require 'wnd-pos)
+
+(sml/setup)
 
 (require 'bind-key)
 
