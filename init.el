@@ -76,7 +76,7 @@
  '(sml/theme 'dark)
  '(tab-width 4)
  '(truncate-lines t)
- '(warning-suppress-log-types '((lsp-mode)))
+ '(warning-suppress-log-types '((comp) (lsp-mode)))
  '(warning-suppress-types '((emacs)))
  '(whitespace-style '(face trailing tabs tab-mark)))
 
@@ -171,6 +171,8 @@
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x))
+(unbind-key "C-c C-c" c++-mode-map)
+(bind-key "C-c C-c" 'comment-or-uncomment-region)
 
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize)))
