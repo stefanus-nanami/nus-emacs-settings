@@ -25,11 +25,6 @@
        (add-to-list 'default-frame-alist `(height . 90))
        (add-to-list 'default-frame-alist `(width . 140))))
 
-(setq initial-frame-alist default-frame-alist)
-
-(setq load-prefer-newer t)
-(add-to-list 'load-path "~/.emacs.d/local")
-
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
