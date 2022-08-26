@@ -1,4 +1,4 @@
-;; Set default window position and  size.
+﻿;; Set default window position and  size.
 
 (setq-local localhost-name (nth 0 (split-string system-name "\\.")))
 
@@ -24,9 +24,6 @@
        (add-to-list 'default-frame-alist `(top . 0))
        (add-to-list 'default-frame-alist `(height . 90))
        (add-to-list 'default-frame-alist `(width . 140))))
-
-(setq load-prefer-newer t)
-(add-to-list 'load-path "~/.emacs.d/local")
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil

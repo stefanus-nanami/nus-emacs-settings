@@ -101,8 +101,16 @@
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray36")))))
 
+(setq load-prefer-newer t)
+
 ;; Activate all the packages.
 (package-initialize)
+(add-to-list 'load-path "~/.emacs.d/local")
+
+;; Auto compile everything.
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
@@ -115,16 +123,6 @@
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
     (package-install package)))
-
-;; Auto compile everything.
-(require 'auto-compile)
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
-
-(setq load-path (cons "~/.emacs.d/local" load-path))
-(autoload 'hlsl-mode "hlsl-mode" nil t)
-(autoload 'nus-snippets "nus-snippets" nil t)
-(autoload 'wnd-pos "wnd-pos" nil t)
 
 (require 'hlsl-mode)
 (require 'nus-snippets)
