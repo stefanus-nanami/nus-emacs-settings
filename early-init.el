@@ -11,7 +11,7 @@
 
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
 
-(cond ((string= localhost-name "CT043472")
+(cond ((or (string= localhost-name "CT043472") (string= localhost-name "Lyka"))
        (add-to-list 'default-frame-alist `(left . 0.5))
        (add-to-list 'default-frame-alist `(top . 0.5))
        (add-to-list 'default-frame-alist `(width . 120))

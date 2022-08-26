@@ -107,14 +107,6 @@
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/local")
 
-;; Auto compile everything.
-(require 'auto-compile)
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
-
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-  
 ;; Fetch the list of packages available.
 (unless package-archive-contents
   (package-refresh-contents))
@@ -124,6 +116,14 @@
   (unless (package-installed-p package)
     (package-install package)))
 
+;; Auto compile everything.
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+  
 (require 'hlsl-mode)
 (require 'nus-snippets)
 (require 'wnd-pos)
