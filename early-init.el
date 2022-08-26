@@ -1,4 +1,4 @@
-;; Set default window position and  size.
+﻿;; Set default window position and  size.
 
 (setq-local localhost-name (nth 0 (split-string system-name "\\.")))
 

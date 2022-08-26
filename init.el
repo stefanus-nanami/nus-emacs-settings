@@ -56,9 +56,9 @@
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
+ '(lsp-headerline-breadcrumb-enable t)
+ '(lsp-headerline-breadcrumb-enable-diagnostics nil)
  '(lsp-keymap-prefix "C-c l")
- '(ns-alternate-modifier 'super)
- '(ns-command-modifier 'meta)
  '(package-archives
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
