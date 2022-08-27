@@ -64,7 +64,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(exec-path-from-shell smart-mode-line-atom-one-dark-theme atom-one-dark-theme smart-mode-line swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(helm-descbinds lua-mode exec-path-from-shell smart-mode-line-atom-one-dark-theme atom-one-dark-theme smart-mode-line swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -75,7 +75,6 @@
  '(show-trailing-whitespace t)
  '(sml/shorten-modes t)
  '(sml/theme 'dark)
- '(tab-width 4)
  '(truncate-lines t)
  '(warning-suppress-log-types '((comp) (lsp-mode)))
  '(warning-suppress-types '((emacs)))
@@ -123,7 +122,7 @@
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
-  
+
 (require 'hlsl-mode)
 (require 'nus-snippets)
 (require 'wnd-pos)
@@ -194,6 +193,13 @@
 (add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.fx\\'" . hlsl-mode))
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
+
+(cond ((string= localhost-name "Lyka")
+       (setq-default tab-width 2)
+       (setq-default indent-tabs-mode nil))
+      (t
+       (setq-default tab-width 4)
+       (setq-default indent-tabs-mode t)))
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil

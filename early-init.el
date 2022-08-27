@@ -1,6 +1,6 @@
 ﻿;; Set default window position and  size.
 
-(setq-local localhost-name (nth 0 (split-string system-name "\\.")))
+(setq localhost-name (nth 0 (split-string system-name "\\.")))
 
 (setq default-frame-alist
       (append '((font . "Bitstream Vera Sans Mono-10"))
