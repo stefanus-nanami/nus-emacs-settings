@@ -12,3 +12,4 @@ semanticdb
 *.cache
 recentf
 eln-cache
+async-bytecomp.log
