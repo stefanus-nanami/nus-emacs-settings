@@ -64,7 +64,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(helm-descbinds lua-mode exec-path-from-shell smart-mode-line-atom-one-dark-theme atom-one-dark-theme smart-mode-line swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell smart-mode-line-atom-one-dark-theme atom-one-dark-theme smart-mode-line swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -123,6 +123,12 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
+(require 'doom-modeline)
+(doom-modeline-mode 1)
+
+(when (display-graphic-p)
+  (require 'all-the-icons))
+
 (require 'hlsl-mode)
 (require 'nus-snippets)
 (require 'wnd-pos)
@@ -164,7 +170,6 @@
 ;; Bind keys.
 (unbind-key "C-\\" isearch-mode-map)
 (bind-key* "C-\\" 'undo)
-;; (bind-key "C-<f12>" 'other-window)
 (unbind-key "C-z" global-map)
 (bind-key "C-;" 'completion-at-point)
 (bind-key "C-'" 'helm-dabbrev)
