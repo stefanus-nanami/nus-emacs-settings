@@ -31,9 +31,9 @@
  '(completion-search-distance 0)
  '(completion-styles '(flex basic partial-completion emacs22))
  '(current-language-environment "Japanese")
- '(custom-enabled-themes '(tango-dark))
+ '(custom-enabled-themes '(doom-outrun-electric))
  '(custom-safe-themes
-   '("ed68393e901a88b9feefea1abfa9a9c5983e166e4378c71bb92e636423bd94fd" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
+   '("02f57ef0a20b7f61adce51445b68b2a7e832648ce2e7efb19d217b6454c1b644" "8b6506330d63e7bc5fb940e7c177a010842ecdda6e1d1941ac5a81b13191020e" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" "ed68393e901a88b9feefea1abfa9a9c5983e166e4378c71bb92e636423bd94fd" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(display-line-numbers t)
  '(display-line-numbers-major-tick 50)
  '(display-line-numbers-minor-tick 10)
@@ -64,7 +64,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell smart-mode-line-atom-one-dark-theme atom-one-dark-theme smart-mode-line swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -73,8 +73,6 @@
  '(projectile-globally-ignored-files '("TAGS" ".git*"))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
- '(sml/shorten-modes t)
- '(sml/theme 'dark)
  '(truncate-lines t)
  '(warning-suppress-log-types '((comp) (lsp-mode)))
  '(warning-suppress-types '((emacs)))
@@ -94,10 +92,6 @@
  '(line-number-minor-tick ((t (:foreground "white"))))
  '(lsp-headerline-breadcrumb-project-prefix-face ((t (:inherit font-lock-string-face))))
  '(lsp-headerline-breadcrumb-symbols-face ((t (:inherit font-lock-doc-face))))
- '(sml/filename ((t (:weight normal :foreground "#eab700" :inherit sml/global))))
- '(sml/global ((t (:foreground "gray50" :inverse-video nil :family "Bitstream Vera Sans"))))
- '(sml/line-number ((t (:inherit sml/modes))))
- '(sml/modified ((t (:foreground "Red" :inherit sml/not-modified))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray36")))))
 
@@ -133,8 +127,6 @@
 (require 'hlsl-mode)
 (require 'nus-snippets)
 (require 'wnd-pos)
-
-(sml/setup)
 
 (require 'bind-key)
 
