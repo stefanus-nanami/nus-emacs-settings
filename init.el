@@ -90,6 +90,7 @@
  '(line-number-major-tick ((t (:background "gray17" :foreground "white"))))
  '(line-number-minor-tick ((t (:foreground "white"))))
  '(mode-line ((t (:background "dark slate blue" :box nil))))
+ '(mode-line-inactive ((t (:background "dark slate blue" :foreground "#BA45A3" :box nil))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray36")))))
 
