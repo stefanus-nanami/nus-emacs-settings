@@ -83,7 +83,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(cursor ((t (:background "#fce94f" :foreground "black"))))
- '(header-line ((t (:background "#666" :family "Bitstream Vera Sans"))))
+ '(header-line ((t (:background "midnight blue" :inherit mode-line))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(line-number ((t (:foreground "PaleVioletRed4"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "red"))))
