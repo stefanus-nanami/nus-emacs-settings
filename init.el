@@ -198,15 +198,6 @@
        (setq-default tab-width 4)
        (setq-default indent-tabs-mode t)))
 
-;; Fixing header-line.
-(setq lsp-headerline-arrow (let ((all-the-icons-scale-factor 1.0)
-                                 (all-the-icons-default-adjust -0.25))
-                             (lsp-icons-all-the-icons-material-icon
-                              "chevron_right"
-                              'lsp-headerline-breadcrumb-separator-face
-                              ">"
-                              'headerline-breadcrumb)))
-
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
