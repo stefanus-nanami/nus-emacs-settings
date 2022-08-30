@@ -1,4 +1,4 @@
-;;; init.el --- init elisp script. -*- no-byte-compile: t -*-
+﻿;;; init.el --- init elisp script. -*- no-byte-compile: t -*-
 ;;; Commentary:
 ;;; My initialization script.
 
@@ -89,6 +89,7 @@
  '(line-number-current-line ((t (:inherit line-number :foreground "red"))))
  '(line-number-major-tick ((t (:background "gray17" :foreground "white"))))
  '(line-number-minor-tick ((t (:foreground "white"))))
+ '(mode-line ((t (:background "dark slate blue" :box nil))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray36")))))
 
