@@ -83,7 +83,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(cursor ((t (:background "#fce94f" :foreground "black"))))
- '(header-line ((t (:background "midnight blue" :inherit mode-line))))
+ '(header-line ((t (:family "Bitstream Vera Sans" :background "midnight blue" :inherit mode-line))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(line-number ((t (:foreground "PaleVioletRed4"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "red"))))
@@ -197,6 +197,15 @@
       (t
        (setq-default tab-width 4)
        (setq-default indent-tabs-mode t)))
+
+;; Fixing header-line.
+(setq lsp-headerline-arrow (let ((all-the-icons-scale-factor 1.0)
+                                 (all-the-icons-default-adjust -0.25))
+                             (lsp-icons-all-the-icons-material-icon
+                              "chevron_right"
+                              'lsp-headerline-breadcrumb-separator-face
+                              ">"
+                              'headerline-breadcrumb)))
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil
