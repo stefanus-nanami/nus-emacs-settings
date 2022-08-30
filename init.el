@@ -38,6 +38,7 @@
  '(display-line-numbers-major-tick 50)
  '(display-line-numbers-minor-tick 10)
  '(display-line-numbers-width 5)
+ '(doom-themes-enable-italic nil)
  '(dynamic-completion-mode t)
  '(electric-pair-mode t)
  '(global-flycheck-mode t)
@@ -56,8 +57,6 @@
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
- '(lsp-headerline-breadcrumb-enable t)
- '(lsp-headerline-breadcrumb-enable-diagnostics nil)
  '(lsp-keymap-prefix "C-c l")
  '(package-archives
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
@@ -90,8 +89,6 @@
  '(line-number-current-line ((t (:inherit line-number :foreground "red"))))
  '(line-number-major-tick ((t (:background "gray17" :foreground "white"))))
  '(line-number-minor-tick ((t (:foreground "white"))))
- '(lsp-headerline-breadcrumb-project-prefix-face ((t (:inherit font-lock-string-face))))
- '(lsp-headerline-breadcrumb-symbols-face ((t (:inherit font-lock-doc-face))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray36")))))
 
