@@ -91,6 +91,7 @@
  '(line-number-minor-tick ((t (:foreground "white"))))
  '(mode-line ((t (:background "dark slate blue" :box nil))))
  '(mode-line-inactive ((t (:background "dark slate blue" :foreground "light slate blue" :box nil))))
+ '(region ((t (:extend t :background "midnight blue"))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray36")))))
 
