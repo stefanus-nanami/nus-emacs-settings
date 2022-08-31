@@ -198,6 +198,8 @@
        (setq-default tab-width 4)
        (setq-default indent-tabs-mode t)))
 
+(setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
+
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
