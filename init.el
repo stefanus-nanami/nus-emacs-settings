@@ -170,6 +170,7 @@
 (bind-key "<f2>" 'helm-mini)
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-|" 'undo-redo)
+(bind-key "<f12>" 'helm-imenu)
 (bind-key (concat lsp-keymap-prefix " g p") 'lsp-clangd-find-other-file)
 (bind-keys :map lsp-mode-map
            ([remap xref-find-apropos] . helm-lsp-workspace-symbol))
