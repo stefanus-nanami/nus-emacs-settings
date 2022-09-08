@@ -24,6 +24,10 @@
        (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-10"))
        (add-to-list 'default-frame-alist `(height . 100))
        (add-to-list 'default-frame-alist `(width . 140)))
+      ((string= localhost-name "CT055654")
+       (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-9"))
+       (add-to-list 'default-frame-alist `(height . 70))
+       (add-to-list 'default-frame-alist `(width . 120)))
       (t
        (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-10"))
        (add-to-list 'default-frame-alist `(left . 0))
