@@ -8,13 +8,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ac-auto-show-menu nil)
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(auto-hscroll-mode 'current-line)
  '(backup-directory-alist '(("" . "~/.emacs.d/backups")))
- '(c-basic-offset 4)
  '(c-hanging-braces-alist
    '((block-close . c-snug-do-while)
      (statement-cont)
@@ -64,7 +64,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(ac-helm auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -83,6 +83,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ac-candidate-face ((t (:background "royal blue" :foreground "ivory"))))
  '(header-line ((t (:family "Bitstream Vera Sans" :background "midnight blue" :inherit mode-line))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(line-number ((t (:foreground "PaleVioletRed4"))))
@@ -100,6 +101,7 @@
 ;; Activate all the packages.
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/local")
+(add-to-list 'load-path "~/.emacs.d/tern/emacs")
 
 ;; Fetch the list of packages available.
 (unless package-archive-contents
@@ -137,6 +139,10 @@
 
 (require 'projectile)
 
+;; auto-complete
+(require 'auto-complete)
+(global-auto-complete-mode t)
+
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
@@ -146,6 +152,7 @@
 (require 'helm-xref)
 (require 'helm-lsp)
 (require 'helm-projectile)
+(require 'ac-helm)
 
 (require 'json-mode)
 
@@ -156,6 +163,14 @@
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 (helm-projectile-on)
+
+;; Tern.
+(autoload 'tern-mode "tern.el" nil t)
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
 
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
@@ -180,6 +195,10 @@
            ([remap execute-extended-command] . helm-M-x))
 (unbind-key "C-c C-c" c++-mode-map)
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
+(bind-key "C-:" 'ac-complete-with-helm)
+(bind-keys :map ac-complete-mode-map
+           ("\C-n" . ac-next)
+           ("\C-p" . ac-previous))
 
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize)))
@@ -195,10 +214,12 @@
 
 (cond ((string= localhost-name "Lyka")
        (setq-default tab-width 2)
-       (setq-default indent-tabs-mode nil))
+       (setq-default indent-tabs-mode nil)
+       (setq-default c-basic-offset 2))
       (t
        (setq-default tab-width 4)
-       (setq-default indent-tabs-mode t)))
+       (setq-default indent-tabs-mode t)
+       (setq-default c-basic-offset 4)))
 
 (setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
 
