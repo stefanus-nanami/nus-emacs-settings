@@ -29,12 +29,17 @@
      (arglist-cont-nonempty)))
  '(c-mode-common-hook '(lsp))
  '(c-offsets-alist '((substatement-open . 0)))
+ '(company-backends
+   '(company-bbdb company-cmake company-clang company-capf company-semantic company-files
+                  (company-dabbrev-code company-gtags company-etags company-keywords)
+                  company-oddmuse company-dabbrev))
  '(completion-search-distance 0)
  '(completion-styles '(flex basic partial-completion emacs22))
  '(current-language-environment "Japanese")
  '(custom-enabled-themes '(doom-outrun-electric))
  '(custom-safe-themes
    '("02f57ef0a20b7f61adce51445b68b2a7e832648ce2e7efb19d217b6454c1b644" "8b6506330d63e7bc5fb940e7c177a010842ecdda6e1d1941ac5a81b13191020e" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" "ed68393e901a88b9feefea1abfa9a9c5983e166e4378c71bb92e636423bd94fd" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
+ '(display-fill-column-indicator-column 120)
  '(display-line-numbers t)
  '(display-line-numbers-major-tick 50)
  '(display-line-numbers-minor-tick 10)
@@ -42,6 +47,7 @@
  '(doom-themes-enable-italic nil)
  '(dynamic-completion-mode t)
  '(electric-pair-mode t)
+ '(global-display-fill-column-indicator-mode t)
  '(global-flycheck-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
@@ -64,7 +70,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(ac-helm auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -84,6 +90,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-candidate-face ((t (:background "royal blue" :foreground "ivory"))))
+ '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
  '(header-line ((t (:family "Bitstream Vera Sans" :background "midnight blue" :inherit mode-line))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(line-number ((t (:foreground "PaleVioletRed4"))))
@@ -139,20 +146,19 @@
 
 (require 'projectile)
 
-;; auto-complete
-(require 'auto-complete)
-(global-auto-complete-mode t)
-
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
+
+(require 'company)
+(global-company-mode)
 
 (require 'helm-ls-git)
 (require 'helm-ag)
 (require 'helm-xref)
 (require 'helm-lsp)
 (require 'helm-projectile)
-(require 'ac-helm)
+(require 'helm-company)
 
 (require 'json-mode)
 
@@ -167,10 +173,6 @@
 ;; Tern.
 (autoload 'tern-mode "tern.el" nil t)
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
-(eval-after-load 'tern
-  '(progn
-     (require 'tern-auto-complete)
-     (tern-ac-setup)))
 
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
@@ -195,10 +197,8 @@
            ([remap execute-extended-command] . helm-M-x))
 (unbind-key "C-c C-c" c++-mode-map)
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
-(bind-key "C-:" 'ac-complete-with-helm)
-(bind-keys :map ac-complete-mode-map
-           ("\C-n" . ac-next)
-           ("\C-p" . ac-previous))
+(bind-key "C-:" 'helm-company company-mode-map)
+(bind-key "C-:" 'helm-company company-active-map)
 
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize)))
