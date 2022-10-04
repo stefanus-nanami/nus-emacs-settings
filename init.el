@@ -28,7 +28,7 @@
      (inexpr-class-close before)
      (arglist-cont-nonempty)))
  '(c-mode-common-hook '(lsp))
- '(c-offsets-alist '((substatement-open . 0)))
+ '(c-offsets-alist '((brace-list-open . 0) (substatement-open . 0)))
  '(company-backends
    '(company-bbdb company-cmake company-clang company-capf company-semantic company-files
                   (company-dabbrev-code company-gtags company-etags company-keywords)
