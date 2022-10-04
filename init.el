@@ -1,4 +1,4 @@
-;;; init.el --- init elisp script. -*- no-byte-compile: t -*-
+﻿;;; init.el --- init elisp script. -*- no-byte-compile: t -*-
 ;;; Commentary:
 ;;; My initialization script.
 
@@ -56,6 +56,7 @@
  '(helm-boring-buffer-regexp-list
    '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc"))
  '(helm-buffer-max-length nil)
+ '(helm-commands-using-frame '(helm-company completion-at-point))
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
@@ -144,29 +145,15 @@
 
 (require 'lsp-mode)
 
-(require 'projectile)
-
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
 
-(require 'company)
-
-(require 'helm-ls-git)
-(require 'helm-ag)
-(require 'helm-xref)
-(require 'helm-lsp)
-(require 'helm-projectile)
-(require 'helm-company)
-
 (require 'json-mode)
 
-(require 'function-args)
 (fa-config-default)
 
 (projectile-mode +1)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
 (helm-projectile-on)
 
 ;; Tern.
@@ -180,8 +167,6 @@
 (unbind-key "C-\\" isearch-mode-map)
 (bind-key* "C-\\" 'undo)
 (unbind-key "C-z" global-map)
-(bind-key "C-;" 'completion-at-point)
-(bind-key "C-'" 'helm-dabbrev)
 (bind-key "C-c g" 'helm-do-ag)
 (bind-key "C-c b" 'helm-do-ag-buffers)
 (bind-key "<f2>" 'helm-mini)
@@ -196,8 +181,12 @@
            ([remap execute-extended-command] . helm-M-x))
 (unbind-key "C-c C-c" c++-mode-map)
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
-(bind-key "C-:" 'helm-company company-mode-map)
-(bind-key "C-:" 'helm-company company-active-map)
+(bind-key "C-c p" 'projectile-command-map 'projectile-mode-map)
+
+;; Completions.
+(bind-key "C-'" 'helm-company)
+(bind-key "C-;" 'completion-at-point)
+(bind-key "C-\"" 'helm-dabbrev)
 
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize)))
