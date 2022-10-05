@@ -158,7 +158,9 @@
 
 ;; Tern.
 (autoload 'tern-mode "tern.el" nil t)
-(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(add-hook 'js-mode-hook
+          (lambda ()
+            (tern-mode t)))
 
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
@@ -212,6 +214,10 @@
 (setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+
+(add-hook 'csharp-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)))
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil
