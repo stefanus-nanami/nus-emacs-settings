@@ -8,7 +8,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-auto-show-menu nil)
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
@@ -71,7 +70,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(auto-complete helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -90,7 +89,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-candidate-face ((t (:background "royal blue" :foreground "ivory"))))
  '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
  '(header-line ((t (:family "Bitstream Vera Sans" :background "midnight blue" :inherit mode-line))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
@@ -141,7 +139,6 @@
 (require 'bind-key)
 
 (require 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (require 'lsp-mode)
 
@@ -158,9 +155,16 @@
 
 ;; Tern.
 (autoload 'tern-mode "tern.el" nil t)
-(add-hook 'js-mode-hook
-          (lambda ()
-            (tern-mode t)))
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)
+     (bind-key "C-'" 'tern-ac-complete tern-mode-keymap)
+     (bind-keys :map ac-complete-mode-map
+                ("C-n" . ac-next)
+                ("C-p" . ac-previous)
+                ("C-v" . ac-next-page)
+                ("M-v" . ac-previous-page))))
 
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
@@ -212,6 +216,17 @@
        (setq-default c-basic-offset 4)))
 
 (setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
+
+;; Hooks
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(add-hook 'js-mode-hook
+          (lambda ()
+            (auto-complete-mode t)
+            (tern-mode t)
+            (setq indent-tabs-mode nil)
+            (setq tab-width 2)))
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
