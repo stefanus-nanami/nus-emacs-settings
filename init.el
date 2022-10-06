@@ -8,6 +8,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ac-dictionary-files '("~/.emacs.d/.dict"))
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
@@ -119,14 +120,12 @@
     (package-install package)))
 
 ;; Auto compile everything.
-(require 'auto-compile)
 (auto-compile-on-load-mode)
 (auto-compile-on-save-mode)
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
-(require 'doom-modeline)
 (doom-modeline-mode 1)
 
 (when (display-graphic-p)
@@ -138,15 +137,11 @@
 
 (require 'bind-key)
 
-(require 'flycheck)
-
 (require 'lsp-mode)
 
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
-
-(require 'json-mode)
 
 (fa-config-default)
 
@@ -154,17 +149,11 @@
 (helm-projectile-on)
 
 ;; Tern.
-(autoload 'tern-mode "tern.el" nil t)
 (eval-after-load 'tern
   '(progn
      (require 'tern-auto-complete)
      (tern-ac-setup)
-     (bind-key "C-'" 'tern-ac-complete tern-mode-keymap)
-     (bind-keys :map ac-complete-mode-map
-                ("C-n" . ac-next)
-                ("C-p" . ac-previous)
-                ("C-v" . ac-next-page)
-                ("M-v" . ac-previous-page))))
+     (bind-key "C-'" 'tern-ac-complete tern-mode-keymap)))
 
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
@@ -221,8 +210,17 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+(add-hook 'auto-complete-mode-hook
+          (lambda()
+            (bind-keys :map ac-complete-mode-map
+                ("C-n" . ac-next)
+                ("C-p" . ac-previous)
+                ("C-v" . ac-next-page)
+                ("M-v" . ac-previous-page))))
+
 (add-hook 'js-mode-hook
           (lambda ()
+            (require 'tern)
             (auto-complete-mode t)
             (tern-mode t)
             (setq indent-tabs-mode nil)
@@ -233,6 +231,11 @@
 (add-hook 'csharp-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)))
+
+(add-hook 'text-mode-hook
+          (lambda()
+            (auto-complete-mode t)
+            (bind-key "C-'" 'ac-complete-dictionary)))
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil
