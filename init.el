@@ -158,6 +158,9 @@
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
 
+;; Load library for key-binding.
+(require 'cc-mode)
+
 ;; Bind keys.
 (unbind-key "C-\\" isearch-mode-map)
 (bind-key* "C-\\" 'undo)
@@ -174,6 +177,7 @@
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x))
+(unbind-key "C-c C-c" c-mode-map)
 (unbind-key "C-c C-c" c++-mode-map)
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
 (bind-key "C-c p" 'projectile-command-map 'projectile-mode-map)
