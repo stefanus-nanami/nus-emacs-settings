@@ -160,6 +160,7 @@
 
 ;; Load library for key-binding.
 (require 'cc-mode)
+(require 'tern)
 
 ;; Bind keys.
 (unbind-key "C-\\" isearch-mode-map)
@@ -179,8 +180,10 @@
            ([remap execute-extended-command] . helm-M-x))
 (unbind-key "C-c C-c" c-mode-map)
 (unbind-key "C-c C-c" c++-mode-map)
+(unbind-key "C-c C-c" tern-mode-keymap)
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
 (bind-key "C-c p" 'projectile-command-map 'projectile-mode-map)
+(bind-key "C-c C-t" 'tern-get-type tern-mode-keymap)
 
 ;; Completions.
 (bind-key "C-'" 'helm-company)
@@ -224,7 +227,6 @@
 
 (add-hook 'js-mode-hook
           (lambda ()
-            (require 'tern)
             (auto-complete-mode t)
             (tern-mode t)
             (setq indent-tabs-mode nil)
