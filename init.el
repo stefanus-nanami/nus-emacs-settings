@@ -62,6 +62,7 @@
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
  '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(inhibit-startup-screen t)
+ '(js-indent-level 2)
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
