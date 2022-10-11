@@ -1,4 +1,4 @@
-﻿;;; init.el --- init elisp script. -*- no-byte-compile: t -*-
+;;; init.el --- init elisp script. -*- no-byte-compile: t -*-
 ;;; Commentary:
 ;;; My initialization script.
 

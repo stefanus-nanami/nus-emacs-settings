@@ -1,4 +1,4 @@
-﻿;;; early-init.el --- Early init script. -*- no-byte-compile: t -*-
+;;; early-init.el --- Early init script. -*- no-byte-compile: t -*-
 ;;; Commentary:
 ;;; Set default window position, size and default font.
 
