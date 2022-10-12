@@ -189,9 +189,9 @@
 (bind-key "C-c C-t" 'tern-get-type tern-mode-keymap)
 
 ;; Completions.
-(bind-key "C-'" 'helm-company)
+(bind-key "C-\"" 'helm-company)
 (bind-key "C-;" 'completion-at-point)
-(bind-key "C-\"" 'helm-dabbrev)
+(bind-key "C-'" 'helm-dabbrev)
 
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize)))
