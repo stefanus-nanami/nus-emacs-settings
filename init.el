@@ -54,7 +54,6 @@
  '(global-flycheck-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
- '(gnus-group-change-level-function 'gnus-topic-change-level)
  '(gnus-group-mode-hook '(gnus-topic-mode))
  '(gnus-secondary-select-methods
    '((nnimap "icloud"
