@@ -48,11 +48,28 @@
  '(doom-themes-enable-italic nil)
  '(dynamic-completion-mode t)
  '(electric-pair-mode t)
+ '(epa-file-cache-passphrase-for-symmetric-encryption t)
  '(global-company-mode t)
  '(global-display-fill-column-indicator-mode t)
  '(global-flycheck-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
+ '(gnus-group-change-level-function 'gnus-topic-change-level)
+ '(gnus-group-mode-hook '(gnus-topic-mode))
+ '(gnus-secondary-select-methods
+   '((nnimap "icloud"
+             (nnimap-address "imap.mail.me.com")
+             (nnimap-server-port 993)
+             (nnimap-stream tls))))
+ '(gnus-select-method
+   '(nnimap "gmail"
+            (nnimap-address "imap.gmail.com")
+            (nnimap-server-port 993)
+            (nnimap-stream ssl)))
+ '(gnus-thread-sort-functions
+   '(gnus-thread-sort-by-most-recent-date
+     (not gnus-thread-sort-by-number)))
+ '(gnus-use-cache t)
  '(helm-ag-insert-at-point 'symbol)
  '(helm-ag-use-agignore 1)
  '(helm-boring-buffer-regexp-list
@@ -69,6 +86,8 @@
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
+ '(message-send-mail-function 'smtpmail-send-it)
+ '(mm-text-html-renderer 'w3m)
  '(package-archives
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
@@ -83,6 +102,8 @@
  '(projectile-globally-ignored-files '("TAGS" ".git*"))
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
+ '(smtpmail-default-smtp-server "smtp.gmail.com")
+ '(smtpmail-smtp-service 587)
  '(truncate-lines t)
  '(warning-suppress-log-types '((comp) (lsp-mode)))
  '(warning-suppress-types '((emacs)))
@@ -112,6 +133,7 @@
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/local")
 (add-to-list 'load-path "~/.emacs.d/tern/emacs")
+(add-to-list 'load-path "~/.emacs.d/emacs-w3m")
 
 ;; Fetch the list of packages available.
 (unless package-archive-contents
@@ -150,6 +172,8 @@
 
 (projectile-mode +1)
 (helm-projectile-on)
+
+(require 'w3m-load)
 
 ;; Tern.
 (eval-after-load 'tern
