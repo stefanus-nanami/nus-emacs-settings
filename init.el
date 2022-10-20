@@ -54,17 +54,6 @@
  '(global-flycheck-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
- '(gnus-group-mode-hook '(gnus-topic-mode))
- '(gnus-secondary-select-methods
-   '((nnimap "icloud"
-             (nnimap-address "imap.mail.me.com")
-             (nnimap-server-port 993)
-             (nnimap-stream tls))))
- '(gnus-select-method
-   '(nnimap "gmail"
-            (nnimap-address "imap.gmail.com")
-            (nnimap-server-port 993)
-            (nnimap-stream ssl)))
  '(gnus-thread-sort-functions
    '(gnus-thread-sort-by-most-recent-date
      (not gnus-thread-sort-by-number)))
