@@ -205,11 +205,6 @@
 (bind-key "C-;" 'completion-at-point)
 (bind-key "C-'" 'helm-dabbrev)
 
-;; Magit
-(bind-key "C-c m s" 'magit-status)
-(bind-key "C-c m d" 'magit-dispatch)
-(bind-key "C-c m f" 'magit-file-dispatch)
-
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize)))
 
