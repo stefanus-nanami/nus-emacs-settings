@@ -63,6 +63,7 @@
  '(helm-boring-buffer-regexp-list
    '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc"))
  '(helm-buffer-max-length nil)
+ '(helm-command-prefix-key "C-c h")
  '(helm-commands-using-frame '(helm-company completion-at-point))
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
@@ -74,6 +75,7 @@
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
+ '(lsp-ui-sideline-show-diagnostics nil)
  '(message-send-mail-function 'smtpmail-send-it)
  '(mm-text-html-renderer 'w3m)
  '(package-archives
@@ -81,7 +83,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(magit auto-complete helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(lsp-ui magit auto-complete helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -186,16 +188,19 @@
 (bind-key "<f2>" 'helm-mini)
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-|" 'undo-redo)
-(bind-key "<f12>" 'helm-imenu)
-(bind-key (concat lsp-keymap-prefix " g p") 'lsp-clangd-find-other-file)
+
 (bind-keys :map lsp-mode-map
-           ([remap xref-find-apropos] . helm-lsp-workspace-symbol))
+           ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+           ([remap xref-find-references] . lsp-ui-peek-find-references))
+
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x))
+
 (unbind-key "C-c C-c" c-mode-map)
 (unbind-key "C-c C-c" c++-mode-map)
 (unbind-key "C-c C-c" tern-mode-keymap)
+
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
 (bind-key "C-c p" 'projectile-command-map 'projectile-mode-map)
 (bind-key "C-c C-t" 'tern-get-type tern-mode-keymap)
