@@ -71,6 +71,7 @@
  '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
+ '(js2-strict-missing-semi-warning nil)
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
@@ -83,7 +84,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(lsp-ui magit auto-complete helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(js2-mode lsp-ui magit auto-complete helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -122,7 +123,6 @@
 ;; Activate all the packages.
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/local")
-(add-to-list 'load-path "~/.emacs.d/tern/emacs")
 (add-to-list 'load-path "~/.emacs.d/emacs-w3m")
 
 ;; Fetch the list of packages available.
@@ -165,19 +165,11 @@
 
 (require 'w3m-load)
 
-;; Tern.
-(eval-after-load 'tern
-  '(progn
-     (require 'tern-auto-complete)
-     (tern-ac-setup)
-     (bind-key "C-'" 'tern-ac-complete tern-mode-keymap)))
-
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
 
 ;; Load library for key-binding.
 (require 'cc-mode)
-(require 'tern)
 
 ;; Bind keys.
 (unbind-key "C-\\" isearch-mode-map)
@@ -199,11 +191,9 @@
 
 (unbind-key "C-c C-c" c-mode-map)
 (unbind-key "C-c C-c" c++-mode-map)
-(unbind-key "C-c C-c" tern-mode-keymap)
 
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
 (bind-key "C-c p" 'projectile-command-map 'projectile-mode-map)
-(bind-key "C-c C-t" 'tern-get-type tern-mode-keymap)
 
 ;; Completions.
 (bind-key "C-\"" 'helm-company)
@@ -226,6 +216,9 @@
 (add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.fx\\'" . hlsl-mode))
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
 (cond ((string= localhost-name "Lyka")
        (setq-default tab-width 2)
@@ -250,10 +243,8 @@
                 ("C-v" . ac-next-page)
                 ("M-v" . ac-previous-page))))
 
-(add-hook 'js-mode-hook
+(add-hook 'js2-mode-hook
           (lambda ()
-            (auto-complete-mode t)
-            (tern-mode t)
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
 
