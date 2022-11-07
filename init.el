@@ -77,6 +77,7 @@
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
  '(lsp-ui-sideline-show-diagnostics nil)
+ '(lua-indent-level 2)
  '(message-send-mail-function 'smtpmail-send-it)
  '(mm-text-html-renderer 'w3m)
  '(package-archives
@@ -246,7 +247,8 @@
 (add-hook 'js2-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
-            (setq tab-width 2)))
+            (setq tab-width 2)
+            (lsp)))
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
@@ -258,6 +260,12 @@
           (lambda()
             (auto-complete-mode t)
             (bind-key "C-'" 'ac-complete-dictionary text-mode-map)))
+
+(add-hook 'lua-mode-hook
+          (lambda()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 2)
+            (lsp)))
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil
