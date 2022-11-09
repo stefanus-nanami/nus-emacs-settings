@@ -207,7 +207,9 @@
 (bind-key "C-c m f" 'magit-file-dispatch)
 
 (cond ((string= system-type "darwin")
-       (bind-key "M-," 'customize)))
+       (bind-key "M-," 'customize))
+      ((string= system-type "windows-nt")
+       (bind-key "C-<f12>" 'other-frame)))
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
