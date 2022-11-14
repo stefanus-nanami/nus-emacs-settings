@@ -52,6 +52,7 @@
  '(global-company-mode t)
  '(global-display-fill-column-indicator-mode t)
  '(global-flycheck-mode t)
+ '(global-hl-line-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
  '(gnus-thread-sort-functions
@@ -110,6 +111,7 @@
  '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
  '(header-line ((t (:family "Bitstream Vera Sans" :background "midnight blue" :inherit mode-line))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
+ '(hl-line ((t (:extend t :background "#202040"))))
  '(line-number ((t (:foreground "PaleVioletRed4"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "red"))))
  '(line-number-major-tick ((t (:background "gray17" :foreground "white"))))
@@ -210,7 +212,7 @@
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize))
       ((string= system-type "windows-nt")
-       (bind-key "C-<f12>" 'other-frame)))
+       (bind-key "C-<f13>" 'other-frame)))
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
