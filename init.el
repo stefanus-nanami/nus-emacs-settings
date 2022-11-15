@@ -71,6 +71,7 @@
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
  '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(helm-follow-mode-persistent t)
+ '(helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
  '(js2-strict-missing-semi-warning nil)
