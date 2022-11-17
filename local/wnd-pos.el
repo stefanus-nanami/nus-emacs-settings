@@ -49,6 +49,23 @@
     (add-to-list 'wnd-pos-frame-parameters `(left . ,wnd-pos))
     (modify-frame-parameters frame wnd-pos-frame-parameters)))
 
+(defun swap-buffers-in-windows ()
+  ;; Put the buffer from the selected window in next window, and vice versa
+  (interactive)
+  (let* ((this (selected-window))
+     (other (next-window))
+     (this-buffer (window-buffer this))
+     (other-buffer (window-buffer other)))
+    (set-window-buffer other this-buffer)
+    (set-window-buffer this other-buffer)
+    )
+  )
+
+(global-set-key (kbd "C-c w l") 'arrange-frame-left)
+(global-set-key (kbd "C-c w r") 'arrange-frame-right)
+(global-set-key (kbd "C-c w c") 'arrange-frame-center)
+(global-set-key (kbd "C-c w s") 'swap-buffers-in-windows)
+
 (provide 'wnd-pos)
 
 ;; Local Variables:
