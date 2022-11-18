@@ -88,7 +88,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(js2-mode lsp-ui magit auto-complete helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(all-the-icons-dired js2-mode lsp-ui magit auto-complete helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -149,7 +149,9 @@
 (doom-modeline-mode 1)
 
 (when (display-graphic-p)
-  (require 'all-the-icons))
+  (require 'all-the-icons)
+  (require 'all-the-icons-dired)
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 (require 'hlsl-mode)
 (require 'nus-snippets)
@@ -185,6 +187,7 @@
 (bind-key "<f2>" 'helm-mini)
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-|" 'undo-redo)
+(bind-key "C-<tab>" 'other-window)
 
 (bind-keys :map lsp-mode-map
            ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
