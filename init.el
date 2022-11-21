@@ -71,6 +71,7 @@
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc"))
  '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(helm-follow-mode-persistent t)
+ '(helm-source-names-using-follow '("Helm Xref"))
  '(helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
@@ -79,6 +80,7 @@
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
+ '(lsp-response-timeout nil)
  '(lsp-ui-sideline-show-diagnostics nil)
  '(lua-indent-level 2)
  '(message-send-mail-function 'smtpmail-send-it)
@@ -191,7 +193,9 @@
 
 (bind-keys :map lsp-mode-map
            ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-           ([remap xref-find-references] . lsp-ui-peek-find-references))
+           ([remap xref-find-references] . lsp-ui-peek-find-references)
+           ("<f12>" . lsp-find-definition)
+           ("C-<f12>" . lsp-find-references))
 
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
