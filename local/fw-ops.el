@@ -1,11 +1,11 @@
-;;; wnd-pos.el --- Window positioning
+;;; fw-ops.el --- Frame/window operations
 ;;; Commentary:
-;;; Arrange window functions.
+;;; Frame/window related functions.
 
 ;;; Code:
 
-(defun arrange-frame-center (&optional frame)
-  ;; Center FRAME on the screen.
+(defun fw-ops-frame-center (&optional frame)
+  "Center FRAME on the screen."
   ;; Frame be a frame name, a terminal name, or a frame.
   ;; If FRAME is omitted or nil, use currently selected frame.
   (interactive)
@@ -13,8 +13,8 @@
     (modify-frame-parameters
      frame '((user-position . t) (top . 0.5) (left . 0.5)))))
 
-(defun arrange-frame-right (&optional frame)
-  ;; Arrage FRAME to right of screen.
+(defun fw-ops-frame-right (&optional frame)
+  "Arrange FRAME to right of screen."
   ;; Frame be a frame name, a terminal name, or a frame.
   ;; If FRAME is omitted or nil, use currently selected frame.
   (interactive)
@@ -31,8 +31,8 @@
     (add-to-list 'wnd-pos-frame-parameters `(left . ,wnd-pos))
     (modify-frame-parameters frame wnd-pos-frame-parameters)))
 
-(defun arrange-frame-left (&optional frame)
-  ;; Arrage FRAME to right of screen.
+(defun fw-ops-frame-left (&optional frame)
+  "Arrange FRAME to right of screen."
   ;; Frame be a frame name, a terminal name, or a frame.
   ;; If FRAME is omitted or nil, use currently selected frame.
   (interactive)
@@ -49,8 +49,8 @@
     (add-to-list 'wnd-pos-frame-parameters `(left . ,wnd-pos))
     (modify-frame-parameters frame wnd-pos-frame-parameters)))
 
-(defun swap-buffers-in-windows ()
-  ;; Put the buffer from the selected window in next window, and vice versa
+(defun fw-ops-swap-buffers ()
+  "Put the buffer from the selected window in next window, and vice versa."
   (interactive)
   (let* ((this (selected-window))
      (other (next-window))
@@ -61,12 +61,12 @@
     )
   )
 
-(global-set-key (kbd "C-c w l") 'arrange-frame-left)
-(global-set-key (kbd "C-c w r") 'arrange-frame-right)
-(global-set-key (kbd "C-c w c") 'arrange-frame-center)
-(global-set-key (kbd "C-c w s") 'swap-buffers-in-windows)
+(global-set-key (kbd "C-c w l") 'fw-ops-frame-left)
+(global-set-key (kbd "C-c w r") 'fw-ops-frame-right)
+(global-set-key (kbd "C-c w c") 'fw-ops-frame-center)
+(global-set-key (kbd "C-c w s") 'fw-ops-swap-buffers)
 
-(provide 'wnd-pos)
+(provide 'fw-ops)
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil

@@ -1,3 +1,6 @@
 [submodule "emacs-w3m"]
 	path = emacs-w3m
 	url = git@github.com:emacs-w3m/emacs-w3m.git
+[submodule "glsl-language-server"]
+	path = glsl-language-server
+	url = git@github.com:svenstaro/glsl-language-server.git
