@@ -224,12 +224,19 @@
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 (add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.vs\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.fs\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.geom\\'" . glsl-mode))
-(add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.gs\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.tese\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.comp\\'" . glsl-mode))
+
 (add-to-list 'auto-mode-alist '("\\.fx\\'" . hlsl-mode))
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
+
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
@@ -283,10 +290,11 @@
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-language-id-configuration
                '(glsl-mode . "glsl"))
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("~/.emacs.d/glsl-language-server/build/glslls"))
-                    :activation-fn (lsp-activate-on "glsl")
-                    :server-id 'glslls)))
+  (lsp-register-client (make-lsp-client
+                        :new-connection (lsp-stdio-connection
+                                         '("~/.emacs.d/glsl-language-server/build/glslls" "--stdin"))
+                        :activation-fn (lsp-activate-on "glsl")
+                        :server-id 'glslls)))
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil
