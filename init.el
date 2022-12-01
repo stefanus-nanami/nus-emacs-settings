@@ -62,13 +62,13 @@
  '(helm-ag-insert-at-point 'symbol)
  '(helm-ag-use-agignore 1)
  '(helm-boring-buffer-regexp-list
-   '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc" "\\`\\*omnisharp" "\\`\\*Flycheck error messages" "\\`\\*glslls" "\\`\\*Compile-Log" "\\`\\*Customize" "\\`\\*Async-native-compile-log" "\\`\\*Packages" "\\`\\*Warnings" "\\`\\*Colors"))
+   '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc" "\\`\\*omnisharp" "\\`\\*Flycheck error messages" "\\`\\*glslls" "\\`\\*Compile-Log" "\\`\\*Customize" "\\`\\*Async-native-compile-log" "\\`\\*Packages" "\\`\\*Warnings" "\\`\\*Colors`\\*pylsp"))
  '(helm-buffer-max-length nil)
  '(helm-command-prefix-key "C-c h")
  '(helm-commands-using-frame '(helm-company completion-at-point))
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
-   '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors"))
+   '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors" "\\*pylsp"))
  '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(helm-follow-mode-persistent t)
  '(helm-source-names-using-follow '("Helm Xref"))
@@ -282,6 +282,12 @@
             (bind-key "C-'" 'ac-complete-dictionary text-mode-map)))
 
 (add-hook 'lua-mode-hook
+          (lambda()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 2)
+            (lsp)))
+
+(add-hook 'python-mode-hook
           (lambda()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)
