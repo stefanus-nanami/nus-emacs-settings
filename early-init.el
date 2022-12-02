@@ -13,7 +13,6 @@
        (add-to-list 'default-frame-alist '(menu-bar-lines . 0))))
 
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
-(add-to-list 'default-frame-alist '(alpha . (95 . 80)))
 
 (cond ((or (string= localhost-name "CT043472") (string= localhost-name "Lyka"))
        (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-12"))
