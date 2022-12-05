@@ -302,6 +302,10 @@
                         :activation-fn (lsp-activate-on "glsl")
                         :server-id 'glslls)))
 
+(add-hook 'lsp-ui-doc-frame-hook
+          (lambda (frame window)
+            (set-frame-parameter frame 'alpha 100)))
+
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
