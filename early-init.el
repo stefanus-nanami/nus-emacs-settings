@@ -10,7 +10,9 @@
 
 ;; No menu bar on Windows.
 (cond ((string= system-type "windows-nt")
-       (add-to-list 'default-frame-alist '(menu-bar-lines . 0))))
+       (add-to-list 'default-frame-alist '(menu-bar-lines . 0)))
+      ((string= system-type "darwin")
+       (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))))
 
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
 (add-to-list 'default-frame-alist '(alpha . (95 . 80)))
