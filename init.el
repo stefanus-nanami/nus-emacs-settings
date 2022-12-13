@@ -49,6 +49,8 @@
  '(dynamic-completion-mode t)
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
+ '(flycheck-check-syntax-automatically '(save new-line mode-enabled))
+ '(flycheck-checker-error-threshold nil)
  '(global-company-mode t)
  '(global-display-fill-column-indicator-mode t)
  '(global-flycheck-mode t)
@@ -62,13 +64,13 @@
  '(helm-ag-insert-at-point 'symbol)
  '(helm-ag-use-agignore 1)
  '(helm-boring-buffer-regexp-list
-   '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc" "\\`\\*omnisharp" "\\`\\*Flycheck error messages" "\\`\\*glslls" "\\`\\*Compile-Log" "\\`\\*Customize" "\\`\\*Async-native-compile-log" "\\`\\*Packages" "\\`\\*Warnings" "\\`\\*Colors" "\\`\\*pylsp" "\\`\\*clang" "\\*lua-language-server"))
+   '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc" "\\`\\*omnisharp" "\\`\\*Flycheck error messages" "\\`\\*glslls" "\\`\\*Compile-Log" "\\`\\*Customize" "\\`\\*Async-native-compile-log" "\\`\\*Packages" "\\`\\*Warnings" "\\`\\*Colors" "\\`\\*pylsp" "\\`\\*clang" "\\`\\*Flycheck" "\\`\\*csharp-ls"))
  '(helm-buffer-max-length nil)
  '(helm-command-prefix-key "C-c h")
  '(helm-commands-using-frame '(helm-company completion-at-point))
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
-   '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors" "\\*pylsp" "\\*clang" "\\*lua-language-server"))
+   '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors" "\\*pylsp" "\\*clang" "\\*Flycheck" "\\*csharp-ls"))
  '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(helm-follow-mode-persistent t)
  '(helm-source-names-using-follow '("Helm Xref"))
@@ -80,9 +82,10 @@
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
- '(lsp-response-timeout nil)
+ '(lsp-modeline-diagnostics-enable nil)
  '(lsp-ui-sideline-show-diagnostics nil)
  '(lua-indent-level 2)
+ '(max-lisp-eval-depth 65536)
  '(message-send-mail-function 'smtpmail-send-it)
  '(mm-text-html-renderer 'w3m)
  '(package-archives
@@ -250,7 +253,11 @@
        (setq-default indent-tabs-mode t)
        (setq-default c-basic-offset 4)))
 
-(setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
+;; Improving LSP performance.
+(setq lsp-headerline-breadcrumb-enable nil)
+;; (setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
+(setq gc-cons-threshold (* 128 1024 1024))
+(setq read-process-output-max (* 1024 1024))
 
 ;; Hooks
 
