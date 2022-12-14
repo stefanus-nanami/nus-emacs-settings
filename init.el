@@ -28,7 +28,6 @@
      (inexpr-class-open after)
      (inexpr-class-close before)
      (arglist-cont-nonempty)))
- '(c-mode-common-hook '(lsp))
  '(c-offsets-alist '((brace-list-open . 0) (substatement-open . 0)))
  '(company-backends
    '(company-bbdb company-cmake company-clang company-capf company-semantic company-files
@@ -78,12 +77,14 @@
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
  '(js2-strict-missing-semi-warning nil)
+ '(lsp-enable-file-watchers nil)
  '(lsp-enable-indentation nil)
  '(lsp-enable-on-type-formatting nil)
  '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
  '(lsp-modeline-diagnostics-enable nil)
  '(lsp-ui-sideline-show-diagnostics nil)
+ '(lsp-warn-no-matched-clients nil)
  '(lua-indent-level 2)
  '(max-lisp-eval-depth 65536)
  '(message-send-mail-function 'smtpmail-send-it)
@@ -275,10 +276,12 @@
 (add-hook 'js2-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
-            (setq tab-width 2)
-            (lsp)))
+            (setq tab-width 2)))
 
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (display-line-numbers-mode)
+            (lsp)))
 
 (add-hook 'csharp-mode-hook
           (lambda ()
@@ -292,14 +295,12 @@
 (add-hook 'lua-mode-hook
           (lambda()
             (setq indent-tabs-mode nil)
-            (setq tab-width 2)
-            (lsp)))
+            (setq tab-width 2)))
 
 (add-hook 'python-mode-hook
           (lambda()
             (setq indent-tabs-mode nil)
-            (setq tab-width 2)
-            (lsp)))
+            (setq tab-width 2)))
 
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-language-id-configuration
