@@ -257,6 +257,7 @@
 (setq lsp-headerline-breadcrumb-enable nil)
 ;; (setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
 (setq gc-cons-threshold (* 128 1024 1024))
+(run-with-idle-timer 2 t (lambda () (garbage-collect)))
 (setq read-process-output-max (* 1024 1024))
 
 ;; Hooks
