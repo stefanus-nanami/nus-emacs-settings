@@ -211,6 +211,9 @@
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
 (bind-key "C-c p" 'projectile-command-map 'projectile-mode-map)
 
+(bind-keys :map projectile-mode-map
+           ("<f9>" . projectile-find-other-file))
+
 ;; Completions.
 (bind-key "C-\"" 'helm-company)
 (bind-key "C-;" 'completion-at-point)
