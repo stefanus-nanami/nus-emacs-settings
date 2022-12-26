@@ -71,7 +71,6 @@
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors" "\\*pylsp" "\\*clang" "\\*Flycheck" "\\*csharp-ls"))
  '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
- '(helm-follow-mode-persistent t)
  '(helm-source-names-using-follow '("Helm Xref"))
  '(helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
  '(inhibit-startup-screen t)
