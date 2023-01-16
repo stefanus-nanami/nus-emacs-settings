@@ -171,8 +171,6 @@
 (require 'helm-config)
 (helm-mode 1)
 
-(require 'helm-dabbrev)
-
 (fa-config-default)
 
 (projectile-mode +1)
@@ -205,7 +203,11 @@
 
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
-           ([remap execute-extended-command] . helm-M-x))
+           ([remap execute-extended-command] . helm-M-x)
+           ([remap occur] . helm-occur)
+           ([remap list-buffers] . helm-buffers-list)
+           ([remap dabbrev-expand] . helm-dabbrev)
+           ([remap apropos-command] . helm-apropos))
 
 (unbind-key "C-c C-c" c-mode-map)
 (unbind-key "C-c C-c" c++-mode-map)
