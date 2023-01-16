@@ -93,7 +93,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(lsp-sourcekit all-the-icons-dired js2-mode lsp-ui magit auto-complete helm-company doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(lsp-sourcekit all-the-icons-dired js2-mode lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -219,7 +219,6 @@
            ("<f9>" . projectile-find-other-file))
 
 ;; Completions.
-(bind-key "C-\"" 'helm-company)
 (bind-key "C-;" 'completion-at-point)
 (bind-key "C-'" 'helm-dabbrev)
 
@@ -273,12 +272,12 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (add-hook 'auto-complete-mode-hook
-          (lambda()
+          (lambda ()
             (bind-keys :map ac-complete-mode-map
-                ("C-n" . ac-next)
-                ("C-p" . ac-previous)
-                ("C-v" . ac-next-page)
-                ("M-v" . ac-previous-page))))
+                       ("C-n" . ac-next)
+                       ("C-p" . ac-previous)
+                       ("C-v" . ac-next-page)
+                       ("M-v" . ac-previous-page))))
 
 (add-hook 'js2-mode-hook
           (lambda ()
@@ -295,22 +294,22 @@
             (setq indent-tabs-mode nil)))
 
 (add-hook 'text-mode-hook
-          (lambda()
+          (lambda ()
             (auto-complete-mode t)
             (bind-key "C-'" 'ac-complete-dictionary text-mode-map)))
 
 (add-hook 'lua-mode-hook
-          (lambda()
+          (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
 
 (add-hook 'python-mode-hook
-          (lambda()
+          (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
 
 (add-hook 'swift-mode-hook
-          (lambda()
+          (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)
             (lsp)))
