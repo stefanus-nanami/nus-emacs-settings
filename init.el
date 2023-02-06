@@ -16,19 +16,6 @@
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(auto-hscroll-mode 'current-line)
  '(backup-directory-alist '(("" . "~/.emacs.d/backups")))
- '(c-hanging-braces-alist
-   '((block-close . c-snug-do-while)
-     (statement-cont)
-     (brace-list-open)
-     (brace-entry-open)
-     (extern-lang-open after)
-     (namespace-open after)
-     (module-open after)
-     (composition-open after)
-     (inexpr-class-open after)
-     (inexpr-class-close before)
-     (arglist-cont-nonempty)))
- '(c-offsets-alist '((brace-list-open . 0) (substatement-open . 0)))
  '(company-backends
    '(company-bbdb company-cmake company-clang company-capf company-semantic company-files
                   (company-dabbrev-code company-gtags company-etags company-keywords)
@@ -188,12 +175,20 @@
 (unbind-key "C-\\" isearch-mode-map)
 (bind-key* "C-\\" 'undo)
 (unbind-key "C-z" global-map)
-(bind-key "C-c g" 'helm-do-ag)
-(bind-key "C-c b" 'helm-do-ag-buffers)
-(bind-key "<f2>" 'helm-mini)
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-|" 'undo-redo)
 (bind-key "C-<tab>" 'other-window)
+
+;; Helm related keys.
+(bind-key "C-c g" 'helm-do-ag)
+(bind-key "C-c b" 'helm-do-ag-buffers)
+(bind-key "<f2>" 'helm-mini)
+(bind-key "<f8>" 'helm-browse-project)
+(bind-key "<f5>" 'helm-imenu)
+(bind-key "C-<f5>" 'helm-imenu-in-all-buffers)
+(bind-key "C-'" 'helm-dabbrev)
+(bind-key "<f6>" 'helm-show-kill-ring)
+(bind-key "C-<f6>" 'helm-all-mark-rings)
 
 (bind-keys :map lsp-mode-map
            ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
@@ -211,16 +206,15 @@
 
 (unbind-key "C-c C-c" c-mode-map)
 (unbind-key "C-c C-c" c++-mode-map)
-
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
-(bind-key "C-c p" 'projectile-command-map 'projectile-mode-map)
 
+(bind-key "C-c p" 'projectile-command-map 'projectile-mode-map)
 (bind-keys :map projectile-mode-map
-           ("<f9>" . projectile-find-other-file))
+           ("<f9>" . projectile-find-other-file)
+           ("C-<f9>" . helm-projectile-find-file))
 
 ;; Completions.
 (bind-key "C-;" 'completion-at-point)
-(bind-key "C-'" 'helm-dabbrev)
 
 ;; Magit
 (bind-key "C-c m s" 'magit-status)
@@ -266,6 +260,24 @@
 (setq gc-cons-threshold (* 128 1024 1024))
 (run-with-idle-timer 2 t (lambda () (garbage-collect)))
 (setq read-process-output-max (* 1024 1024))
+
+;; C offsets.
+(setq c-offsets-alist
+	  '((brace-list-open . 0)
+		(substatement-open . 0)))
+
+(setq c-hanging-braces-alist
+	  '((block-close . c-snug-do-while)
+		(statement-cont)
+		(brace-list-open)
+		(brace-entry-open)
+		(extern-lang-open after)
+		(namespace-open after)
+		(module-open after)
+		(composition-open after)
+		(inexpr-class-open after)
+		(inexpr-class-close before)
+		(arglist-cont-nonempty)))
 
 ;; Hooks
 
