@@ -172,12 +172,16 @@
 (require 'cc-mode)
 
 ;; Bind keys.
-(unbind-key "C-\\" isearch-mode-map)
+(unbind-key "C-\\" 'isearch-mode-map)
 (bind-key* "C-\\" 'undo)
-(unbind-key "C-z" global-map)
+(unbind-key "C-z" 'global-map)
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-|" 'undo-redo)
 (bind-key "C-<tab>" 'other-window)
+
+(unbind-key "C-_" 'global-map)
+(unbind-key "C-<prior>" 'global-map)
+(unbind-key "C-<next>" 'global-map)
 
 ;; Helm related keys.
 (bind-key "C-c g" 'helm-do-ag)
