@@ -183,6 +183,9 @@
 (unbind-key "C-<prior>" 'global-map)
 (unbind-key "C-<next>" 'global-map)
 
+(bind-key "M-[" 'scroll-other-window-down)
+(bind-key "M-]" 'scroll-other-window)
+
 ;; Helm related keys.
 (bind-key "C-c g" 'helm-do-ag)
 (bind-key "C-c b" 'helm-do-ag-buffers)
