@@ -159,7 +159,6 @@
 (require 'lsp-mode)
 
 (require 'helm)
-(require 'helm-config)
 (helm-mode 1)
 
 (fa-config-default)
