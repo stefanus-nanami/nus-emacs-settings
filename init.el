@@ -83,6 +83,10 @@
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
    '(helm-flycheck objc-font-lock lsp-sourcekit all-the-icons-dired js2-mode lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+ '(pixel-scroll-mode t)
+ '(pixel-scroll-precision-interpolate-page t)
+ '(pixel-scroll-precision-mode t)
+ '(pixel-scroll-precision-use-momentum t)
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
@@ -181,6 +185,11 @@
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-|" 'undo-redo)
 (bind-key "C-<tab>" 'other-window)
+
+;; Pixel scroll everything!
+(cond ((>= emacs-major-version 29)
+       (bind-key "C-v" 'pixel-scroll-interpolate-down)
+       (bind-key "M-v" 'pixel-scroll-interpolate-up)))
 
 (unbind-key "C-_" 'global-map)
 (unbind-key "C-<prior>" 'global-map)
@@ -358,7 +367,10 @@
 
 (eval-after-load 'flycheck
   '(bind-keys :map flycheck-mode-map
-           ("C-c ! h" . helm-flycheck)))
+              ("C-c ! h" . helm-flycheck)))
+
+(provide 'init)
+;;; init.el ends here
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil

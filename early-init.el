@@ -34,6 +34,10 @@
        (add-to-list 'default-frame-alist `(height . 90))
        (add-to-list 'default-frame-alist `(width . 140))))
 
+(provide 'early-init)
+;;; early-init.el ends here
+
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
+
