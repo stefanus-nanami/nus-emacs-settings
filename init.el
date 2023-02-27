@@ -58,6 +58,8 @@
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors" "\\*pylsp" "\\*clang" "\\*Flycheck" "\\*csharp-ls" "\\*json-ls"))
  '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
+ '(helm-ff-file-name-history-use-recentf t)
+ '(helm-recentf-fuzzy-match t)
  '(helm-source-names-using-follow '("Helm Xref"))
  '(helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
  '(inhibit-startup-screen t)
@@ -87,6 +89,8 @@
  '(projectile-globally-ignored-file-suffixes
    '(".exe" ".dll" ".pdb" ".lib" ".obj" ".diff" ".o" ".a" ".dylib" ".so"))
  '(projectile-globally-ignored-files '("TAGS" ".git*"))
+ '(recentf-auto-cleanup 300)
+ '(recentf-mode t)
  '(scroll-bar-mode nil)
  '(show-trailing-whitespace t)
  '(smtpmail-default-smtp-server "smtp.gmail.com")
