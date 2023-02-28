@@ -35,6 +35,7 @@
  '(dynamic-completion-mode t)
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
+ '(exec-path-from-shell-arguments nil)
  '(flycheck-check-syntax-automatically '(save new-line mode-enabled))
  '(flycheck-checker-error-threshold nil)
  '(global-company-mode t)
@@ -129,6 +130,10 @@
 
 ;; Activate all the packages.
 (package-initialize)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 (add-to-list 'load-path "~/.emacs.d/local")
 (add-to-list 'load-path "~/.emacs.d/emacs-w3m")
 
@@ -144,9 +149,6 @@
 ;; Auto compile everything.
 (auto-compile-on-load-mode)
 (auto-compile-on-save-mode)
-
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
 
 (doom-modeline-mode 1)
 
