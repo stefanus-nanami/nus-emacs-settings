@@ -85,6 +85,7 @@
    '(helm-flycheck objc-font-lock lsp-sourcekit all-the-icons-dired js2-mode lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolate-page t)
+ '(pixel-scroll-precision-interpolation-total-time 0.2)
  '(pixel-scroll-precision-mode t)
  '(pixel-scroll-precision-use-momentum t)
  '(projectile-completion-system 'helm)
