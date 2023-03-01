@@ -246,7 +246,9 @@
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize))
       ((string= system-type "windows-nt")
-       (bind-key "C-<f13>" 'other-frame)))
+       (setq w32-lwindow-modifier 'super)
+       (setq w32-rwindow-modifier 'super)
+       (bind-key "s-`" 'other-frame)))
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -280,7 +282,7 @@
 (setq lsp-headerline-breadcrumb-enable nil)
 ;; (setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
 (setq gc-cons-threshold (* 128 1024 1024))
-(run-with-idle-timer 2 t (lambda () (garbage-collect)))
+;; (run-with-idle-timer 2 t (lambda () (garbage-collect)))
 (setq read-process-output-max (* 1024 1024))
 
 ;; C offsets.
