@@ -36,8 +36,6 @@
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
  '(exec-path-from-shell-arguments nil)
- '(flycheck-check-syntax-automatically '(save new-line mode-enabled))
- '(flycheck-checker-error-threshold nil)
  '(global-company-mode t)
  '(global-display-fill-column-indicator-mode t)
  '(global-hl-line-mode t)
@@ -82,7 +80,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(helm-flycheck objc-font-lock lsp-sourcekit all-the-icons-dired js2-mode lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile flycheck helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(flycheck objc-font-lock lsp-sourcekit all-the-icons-dired js2-mode lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolate-page t)
  '(pixel-scroll-precision-interpolation-total-time 0.2)
@@ -366,10 +364,6 @@
 (add-hook 'lsp-ui-doc-frame-hook
           (lambda (frame window)
             (set-frame-parameter frame 'alpha 100)))
-
-(eval-after-load 'flycheck
-  '(bind-keys :map flycheck-mode-map
-              ("C-c ! h" . helm-flycheck)))
 
 (provide 'init)
 ;;; init.el ends here
