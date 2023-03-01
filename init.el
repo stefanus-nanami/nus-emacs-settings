@@ -40,7 +40,6 @@
  '(flycheck-checker-error-threshold nil)
  '(global-company-mode t)
  '(global-display-fill-column-indicator-mode t)
- '(global-flycheck-mode t)
  '(global-hl-line-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
@@ -304,8 +303,6 @@
 		(arglist-cont-nonempty)))
 
 ;; Hooks
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (add-hook 'auto-complete-mode-hook
           (lambda ()
