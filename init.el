@@ -80,7 +80,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(flycheck objc-font-lock lsp-sourcekit all-the-icons-dired js2-mode lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolate-page t)
  '(pixel-scroll-precision-interpolation-total-time 0.2)
@@ -208,6 +208,7 @@
 (bind-key "C-'" 'helm-dabbrev)
 (bind-key "<f6>" 'helm-show-kill-ring)
 (bind-key "C-<f6>" 'helm-all-mark-rings)
+(bind-key "C-c h x" 'helm-flycheck)
 
 (bind-keys :map lsp-mode-map
            ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
@@ -243,9 +244,7 @@
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize))
       ((string= system-type "windows-nt")
-       (setq w32-lwindow-modifier 'super)
-       (setq w32-rwindow-modifier 'super)
-       (bind-key "s-`" 'other-frame)))
+       (bind-key "C-<f13>" 'other-frame)))
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -262,9 +261,7 @@
 (add-to-list 'auto-mode-alist '("\\.fx\\'" . hlsl-mode))
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(add-to-list 'interpreter-mode-alist '("node" . js-mode))
 
 (cond ((string= localhost-name "Lyka")
        (setq-default tab-width 2)
@@ -279,7 +276,6 @@
 (setq lsp-headerline-breadcrumb-enable nil)
 ;; (setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
 (setq gc-cons-threshold (* 128 1024 1024))
-;; (run-with-idle-timer 2 t (lambda () (garbage-collect)))
 (setq read-process-output-max (* 1024 1024))
 
 ;; C offsets.
@@ -310,15 +306,14 @@
                        ("C-v" . ac-next-page)
                        ("M-v" . ac-previous-page))))
 
-(add-hook 'js2-mode-hook
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (display-line-numbers-mode)))
+
+(add-hook 'js-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
-
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (display-line-numbers-mode)
-            (lsp)))
 
 (add-hook 'csharp-mode-hook
           (lambda ()
@@ -342,8 +337,21 @@
 (add-hook 'swift-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
-            (setq tab-width 2)
-            (lsp)))
+            (setq tab-width 2)))
+
+(add-hook 'lsp-ui-doc-frame-hook
+          (lambda (frame window)
+            (set-frame-parameter frame 'alpha 100)))
+
+;; LSP hooks.
+(add-hook 'c-mode-hook #'lsp-deferred)
+(add-hook 'c++-mode-hook #'lsp-deferred)
+(add-hook 'objc-mode-hook #'lsp-deferred)
+(add-hook 'swift-mode-hook #'lsp-deferred)
+(add-hook 'csharp-mode-hook #'lsp-deferred)
+(add-hook 'python-mode-hook #'lsp-deferred)
+(add-hook 'js-mode-hook #'lsp-deferred)
+(add-hook 'lua-mode-hook #'lsp-deferred)
 
 (cond ((string= system-type "darwin")
        (eval-after-load 'lsp-mode
@@ -360,10 +368,6 @@
                                          '("~/.emacs.d/glsl-language-server/build/glslls" "--stdin"))
                         :activation-fn (lsp-activate-on "glsl")
                         :server-id 'glslls)))
-
-(add-hook 'lsp-ui-doc-frame-hook
-          (lambda (frame window)
-            (set-frame-parameter frame 'alpha 100)))
 
 (provide 'init)
 ;;; init.el ends here
