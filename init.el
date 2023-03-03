@@ -244,7 +244,11 @@
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize))
       ((string= system-type "windows-nt")
-       (bind-key "C-<f13>" 'other-frame)))
+       (setq w32-pass-lwindow-to-system nil)
+       (setq w32-lwindow-modifier 'super)
+       (setq w32-pass-rwindow-to-system nil)
+       (setq w32-rwindow-modifier 'super)
+       (bind-key "s-`" 'other-frame)))
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
