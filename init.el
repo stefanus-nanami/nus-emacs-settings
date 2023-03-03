@@ -284,21 +284,21 @@
 
 ;; C offsets.
 (setq c-offsets-alist
-	  '((brace-list-open . 0)
-		(substatement-open . 0)))
+      '((brace-list-open . 0)
+        (substatement-open . 0)))
 
 (setq c-hanging-braces-alist
-	  '((block-close . c-snug-do-while)
-		(statement-cont)
-		(brace-list-open)
-		(brace-entry-open)
-		(extern-lang-open after)
-		(namespace-open after)
-		(module-open after)
-		(composition-open after)
-		(inexpr-class-open after)
-		(inexpr-class-close before)
-		(arglist-cont-nonempty)))
+      '((block-close . c-snug-do-while)
+        (statement-cont)
+        (brace-list-open)
+        (brace-entry-open)
+        (extern-lang-open after)
+        (namespace-open after)
+        (module-open after)
+        (composition-open after)
+        (inexpr-class-open after)
+        (inexpr-class-close before)
+        (arglist-cont-nonempty)))
 
 ;; Hooks
 
