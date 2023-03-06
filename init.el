@@ -62,15 +62,7 @@
  '(helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
- '(js2-strict-missing-semi-warning nil)
- '(lsp-enable-file-watchers nil)
- '(lsp-enable-indentation nil)
- '(lsp-enable-on-type-formatting nil)
- '(lsp-enable-snippet nil)
  '(lsp-keymap-prefix "C-c l")
- '(lsp-modeline-diagnostics-enable nil)
- '(lsp-ui-sideline-show-diagnostics nil)
- '(lsp-warn-no-matched-clients nil)
  '(lua-indent-level 2)
  '(max-lisp-eval-depth 65536)
  '(message-send-mail-function 'smtpmail-send-it)
@@ -276,9 +268,21 @@
        (setq-default indent-tabs-mode t)
        (setq-default c-basic-offset 4)))
 
-;; Improving LSP performance.
+;; Disable LSP features.
 (setq lsp-headerline-breadcrumb-enable nil)
-;; (setq lsp-headerline-arrow #("|" 0 1 (face lsp-headerline-breadcrumb-separator-face)))
+(setq lsp-ui-doc-enable nil)
+(setq lsp-lens-enable nil)
+(setq lsp-enable-file-watchers nil)
+(setq lsp-enable-indentation nil)
+(setq lsp-enable-on-type-formatting nil)
+(setq lsp-enable-snippet nil)
+(setq lsp-modeline-diagnostics-enable nil)
+(setq lsp-ui-sideline-show-diagnostics nil)
+(setq lsp-warn-no-matched-clients nil)
+(setq lsp-eldoc-enable-hover nil)
+(setq lsp-signature-auto-activate nil)
+
+;; Improving LSP performance.
 (setq gc-cons-threshold (* 128 1024 1024))
 (setq read-process-output-max (* 1024 1024))
 
