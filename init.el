@@ -121,9 +121,6 @@
 ;; Activate all the packages.
 (package-initialize)
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
 (add-to-list 'load-path "~/.emacs.d/local")
 (add-to-list 'load-path "~/.emacs.d/emacs-w3m")
 
@@ -135,6 +132,9 @@
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
     (package-install package)))
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 ;; Auto compile everything.
 (auto-compile-on-load-mode)
