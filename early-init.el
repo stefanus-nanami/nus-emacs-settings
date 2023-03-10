@@ -9,7 +9,7 @@
 (setq default-frame-alist nil)
 
 ;; No menu bar on Windows.
-(cond ((string= system-type "windows-nt")
+(cond ((or (string= system-type "windows-nt") (string= system-type "gnu/linux"))
        (add-to-list 'default-frame-alist '(menu-bar-lines . 0)))
       ((string= system-type "darwin")
        (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))))
@@ -25,7 +25,10 @@
        (add-to-list 'default-frame-alist `(width . 130)))
       ((or (string= localhost-name "CT057555") (string= localhost-name "CT055654"))
        (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-10"))
-       (add-to-list 'default-frame-alist `(height . 100))
+       (cond ((string= system-type "gnu/linux")
+              (add-to-list 'default-frame-alist `(height . 85)))
+             (t
+              (add-to-list 'default-frame-alist `(height . 100))))
        (add-to-list 'default-frame-alist `(width . 140)))
       (t
        (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-10"))

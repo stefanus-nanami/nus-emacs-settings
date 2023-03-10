@@ -49,13 +49,13 @@
  '(helm-ag-insert-at-point 'symbol)
  '(helm-ag-use-agignore 1)
  '(helm-boring-buffer-regexp-list
-   '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc" "\\`\\*omnisharp" "\\`\\*Flycheck error messages" "\\`\\*glslls" "\\`\\*Compile-Log" "\\`\\*Customize" "\\`\\*Async-native-compile-log" "\\`\\*Packages" "\\`\\*Warnings" "\\`\\*Colors" "\\`\\*pylsp" "\\`\\*clang" "\\`\\*Flycheck" "\\`\\*csharp-ls" "\\`\\*json-ls"))
+   '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc" "\\`\\*omnisharp" "\\`\\*Flycheck error messages" "\\`\\*glslls" "\\`\\*Compile-Log" "\\`\\*Customize" "\\`\\*Async-native-compile-log" "\\`\\*Packages" "\\`\\*Warnings" "\\`\\*Colors" "\\`\\*pylsp" "\\`\\*clang" "\\`\\*Flycheck" "\\`\\*csharp-ls" "\\`\\*json-ls" "\\`\\*sourcekit-ls"))
  '(helm-buffer-max-length nil)
  '(helm-command-prefix-key "C-c h")
  '(helm-commands-using-frame '(helm-company completion-at-point))
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
-   '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors" "\\*pylsp" "\\*clang" "\\*Flycheck" "\\*csharp-ls" "\\*json-ls"))
+   '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors" "\\*pylsp" "\\*clang" "\\*Flycheck" "\\*csharp-ls" "\\*json-ls" "\\*sourcekit-ls"))
  '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
  '(helm-ff-file-name-history-use-recentf t)
  '(helm-recentf-fuzzy-match t)
@@ -73,6 +73,7 @@
  '(lsp-lens-enable nil)
  '(lsp-modeline-diagnostics-enable nil)
  '(lsp-signature-auto-activate nil)
+ '(lsp-ui-doc-enable nil)
  '(lsp-ui-sideline-show-diagnostics nil)
  '(lsp-warn-no-matched-clients nil)
  '(lua-indent-level 2)
