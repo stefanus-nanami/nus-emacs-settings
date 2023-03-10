@@ -23,7 +23,7 @@
        (add-to-list 'default-frame-alist `(top . 0.5))
        (add-to-list 'default-frame-alist '(fullscreen . fullheight))
        (add-to-list 'default-frame-alist `(width . 130)))
-      ((or (string= localhost-name "CT046608") (string= localhost-name "CT055654"))
+      ((or (string= localhost-name "CT057555") (string= localhost-name "CT055654"))
        (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-10"))
        (add-to-list 'default-frame-alist `(height . 100))
        (add-to-list 'default-frame-alist `(width . 140)))
