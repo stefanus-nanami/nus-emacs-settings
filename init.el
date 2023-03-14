@@ -8,8 +8,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-auto-show-menu nil)
- '(ac-dictionary-files '("~/.emacs.d/.dict"))
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
@@ -20,7 +18,7 @@
  '(company-backends
    '(company-bbdb company-cmake company-clang company-capf company-semantic company-files
                   (company-dabbrev-code company-gtags company-etags company-keywords)
-                  company-oddmuse company-dabbrev))
+                  company-oddmuse company-dict company-dabbrev))
  '(company-idle-delay nil)
  '(completion-search-distance 0)
  '(completion-styles '(flex basic partial-completion emacs22))
@@ -52,7 +50,7 @@
    '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc" "\\`\\*omnisharp" "\\`\\*Flycheck error messages" "\\`\\*glslls" "\\`\\*Compile-Log" "\\`\\*Customize" "\\`\\*Async-native-compile-log" "\\`\\*Packages" "\\`\\*Warnings" "\\`\\*Colors" "\\`\\*pylsp" "\\`\\*clang" "\\`\\*Flycheck" "\\`\\*csharp-ls" "\\`\\*json-ls" "\\`\\*sourcekit-ls"))
  '(helm-buffer-max-length nil)
  '(helm-command-prefix-key "C-c h")
- '(helm-commands-using-frame '(helm-company completion-at-point))
+ '(helm-commands-using-frame '(completion-at-point helm-company))
  '(helm-dabbrev-cycle-threshold 0)
  '(helm-dabbrev-ignored-buffers-regexps
    '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors" "\\*pylsp" "\\*clang" "\\*Flycheck" "\\*csharp-ls" "\\*json-ls" "\\*sourcekit-ls"))
@@ -85,7 +83,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline helm-descbinds lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(company-dict helm-company company-box flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile helm-xref helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolate-page t)
  '(pixel-scroll-precision-interpolation-total-time 0.2)
@@ -210,7 +208,6 @@
 (bind-key "<f8>" 'helm-browse-project)
 (bind-key "<f5>" 'helm-imenu)
 (bind-key "C-<f5>" 'helm-imenu-in-all-buffers)
-(bind-key "C-'" 'helm-dabbrev)
 (bind-key "<f6>" 'helm-show-kill-ring)
 (bind-key "C-<f6>" 'helm-all-mark-rings)
 (bind-key "C-c h x" 'helm-flycheck)
@@ -241,7 +238,7 @@
            ("C-<f9>" . helm-projectile-find-file))
 
 ;; Completions.
-(bind-key "C-;" 'completion-at-point)
+(bind-key "C-;" 'helm-company)
 
 ;; Magit
 (bind-key "C-c m s" 'magit-status)
@@ -307,14 +304,6 @@
 
 ;; Hooks
 
-(add-hook 'auto-complete-mode-hook
-          (lambda ()
-            (bind-keys :map ac-complete-mode-map
-                       ("C-n" . ac-next)
-                       ("C-p" . ac-previous)
-                       ("C-v" . ac-next-page)
-                       ("M-v" . ac-previous-page))))
-
 (add-hook 'prog-mode-hook
           (lambda ()
             (display-line-numbers-mode)))
@@ -327,11 +316,6 @@
 (add-hook 'csharp-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)))
-
-(add-hook 'text-mode-hook
-          (lambda ()
-            (auto-complete-mode t)
-            (bind-key "C-'" 'ac-complete-dictionary text-mode-map)))
 
 (add-hook 'lua-mode-hook
           (lambda ()
