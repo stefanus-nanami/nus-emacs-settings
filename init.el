@@ -219,7 +219,9 @@
            ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
            ([remap xref-find-references] . lsp-ui-peek-find-references)
            ("<f12>" . lsp-find-definition)
-           ("C-<f12>" . lsp-find-references))
+           ("C-<f12>" . lsp-find-references)
+           ("M-<f12>" . helm-lsp-workspace-symbol)
+           ("s-<f12>" . helm-lsp-global-workspace-symbol))
 
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
