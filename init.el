@@ -16,9 +16,9 @@
  '(backup-directory-alist '(("" . "~/.emacs.d/backups")))
  '(column-number-mode t)
  '(company-backends
-   '(company-bbdb company-cmake company-capf company-clang company-semantic company-files
-                  (company-dabbrev-code company-gtags company-etags company-keywords)
-                  company-oddmuse company-dict company-dabbrev))
+   '(company-capf company-cmake
+                  (company-dabbrev-code company-keywords)
+                  (company-dict company-dabbrev)))
  '(company-idle-delay nil)
  '(completion-search-distance 0)
  '(completion-styles '(flex basic partial-completion emacs22))
@@ -83,7 +83,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit auto-complete doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolate-page t)
  '(pixel-scroll-precision-interpolation-total-time 0.2)
@@ -331,10 +331,6 @@
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
-
-(add-hook 'lsp-mode-hook
-          (lambda ()
-            (bind-key "C-;" 'completion-at-point lsp-mode-map)))
 
 ;; LSP hooks.
 (add-hook 'c-mode-hook #'lsp-deferred)
