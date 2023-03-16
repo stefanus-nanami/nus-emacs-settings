@@ -332,6 +332,11 @@
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
 
+(add-hook 'cmake-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 2)))
+
 ;; LSP hooks.
 (add-hook 'c-mode-hook #'lsp-deferred)
 (add-hook 'c++-mode-hook #'lsp-deferred)
