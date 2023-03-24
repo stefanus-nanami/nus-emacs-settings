@@ -44,36 +44,8 @@
    '(gnus-thread-sort-by-most-recent-date
      (not gnus-thread-sort-by-number)))
  '(gnus-use-cache t)
- '(helm-ag-insert-at-point 'symbol)
- '(helm-ag-use-agignore 1)
- '(helm-boring-buffer-regexp-list
-   '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*lsp" "\\`\\*clangd" "\\`\\*Flymake" "\\`\\*gcc" "\\`\\*omnisharp" "\\`\\*Flycheck error messages" "\\`\\*glslls" "\\`\\*Compile-Log" "\\`\\*Customize" "\\`\\*Async-native-compile-log" "\\`\\*Packages" "\\`\\*Warnings" "\\`\\*Colors" "\\`\\*pylsp" "\\`\\*clang" "\\`\\*Flycheck" "\\`\\*csharp-ls" "\\`\\*json-ls" "\\`\\*sourcekit-ls"))
- '(helm-buffer-max-length nil)
- '(helm-command-prefix-key "C-c h")
- '(helm-commands-using-frame '(completion-at-point helm-company))
- '(helm-dabbrev-cycle-threshold 0)
- '(helm-dabbrev-ignored-buffers-regexps
-   '("\\*helm" "\\*Messages" "\\*Echo Area" "\\*Buffer List" "\\*lsp" "\\*clangd" "\\*Flymake" "\\*gcc" "\\*omnisharp" "\\*Flycheck" "\\*glslls" "\\*Compile-Log" "\\*Customize" "\\*Async-native-compile-log" "\\*Packages" "\\*Warnings" "\\*Colors" "\\*pylsp" "\\*clang" "\\*Flycheck" "\\*csharp-ls" "\\*json-ls" "\\*sourcekit-ls"))
- '(helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^" t)
- '(helm-ff-file-name-history-use-recentf t)
- '(helm-recentf-fuzzy-match t)
- '(helm-source-names-using-follow '("Helm Xref"))
- '(helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
- '(lsp-eldoc-enable-hover nil)
- '(lsp-enable-file-watchers nil)
- '(lsp-enable-indentation nil)
- '(lsp-enable-on-type-formatting nil)
- '(lsp-enable-snippet nil)
- '(lsp-headerline-breadcrumb-enable nil)
- '(lsp-keymap-prefix "C-c l")
- '(lsp-lens-enable nil)
- '(lsp-modeline-diagnostics-enable nil)
- '(lsp-signature-auto-activate nil)
- '(lsp-ui-doc-enable nil)
- '(lsp-ui-sideline-show-diagnostics nil)
- '(lsp-warn-no-matched-clients nil)
  '(lua-indent-level 2)
  '(max-lisp-eval-depth 65536)
  '(message-send-mail-function 'smtpmail-send-it)
@@ -83,7 +55,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile compat auto-compile helm-lsp lsp-mode function-args csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolate-page t)
  '(pixel-scroll-precision-interpolation-total-time 0.2)
@@ -146,10 +118,6 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
-;; Auto compile everything.
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
-
 (doom-modeline-mode 1)
 
 (when (display-graphic-p)
@@ -161,14 +129,88 @@
 (require 'nus-snippets)
 (require 'fw-ops)
 
-(require 'bind-key)
+(use-package bind-key)
 
-(require 'lsp-mode)
+(use-package lsp-mode
+  :ensure t
+  :config
+  (setq lsp-eldoc-enable-hover nil
+        lsp-enable-file-watchers nil
+        lsp-enable-indentation nil
+        lsp-enable-on-type-formatting nil
+        lsp-enable-snippet nil
+        lsp-headerline-breadcrumb-enable nil
+        lsp-keymap-prefix "C-c l"
+        lsp-lens-enable nil
+        lsp-modeline-diagnostics-enable nil
+        lsp-signature-auto-activate nil
+        lsp-ui-doc-enable nil
+        lsp-ui-sideline-show-diagnostics nil
+        lsp-warn-no-matched-clients nil))
 
-(require 'helm)
-(helm-mode 1)
-
-(fa-config-default)
+(use-package helm
+  :ensure t
+  :config
+  (setq helm-ag-insert-at-point 'symbol
+        helm-ag-use-agignore 1
+        helm-buffer-max-length nil
+        helm-command-prefix-key "C-c h"
+        helm-commands-using-frame '(completion-at-point helm-company)
+        helm-dabbrev-cycle-threshold 0
+        helm-dabbrev-sepqarator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^"
+        helm-ff-file-name-history-use-recentf t
+        helm-recentf-fuzzy-match t)
+  (setq helm-boring-buffer-regexp-list
+        '("\\` "
+          "\\`\\*helm"
+          "\\`\\*Echo Area"
+          "\\`\\*Minibuf"
+          "\\`\\*lsp"
+          "\\`\\*clangd"
+          "\\`\\*Flymake"
+          "\\`\\*gcc"
+          "\\`\\*omnisharp"
+          "\\`\\*Flycheck error messages"
+          "\\`\\*glslls"
+          "\\`\\*Compile-Log"
+          "\\`\\*Customize"
+          "\\`\\*Async-native-compile-log"
+          "\\`\\*Packages"
+          "\\`\\*Warnings"
+          "\\`\\*Colors"
+          "\\`\\*pylsp"
+          "\\`\\*clang"
+          "\\`\\*Flycheck"
+          "\\`\\*csharp-ls"
+          "\\`\\*json-ls"
+          "\\`\\*sourcekit-ls"))
+  (setq helm-dabbrev-ignored-buffers-regexps
+        '("\\*helm"
+          "\\*Messages"
+          "\\*Echo Area"
+          "\\*Buffer List"
+          "\\*lsp"
+          "\\*clangd"
+          "\\*Flymake"
+          "\\*gcc"
+          "\\*omnisharp"
+          "\\*Flycheck"
+          "\\*glslls"
+          "\\*Compile-Log"
+          "\\*Customize"
+          "\\*Async-native-compile-log"
+          "\\*Packages"
+          "\\*Warnings"
+          "\\*Colors"
+          "\\*pylsp"
+          "\\*clang"
+          "\\*Flycheck"
+          "\\*csharp-ls"
+          "\\*json-ls"
+          "\\*sourcekit-ls"))
+  (setq helm-source-names-using-follow '("Helm Xref"))
+  (helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
+  (helm-mode 1))
 
 (projectile-mode +1)
 (helm-projectile-on)
