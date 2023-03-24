@@ -40,6 +40,7 @@
  '(global-hl-line-mode t)
  '(global-whitespace-mode t)
  '(global-whitespace-newline-mode t)
+ '(gnus-inhibit-startup-message t)
  '(gnus-thread-sort-functions
    '(gnus-thread-sort-by-most-recent-date
      (not gnus-thread-sort-by-number)))
@@ -55,7 +56,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(unicode-fonts emojify cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolate-page t)
  '(pixel-scroll-precision-interpolation-total-time 0.2)
@@ -130,6 +131,15 @@
 (require 'fw-ops)
 
 (use-package bind-key)
+
+(use-package emojify
+  :hook
+  (after-init . global-emojify-mode))
+
+(use-package unicode-fonts
+  :ensure t
+  :config
+  (unicode-fonts-setup))
 
 (use-package lsp-mode
   :ensure t
