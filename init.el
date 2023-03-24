@@ -214,7 +214,7 @@
           "\\*json-ls"
           "\\*sourcekit-ls"))
   (setq helm-source-names-using-follow '("Helm Xref"))
-  (helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
+  (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
   :config
   (helm-mode 1))
 
