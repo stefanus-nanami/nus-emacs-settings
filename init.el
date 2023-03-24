@@ -56,7 +56,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(unicode-fonts emojify cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(emojify cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolate-page t)
  '(pixel-scroll-precision-interpolation-total-time 0.2)
@@ -130,20 +130,15 @@
 (require 'nus-snippets)
 (require 'fw-ops)
 
-(use-package bind-key)
+(use-package bind-key
+  :ensure t)
 
 (use-package emojify
-  :hook
-  (after-init . global-emojify-mode))
-
-(use-package unicode-fonts
-  :ensure t
-  :config
-  (unicode-fonts-setup))
+  :ensure t)
 
 (use-package lsp-mode
   :ensure t
-  :config
+  :init
   (setq lsp-eldoc-enable-hover nil
         lsp-enable-file-watchers nil
         lsp-enable-indentation nil
@@ -160,7 +155,7 @@
 
 (use-package helm
   :ensure t
-  :config
+  :init
   (setq helm-ag-insert-at-point 'symbol
         helm-ag-use-agignore 1
         helm-buffer-max-length nil
@@ -220,6 +215,7 @@
           "\\*sourcekit-ls"))
   (setq helm-source-names-using-follow '("Helm Xref"))
   (helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
+  :config
   (helm-mode 1))
 
 (projectile-mode +1)
