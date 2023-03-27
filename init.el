@@ -86,10 +86,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
- '(header-line ((t (:family "Bitstream Vera Sans" :background "midnight blue" :inherit mode-line))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(hl-line ((t (:extend t :background "#202040"))))
- '(line-number ((t (:inherit default :foreground "PaleVioletRed4"))))
+ '(line-number ((t (:inherit default :foreground "PaleVioletRed4" :slant italic))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gainsboro" :weight bold))))
  '(line-number-major-tick ((t (:inherit line-number :foreground "PaleVioletRed1" :weight bold))))
  '(line-number-minor-tick ((t (:inherit line-number :foreground "PaleVioletRed3"))))
@@ -294,7 +293,8 @@
 (bind-key "C-c m f" 'magit-file-dispatch)
 
 (cond ((string= system-type "darwin")
-       (bind-key "M-," 'customize))
+       (bind-key "M-," 'customize)
+       (bind-key "s-<f12>" 'scroll-lock-mode))
       ((string= system-type "windows-nt")
        (setq w32-pass-lwindow-to-system nil)
        (setq w32-lwindow-modifier 'super)
