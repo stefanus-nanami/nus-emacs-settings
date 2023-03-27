@@ -21,7 +21,7 @@
                   (company-dict company-dabbrev)))
  '(company-idle-delay nil)
  '(completion-search-distance 0)
- '(completion-styles '(flex basic partial-completion emacs22))
+ '(completion-styles '(helm basic partial-completion emacs22))
  '(current-language-environment "Japanese")
  '(custom-enabled-themes '(doom-outrun-electric))
  '(custom-safe-themes
