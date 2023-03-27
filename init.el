@@ -161,7 +161,7 @@
         helm-command-prefix-key "C-c h"
         helm-commands-using-frame '(completion-at-point helm-company)
         helm-dabbrev-cycle-threshold 0
-        helm-dabbrev-sepqarator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^"
+        helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^"
         helm-ff-file-name-history-use-recentf t
         helm-recentf-fuzzy-match t)
   (setq helm-boring-buffer-regexp-list
