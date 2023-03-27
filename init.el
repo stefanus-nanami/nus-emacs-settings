@@ -57,17 +57,6 @@
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
    '(emojify cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
- '(pixel-scroll-mode t)
- '(pixel-scroll-precision-interpolate-page t)
- '(pixel-scroll-precision-interpolation-total-time 0.2)
- '(pixel-scroll-precision-mode t)
- '(pixel-scroll-precision-use-momentum t)
- '(projectile-completion-system 'helm)
- '(projectile-globally-ignored-directories
-   '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "^\\.gitlab$"))
- '(projectile-globally-ignored-file-suffixes
-   '(".exe" ".dll" ".pdb" ".lib" ".obj" ".diff" ".o" ".a" ".dylib" ".so"))
- '(projectile-globally-ignored-files '("TAGS" ".git*"))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -115,22 +104,28 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+(use-package bind-key
+  :ensure t)
+
+(when (memq window-system '(mac ns))
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize)))
 
 (doom-modeline-mode 1)
 
 (when (display-graphic-p)
-  (require 'all-the-icons)
-  (require 'all-the-icons-dired)
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+  (use-package all-the-icons
+    :ensure t)
+  (use-package all-the-icons-dired
+    :ensure t
+    :requires all-the-icons
+    :hook dired-mode))
 
 (require 'hlsl-mode)
 (require 'nus-snippets)
 (require 'fw-ops)
-
-(use-package bind-key
-  :ensure t)
 
 (use-package emojify
   :ensure t)
@@ -217,10 +212,54 @@
   :config
   (helm-mode 1))
 
-(projectile-mode +1)
-(helm-projectile-on)
+(use-package projectile
+  :ensure t
+  :init
+  (setq projectile-completion-system 'helm)
+  (setq projectile-globally-ignored-directories
+        '("^\\.idea$"
+          "^\\.vscode$"
+          "^\\.ensime_cache$"
+          "^\\.eunit$"
+          "^\\.git$"
+          "^\\.hg$"
+          "^\\.fslckout$"
+          "^_FOSSIL_$"
+          "^\\.bzr$"
+          "^_darcs$"
+          "^\\.pijul$"
+          "^\\.tox$"
+          "^\\.svn$"
+          "^\\.stack-work$"
+          "^\\.ccls-cache$"
+          "^\\.cache$"
+          "^\\.clangd$"
+          "^\\.gitlab$"))
+  (setq projectile-globally-ignored-file-suffixes
+        '(".exe"
+          ".dll"
+          ".pdb"
+          ".lib"
+          ".obj"
+          ".diff"
+          ".o"
+          ".a"
+          ".dylib"
+          ".so"))
+  (setq projectile-globally-ignored-files
+        '("TAGS"
+          ".git*"))
+  :config
+  (projectile-mode +1))
 
-(require 'w3m-load)
+(use-package helm-projectile
+  :ensure t
+  :requires projectile
+  :config
+  (helm-projectile-on))
+
+(when (executable-find "w3m")
+  (require 'w3m-load))
 
 ;; Set editor default behavior.
 (setq frame-title-format '("" "%f @ Emacs " emacs-version))
@@ -233,15 +272,27 @@
 (bind-key* "C-\\" 'undo)
 (unbind-key "C-z" 'global-map)
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
-(bind-key "C-|" 'undo-redo)
 (bind-key "C-<tab>" 'other-window)
 
 ;; Pixel scroll everything!
 (cond ((>= emacs-major-version 29)
+       (setq pixel-scroll-precision-interpolate-page t
+             pixel-scroll-precision-interpolation-total-time 0.2
+             pixel-scroll-precision-mode t
+             pixel-scroll-precision-use-momentum t)
+       (pixel-scroll-mode t)
        (bind-key "C-v" 'pixel-scroll-interpolate-down)
        (bind-key "M-v" 'pixel-scroll-interpolate-up)))
 
+;; Undo/redo.
 (unbind-key "C-_" 'global-map)
+(unbind-key "C-/" 'global-map)
+(unbind-key "C-x u" 'global-map)
+(unbind-key "C-?" 'global-map)
+(unbind-key "C-M-_" 'global-map)
+(bind-key "C-|" 'undo-redo)
+(bind-key "s-Z" 'undo-redo)
+
 (unbind-key "C-<prior>" 'global-map)
 (unbind-key "C-<next>" 'global-map)
 
@@ -279,10 +330,10 @@
 (unbind-key "C-c C-c" c++-mode-map)
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
 
-(bind-key "C-c p" 'projectile-command-map 'projectile-mode-map)
 (bind-keys :map projectile-mode-map
+           ("C-c p" . projectile-command-map)
            ("<f9>" . projectile-find-other-file)
-           ("C-<f9>" . helm-projectile-find-file))
+           ("C-<f9>" . helm-projectile))
 
 ;; Completions.
 (bind-key "C-;" 'helm-company)
