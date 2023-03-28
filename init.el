@@ -75,6 +75,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
+ '(font-lock-comment-face ((t (:foreground "DeepSkyBlue4"))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(hl-line ((t (:extend t :background "#202040"))))
  '(line-number ((t (:inherit default :foreground "PaleVioletRed4" :slant italic))))
@@ -113,7 +114,10 @@
     :config
     (exec-path-from-shell-initialize)))
 
-(doom-modeline-mode 1)
+(use-package doom-modeline
+  :ensure t
+  :config
+  (doom-modeline-mode 1))
 
 (when (display-graphic-p)
   (use-package all-the-icons
