@@ -278,6 +278,12 @@
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-<tab>" 'other-window)
 
+;; Kill word at point.
+(bind-key "C-c d" (lambda()
+                    (interactive)
+                    (backward-word)
+                    (kill-word 1)))
+
 ;; Pixel scroll everything!
 (cond ((>= emacs-major-version 29)
        (setq pixel-scroll-precision-interpolate-page t
