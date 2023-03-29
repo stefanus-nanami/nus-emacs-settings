@@ -469,7 +469,8 @@
                '(glsl-mode . "glsl"))
   (lsp-register-client (make-lsp-client
                         :new-connection (lsp-stdio-connection
-                                         '("~/.emacs.d/glsl-language-server/build/glslls" "--stdin"))
+                                         '("~/.emacs.d/glsl-language-server/build/glslls"
+                                           "--stdin"))
                         :activation-fn (lsp-activate-on "glsl")
                         :server-id 'glslls)))
 
