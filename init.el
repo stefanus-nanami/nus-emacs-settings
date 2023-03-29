@@ -149,7 +149,8 @@
         lsp-signature-auto-activate nil
         lsp-ui-doc-enable nil
         lsp-ui-sideline-show-diagnostics nil
-        lsp-warn-no-matched-clients nil))
+        lsp-warn-no-matched-clients nil
+        lsp-clients-clangd-args '("--header-insertion=never")))
 
 (use-package helm
   :ensure t
