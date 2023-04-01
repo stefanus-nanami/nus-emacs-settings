@@ -15,12 +15,7 @@
  '(auto-hscroll-mode 'current-line)
  '(backup-directory-alist '(("" . "~/.emacs.d/backups")))
  '(column-number-mode t)
- '(company-backends
-   '(company-capf company-cmake
-                  (company-dabbrev-code company-keywords)
-                  (company-dict company-dabbrev)))
- '(company-idle-delay nil)
- '(completion-search-distance 0)
+ '(completion-search-distance nil)
  '(completion-styles '(helm basic partial-completion emacs22))
  '(current-language-environment "Japanese")
  '(custom-enabled-themes '(doom-outrun-electric))
@@ -35,7 +30,6 @@
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
  '(exec-path-from-shell-arguments nil)
- '(global-company-mode t)
  '(global-display-fill-column-indicator-mode t)
  '(global-hl-line-mode t)
  '(global-whitespace-mode t)
@@ -133,6 +127,19 @@
 
 (use-package emojify
   :ensure t)
+
+(use-package company
+  :ensure t
+  :init
+  (setq company-backends
+        '(company-capf
+          company-cmake
+          (company-dabbrev-code company-keywords)
+          (company-dict company-dabbrev))
+        company-idle-delay nil)
+  :config
+  (global-company-mode t)
+)
 
 (use-package lsp-mode
   :ensure t
@@ -275,9 +282,11 @@
 ;; Bind keys.
 (unbind-key "C-\\" 'isearch-mode-map)
 (bind-key* "C-\\" 'undo)
-(unbind-key "C-z" 'global-map)
+(unbind-key "C-z")
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-<tab>" 'other-window)
+(bind-key "s-<up>" 'window-swap-states)
+
 
 ;; Kill word at point.
 (bind-key "C-c d" (lambda()
@@ -296,16 +305,16 @@
        (bind-key "M-v" 'pixel-scroll-interpolate-up)))
 
 ;; Undo/redo.
-(unbind-key "C-_" 'global-map)
-(unbind-key "C-/" 'global-map)
-(unbind-key "C-x u" 'global-map)
-(unbind-key "C-?" 'global-map)
-(unbind-key "C-M-_" 'global-map)
+(unbind-key "C-_")
+(unbind-key "C-/")
+(unbind-key "C-x u")
+(unbind-key "C-?")
+(unbind-key "C-M-_")
 (bind-key "C-|" 'undo-redo)
 (bind-key "s-Z" 'undo-redo)
 
-(unbind-key "C-<prior>" 'global-map)
-(unbind-key "C-<next>" 'global-map)
+(unbind-key "C-<prior>")
+(unbind-key "C-<next>")
 
 (bind-key "M-[" 'scroll-other-window-down)
 (bind-key "M-]" 'scroll-other-window)
@@ -348,6 +357,10 @@
 
 ;; Completions.
 (bind-key "C-;" 'helm-company)
+(bind-key "C-'" 'helm-dabbrev)
+(bind-key "C-M-'" 'dabbrev-expand)
+(unbind-key "M-/")
+(unbind-key "C-M-/")
 
 ;; Magit
 (bind-key "C-c m s" 'magit-status)
