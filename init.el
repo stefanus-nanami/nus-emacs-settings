@@ -369,7 +369,7 @@
 
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize)
-       (bind-key "s-<f12>" 'scroll-lock-mode))
+       (bind-key "C-s-<f12>" 'scroll-lock-mode))
       ((string= system-type "windows-nt")
        (setq w32-pass-lwindow-to-system nil)
        (setq w32-lwindow-modifier 'super)
