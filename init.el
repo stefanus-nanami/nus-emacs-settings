@@ -285,8 +285,6 @@
 (unbind-key "C-z")
 (bind-key "C-x x x" 'save-buffers-kill-emacs)
 (bind-key "C-<tab>" 'other-window)
-(bind-key "s-<up>" 'window-swap-states)
-
 
 ;; Kill word at point.
 (bind-key "C-c d" (lambda()
@@ -367,15 +365,19 @@
 (bind-key "C-c m d" 'magit-dispatch)
 (bind-key "C-c m f" 'magit-file-dispatch)
 
-(cond ((string= system-type "darwin")
-       (bind-key "M-," 'customize)
-       (bind-key "C-s-<f12>" 'scroll-lock-mode))
-      ((string= system-type "windows-nt")
+(cond ((string= system-type "windows-nt")
        (setq w32-pass-lwindow-to-system nil)
        (setq w32-lwindow-modifier 'super)
        (setq w32-pass-rwindow-to-system nil)
-       (setq w32-rwindow-modifier 'super)
-       (bind-key "s-`" 'other-frame)))
+       (setq w32-rwindow-modifier 'super)))
+
+(cond ((string= system-type "darwin")
+       (bind-key "M-," 'customize)
+       (bind-key "C-s-<f12>" 'scroll-lock-mode)
+       (bind-key "s-<up>" 'window-swap-states))
+      (t
+       (bind-key "s-`" 'other-frame)
+       (bind-key "s-<f9>" 'window-swap-states)))
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
