@@ -28,8 +28,8 @@
               (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-10"))
               (add-to-list 'default-frame-alist `(height . 85)))
              (t
-              (add-to-list 'default-frame-alist '(font . "Noto Sans Mono-10"))
-              (add-to-list 'default-frame-alist `(height . 85))))
+              (add-to-list 'default-frame-alist '(font . "Hack-10"))
+              (add-to-list 'default-frame-alist `(height . 97))))
        (add-to-list 'default-frame-alist `(width . 140)))
       (t
        (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-10"))
