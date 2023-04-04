@@ -164,7 +164,7 @@
   :init
   (setq helm-ag-insert-at-point 'symbol
         helm-ag-use-agignore 1
-        helm-buffer-max-length nil
+        helm-buffer-max-length 40
         helm-command-prefix-key "C-c h"
         helm-commands-using-frame '(completion-at-point helm-company)
         helm-dabbrev-cycle-threshold 0
