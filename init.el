@@ -135,8 +135,10 @@
         '(company-capf
           company-cmake
           (company-dabbrev-code company-keywords)
-          (company-dict company-dabbrev))
-        company-idle-delay nil)
+          (company-dabbrev company-dict))
+        company-idle-delay nil
+        company-dabbrev-downcase nil
+        company-dabbrev-ignore-case nil)
   :config
   (global-company-mode t)
 )
