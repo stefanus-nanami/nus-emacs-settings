@@ -24,19 +24,17 @@
        (add-to-list 'default-frame-alist '(fullscreen . fullheight))
        (add-to-list 'default-frame-alist `(width . 130)))
       ((or (string= localhost-name "CT057555"))
+       (add-to-list 'default-frame-alist '(font . "Hack-10"))
        (cond ((string= system-type "gnu/linux")
-              (add-to-list 'default-frame-alist '(font . "Hack-10"))
               (add-to-list 'default-frame-alist `(height . 85)))
              (t
-              (add-to-list 'default-frame-alist '(font . "Hack-10"))
               (add-to-list 'default-frame-alist `(height . 97))))
        (add-to-list 'default-frame-alist `(width . 140)))
       (t
-       (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono-10"))
        (add-to-list 'default-frame-alist `(left . 0))
        (add-to-list 'default-frame-alist `(top . 0))
-       (add-to-list 'default-frame-alist `(height . 90))
-       (add-to-list 'default-frame-alist `(width . 140))))
+       (add-to-list 'default-frame-alist `(height . 60))
+       (add-to-list 'default-frame-alist `(width . 120))))
 
 (provide 'early-init)
 ;;; early-init.el ends here
