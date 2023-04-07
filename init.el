@@ -80,7 +80,7 @@
  '(mode-line-inactive ((t (:background "dark slate blue" :foreground "light slate blue" :box nil))))
  '(region ((t (:extend t :background "#4d377b"))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
- '(whitespace-tab ((t (:foreground "gray36")))))
+ '(whitespace-tab ((t (:foreground "gray24")))))
 
 (setq load-prefer-newer t)
 
