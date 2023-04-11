@@ -367,6 +367,13 @@
 (bind-key "C-c m d" 'magit-dispatch)
 (bind-key "C-c m f" 'magit-file-dispatch)
 
+;; Replace
+(unbind-key "C-M-%")
+(bind-keys :map global-map
+           ("M-*" . replace-string)
+           ("C-*" . replace-regexp)
+           ("C-%" . query-replace-regexp))
+
 (cond ((string= system-type "windows-nt")
        (setq w32-pass-lwindow-to-system nil)
        (setq w32-lwindow-modifier 'super)
