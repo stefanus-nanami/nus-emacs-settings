@@ -14,6 +14,7 @@
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(auto-hscroll-mode 'current-line)
  '(backup-directory-alist '(("" . "~/.emacs.d/backups")))
+ '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(completion-search-distance nil)
  '(completion-styles '(helm basic partial-completion emacs22))
