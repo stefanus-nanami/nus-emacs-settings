@@ -128,7 +128,7 @@
 
 (cond ((>= emacs-major-version 29)
        (use-package treesit-auto
-         :demand t
+         :ensure t
          :config
          (setq treesit-auto-install t)
          (global-treesit-auto-mode))))
