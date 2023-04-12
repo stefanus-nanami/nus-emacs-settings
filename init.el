@@ -127,6 +127,7 @@
 (require 'fw-ops)
 
 (cond ((string= system-type "windows-nt")
+       ;; Cannot use tree sitter for Windows.
        (setq can-use-tree-sitter nil))
       ((>= emacs-major-version 29)
        (setq can-use-tree-sitter t))
