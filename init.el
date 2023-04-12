@@ -126,12 +126,19 @@
 (require 'nus-snippets)
 (require 'fw-ops)
 
-(cond ((>= emacs-major-version 29)
-       (use-package treesit-auto
-         :ensure t
-         :config
-         (setq treesit-auto-install t)
-         (global-treesit-auto-mode))))
+(cond ((string= system-type "windows-nt")
+       (setq can-use-tree-sitter nil))
+      ((>= emacs-major-version 29)
+       (setq can-use-tree-sitter t))
+      (t
+       (setq can-use-tree-sitter nil)))
+
+(if can-use-tree-sitter
+    (use-package treesit-auto
+      :ensure t
+      :config
+      (setq treesit-auto-install t)
+      (global-treesit-auto-mode)))
 
 (use-package emojify
   :ensure t)
@@ -489,15 +496,15 @@
 (add-hook 'js-mode-hook #'lsp-deferred)
 (add-hook 'lua-mode-hook #'lsp-deferred)
 
-(cond ((>= emacs-major-version 29)
-       (setq c-ts-mode-hook c-mode-hook
-             c++-ts-mode-hook c++-mode-hook
-             objc-ts-mode-hook objc-mode-hook
-             swift-ts-mode-hook swift-mode-hook
-             csharp-ts-mode-hook csharp-mode-hook
-             python-ts-mode-hook python-mode-hook
-             js-ts-mode-hook js-mode-hook
-             lua-ts-mode-hook lua-mode-hook)))
+(if can-use-tree-sitter
+    (setq c-ts-mode-hook c-mode-hook
+          c++-ts-mode-hook c++-mode-hook
+          objc-ts-mode-hook objc-mode-hook
+          swift-ts-mode-hook swift-mode-hook
+          csharp-ts-mode-hook csharp-mode-hook
+          python-ts-mode-hook python-mode-hook
+          js-ts-mode-hook js-mode-hook
+          lua-ts-mode-hook lua-mode-hook))
 
 (cond ((string= system-type "darwin")
        (eval-after-load 'lsp-mode
