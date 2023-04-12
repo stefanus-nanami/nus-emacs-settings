@@ -51,7 +51,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(emojify cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(treesit-auto emojify cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -125,6 +125,13 @@
 (require 'hlsl-mode)
 (require 'nus-snippets)
 (require 'fw-ops)
+
+(cond ((>= emacs-major-version 29)
+       (use-package treesit-auto
+         :demand t
+         :config
+         (setq treesit-auto-install t)
+         (global-treesit-auto-mode))))
 
 (use-package emojify
   :ensure t)
@@ -481,6 +488,16 @@
 (add-hook 'python-mode-hook #'lsp-deferred)
 (add-hook 'js-mode-hook #'lsp-deferred)
 (add-hook 'lua-mode-hook #'lsp-deferred)
+
+(cond ((>= emacs-major-version 29)
+       (setq c-ts-mode-hook c-mode-hook
+             c++-ts-mode-hook c++-mode-hook
+             objc-ts-mode-hook objc-mode-hook
+             swift-ts-mode-hook swift-mode-hook
+             csharp-ts-mode-hook csharp-mode-hook
+             python-ts-mode-hook python-mode-hook
+             js-ts-mode-hook js-mode-hook
+             lua-ts-mode-hook lua-mode-hook)))
 
 (cond ((string= system-type "darwin")
        (eval-after-load 'lsp-mode
