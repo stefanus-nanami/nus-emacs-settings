@@ -335,6 +335,11 @@
 (bind-key "M-[" 'scroll-other-window-down)
 (bind-key "M-]" 'scroll-other-window)
 
+(unbind-key "M-{")
+(unbind-key "M-}")
+(bind-key "M-n" 'forward-paragraph)
+(bind-key "M-p" 'backward-paragraph)
+
 ;; Helm related keys.
 (bind-key "C-c g" 'helm-do-ag)
 (bind-key "C-c b" 'helm-do-ag-buffers)
