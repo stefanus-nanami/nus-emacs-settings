@@ -457,6 +457,9 @@
         (inexpr-class-close before)
         (arglist-cont-nonempty)))
 
+;; Python.
+(setq-default python-indent-offset 4)
+
 ;; Hooks
 
 (add-hook 'prog-mode-hook
@@ -480,7 +483,7 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
-            (setq tab-width 2)))
+            (setq tab-width 4)))
 
 (add-hook 'swift-mode-hook
           (lambda ()
