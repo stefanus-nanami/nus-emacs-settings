@@ -296,6 +296,7 @@
 
 ;; Load library for key-binding.
 (require 'cc-mode)
+(require 'python)
 
 ;; Bind keys.
 (unbind-key "C-\\" 'isearch-mode-map)
@@ -369,6 +370,7 @@
 
 (unbind-key "C-c C-c" c-mode-map)
 (unbind-key "C-c C-c" c++-mode-map)
+(unbind-key "C-c C-c" python-mode-map)
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
 
 (bind-keys :map projectile-mode-map
@@ -483,7 +485,8 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
-            (setq tab-width 4)))
+            (setq tab-width 4)
+            (setq display-fill-column-indicator-column 80)))
 
 (add-hook 'swift-mode-hook
           (lambda ()
@@ -494,6 +497,10 @@
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
+
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (setq fill-column 100)))
 
 ;; LSP hooks.
 (add-hook 'c-mode-hook #'lsp-deferred)
