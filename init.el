@@ -511,6 +511,7 @@
 (add-hook 'python-mode-hook #'lsp-deferred)
 (add-hook 'js-mode-hook #'lsp-deferred)
 (add-hook 'lua-mode-hook #'lsp-deferred)
+(add-hook 'glsl-mode-hook #'lsp-deferred)
 
 (if can-use-tree-sitter
     (setq c-ts-mode-hook c-mode-hook
@@ -529,15 +530,7 @@
            (setq lsp-sourcekit-executable (string-trim (shell-command-to-string
                                                         "xcrun --find sourcekit-lsp")))))))
 
-(with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-language-id-configuration
-               '(glsl-mode . "glsl"))
-  (lsp-register-client (make-lsp-client
-                        :new-connection (lsp-stdio-connection
-                                         '("~/.emacs.d/glsl-language-server/build/glslls"
-                                           "--stdin"))
-                        :activation-fn (lsp-activate-on "glsl")
-                        :server-id 'glslls)))
+(setq lsp-glsl-executable '("~/.emacs.d/glsl-language-server/build/glslls" "--stdin"))
 
 (provide 'init)
 ;;; init.el ends here
