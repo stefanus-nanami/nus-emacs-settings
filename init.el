@@ -408,7 +408,6 @@
        (bind-key "C-s-<f12>" 'scroll-lock-mode)
        (bind-key "s-<up>" 'window-swap-states))
       (t
-       (bind-key "s-`" 'other-frame)
        (bind-key "s-<f9>" 'window-swap-states)))
 
 ;; Map extensions to modes.
