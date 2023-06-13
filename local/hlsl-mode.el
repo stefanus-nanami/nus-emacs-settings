@@ -54,6 +54,8 @@
                "TriangleStream" "uint" "uint2" "uint3" "uint4" "uniform" "unorm" "unsigned" "vector"
                "vertexfragment" "VertexShader" "void" "volatile" "while"))
 
+(add-hook 'hlsl-mode-hook (lambda () (c-toggle-comment-style -1)))
+
 (provide 'hlsl-mode)
 
 ;; Local Variables:
