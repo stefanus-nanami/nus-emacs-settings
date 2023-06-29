@@ -409,11 +409,11 @@
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize)
        (bind-key "C-s-<f12>" 'scroll-lock-mode)
-       (bind-key "s-<up>" 'window-swap-states)
+       (bind-key "s-<up>" 'fw-ops-swap-buffers)
        (bind-key "M-`" 'other-frame)
        (unbind-key "s-`"))
       (t
-       (bind-key "s-<f9>" 'window-swap-states)))
+       (bind-key "s-<f9>" 'fw-ops-swap-buffers)))
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))

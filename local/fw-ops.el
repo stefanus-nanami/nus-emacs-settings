@@ -57,9 +57,7 @@
      (this-buffer (window-buffer this))
      (other-buffer (window-buffer other)))
     (set-window-buffer other this-buffer)
-    (set-window-buffer this other-buffer)
-    )
-  )
+    (set-window-buffer this other-buffer)))
 
 (global-set-key (kbd "C-c w l") 'fw-ops-frame-left)
 (global-set-key (kbd "C-c w r") 'fw-ops-frame-right)
