@@ -401,12 +401,17 @@
        (setq w32-pass-lwindow-to-system nil)
        (setq w32-lwindow-modifier 'super)
        (setq w32-pass-rwindow-to-system nil)
-       (setq w32-rwindow-modifier 'super)))
+       (setq w32-rwindow-modifier 'super))
+      ((string= system-type "darwin")
+       (setq mac-command-modifier 'meta)
+       (setq mac-option-modifier 'super)))
 
 (cond ((string= system-type "darwin")
        (bind-key "M-," 'customize)
        (bind-key "C-s-<f12>" 'scroll-lock-mode)
-       (bind-key "s-<up>" 'window-swap-states))
+       (bind-key "s-<up>" 'window-swap-states)
+       (bind-key "M-`" 'other-frame)
+       (unbind-key "s-`"))
       (t
        (bind-key "s-<f9>" 'window-swap-states)))
 
