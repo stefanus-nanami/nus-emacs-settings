@@ -376,7 +376,8 @@
 (bind-keys :map projectile-mode-map
            ("C-c p" . projectile-command-map)
            ("<f9>" . projectile-find-other-file)
-           ("C-<f9>" . helm-projectile))
+           ("C-<f9>" . helm-projectile)
+           ("M-<f9>" . helm-projectile-find-file))
 
 ;; Completions.
 (bind-key "C-;" 'helm-company)
