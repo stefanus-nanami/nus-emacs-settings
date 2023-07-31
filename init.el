@@ -448,22 +448,22 @@
 (setq read-process-output-max (* 1024 1024))
 
 ;; C offsets.
-(setq c-offsets-alist
-      '((brace-list-open . 0)
-        (substatement-open . 0)))
+(setq-default c-offsets-alist
+              '((brace-list-open . 0)
+                (substatement-open . 0)))
 
-(setq c-hanging-braces-alist
-      '((block-close . c-snug-do-while)
-        (statement-cont)
-        (brace-list-open)
-        (brace-entry-open)
-        (extern-lang-open after)
-        (namespace-open after)
-        (module-open after)
-        (composition-open after)
-        (inexpr-class-open after)
-        (inexpr-class-close before)
-        (arglist-cont-nonempty)))
+(setq-default c-hanging-braces-alist
+              '((block-close . c-snug-do-while)
+                (statement-cont)
+                (brace-list-open)
+                (brace-entry-open)
+                (extern-lang-open after)
+                (namespace-open after)
+                (module-open after)
+                (composition-open after)
+                (inexpr-class-open after)
+                (inexpr-class-close before)
+                (arglist-cont-nonempty)))
 
 ;; Python.
 (setq-default python-indent-offset 4)
