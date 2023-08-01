@@ -366,8 +366,7 @@
                   ("M-<f12>" . helm-lsp-workspace-symbol)
                   ("s-<f12>" . helm-lsp-global-workspace-symbol))))
 
-(bind-keys :map global-map
-           ([remap find-file] . helm-find-files)
+(bind-keys ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x)
            ([remap occur] . helm-occur)
            ([remap list-buffers] . helm-buffers-list)
@@ -399,8 +398,7 @@
 
 ;; Replace
 (unbind-key "C-M-%")
-(bind-keys :map global-map
-           ("M-*" . replace-string)
+(bind-keys ("M-*" . replace-string)
            ("C-*" . replace-regexp)
            ("C-%" . query-replace-regexp))
 
