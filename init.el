@@ -353,6 +353,7 @@
 (bind-key "<f6>" 'helm-show-kill-ring)
 (bind-key "C-<f6>" 'helm-all-mark-rings)
 
+;; Binding LSP related keys.
 (cond ((eq use-eglot t)
        (bind-keys ("<f12>" . xref-find-definitions)
                   ("C-<f12>" . xref-find-references)))
@@ -364,6 +365,7 @@
                   ("C-<f12>" . lsp-find-references)
                   ("M-<f12>" . helm-lsp-workspace-symbol)
                   ("s-<f12>" . helm-lsp-global-workspace-symbol))))
+
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x)
@@ -446,8 +448,8 @@
        (setq-default indent-tabs-mode t)
        (setq-default c-basic-offset 4)))
 
-;; Improving LSP performance.
 (cond ((eq use-eglot nil)
+       ;; Improving LSP performance.
        (setq gc-cons-threshold (* 128 1024 1024))
        (setq read-process-output-max (* 1024 1024))))
 
@@ -512,8 +514,8 @@
           (lambda ()
             (setq fill-column 100)))
 
-;; LSP hooks.
 (cond ((eq use-eglot t)
+       ;; EGLOT hooks.
        (add-hook 'c-mode-hook #'eglot-ensure)
        (add-hook 'c++-mode-hook #'eglot-ensure)
        (add-hook 'objc-mode-hook #'eglot-ensure)
@@ -524,6 +526,7 @@
        (add-hook 'lua-mode-hook #'eglot-ensure)
        (add-hook 'glsl-mode-hook #'eglot-ensure))
       (t
+       ;; LSP hooks.
        (add-hook 'c-mode-hook #'lsp-deferred)
        (add-hook 'c++-mode-hook #'lsp-deferred)
        (add-hook 'objc-mode-hook #'lsp-deferred)
