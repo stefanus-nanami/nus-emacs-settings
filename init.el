@@ -51,7 +51,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(helm-xref treesit-auto emojify cmake-font-lock cmake-mode company-dict helm-company flycheck objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(helm-xref treesit-auto emojify cmake-font-lock cmake-mode company-dict helm-company objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -84,6 +84,8 @@
  '(whitespace-tab ((t (:foreground "gray24")))))
 
 (setq load-prefer-newer t)
+
+(defconst use-eglot t "Use eglot instead of LSP mode.")
 
 ;; Activate all the packages.
 (package-initialize)
@@ -159,23 +161,24 @@
   (global-company-mode t)
 )
 
-(use-package lsp-mode
-  :ensure t
-  :init
-  (setq lsp-eldoc-enable-hover nil
-        lsp-enable-file-watchers nil
-        lsp-enable-indentation nil
-        lsp-enable-on-type-formatting nil
-        lsp-enable-snippet nil
-        lsp-headerline-breadcrumb-enable nil
-        lsp-keymap-prefix "C-c l"
-        lsp-lens-enable nil
-        lsp-modeline-diagnostics-enable nil
-        lsp-signature-auto-activate nil
-        lsp-ui-doc-enable nil
-        lsp-ui-sideline-show-diagnostics nil
-        lsp-warn-no-matched-clients nil
-        lsp-clients-clangd-args '("--header-insertion=never")))
+(cond ((eq use-eglot nil)
+       (use-package lsp-mode
+         :ensure t
+         :init
+         (setq lsp-eldoc-enable-hover nil
+               lsp-enable-file-watchers nil
+               lsp-enable-indentation nil
+               lsp-enable-on-type-formatting nil
+               lsp-enable-snippet nil
+               lsp-headerline-breadcrumb-enable nil
+               lsp-keymap-prefix "C-c l"
+               lsp-lens-enable nil
+               lsp-modeline-diagnostics-enable nil
+               lsp-signature-auto-activate nil
+               lsp-ui-doc-enable nil
+               lsp-ui-sideline-show-diagnostics nil
+               lsp-warn-no-matched-clients nil
+               lsp-clients-clangd-args '("--header-insertion=never")))))
 
 (use-package helm
   :ensure t
@@ -200,7 +203,6 @@
           "\\`\\*Flymake"
           "\\`\\*gcc"
           "\\`\\*omnisharp"
-          "\\`\\*Flycheck error messages"
           "\\`\\*glslls"
           "\\`\\*Compile-Log"
           "\\`\\*Customize"
@@ -208,9 +210,9 @@
           "\\`\\*Packages"
           "\\`\\*Warnings"
           "\\`\\*Colors"
+          "\\`\\*EGLOT"
           "\\`\\*pylsp"
           "\\`\\*clang"
-          "\\`\\*Flycheck"
           "\\`\\*csharp-ls"
           "\\`\\*json-ls"
           "\\`\\*sourcekit-ls"))
@@ -224,7 +226,6 @@
           "\\*Flymake"
           "\\*gcc"
           "\\*omnisharp"
-          "\\*Flycheck"
           "\\*glslls"
           "\\*Compile-Log"
           "\\*Customize"
@@ -232,9 +233,9 @@
           "\\*Packages"
           "\\*Warnings"
           "\\*Colors"
+          "\\*EGLOT"
           "\\*pylsp"
           "\\*clang"
-          "\\*Flycheck"
           "\\*csharp-ls"
           "\\*json-ls"
           "\\*sourcekit-ls"))
@@ -351,16 +352,18 @@
 (bind-key "C-<f5>" 'helm-imenu-in-all-buffers)
 (bind-key "<f6>" 'helm-show-kill-ring)
 (bind-key "C-<f6>" 'helm-all-mark-rings)
-(bind-key "C-c h x" 'helm-flycheck)
 
-(bind-keys :map lsp-mode-map
-           ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-           ([remap xref-find-references] . lsp-ui-peek-find-references)
-           ("<f12>" . lsp-find-definition)
-           ("C-<f12>" . lsp-find-references)
-           ("M-<f12>" . helm-lsp-workspace-symbol)
-           ("s-<f12>" . helm-lsp-global-workspace-symbol))
-
+(cond ((eq use-eglot t)
+       (bind-keys ("<f12>" . xref-find-definitions)
+                  ("C-<f12>" . xref-find-references)))
+      (t
+       (bind-keys :map lsp-mode-map
+                  ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+                  ([remap xref-find-references] . lsp-ui-peek-find-references)
+                  ("<f12>" . lsp-find-definition)
+                  ("C-<f12>" . lsp-find-references)
+                  ("M-<f12>" . helm-lsp-workspace-symbol)
+                  ("s-<f12>" . helm-lsp-global-workspace-symbol))))
 (bind-keys :map global-map
            ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x)
@@ -444,8 +447,9 @@
        (setq-default c-basic-offset 4)))
 
 ;; Improving LSP performance.
-(setq gc-cons-threshold (* 128 1024 1024))
-(setq read-process-output-max (* 1024 1024))
+(cond ((eq use-eglot nil)
+       (setq gc-cons-threshold (* 128 1024 1024))
+       (setq read-process-output-max (* 1024 1024))))
 
 ;; C offsets.
 (setq-default c-offsets-alist
@@ -509,15 +513,28 @@
             (setq fill-column 100)))
 
 ;; LSP hooks.
-(add-hook 'c-mode-hook #'lsp-deferred)
-(add-hook 'c++-mode-hook #'lsp-deferred)
-(add-hook 'objc-mode-hook #'lsp-deferred)
-(add-hook 'swift-mode-hook #'lsp-deferred)
-(add-hook 'csharp-mode-hook #'lsp-deferred)
-(add-hook 'python-mode-hook #'lsp-deferred)
-(add-hook 'js-mode-hook #'lsp-deferred)
-(add-hook 'lua-mode-hook #'lsp-deferred)
-(add-hook 'glsl-mode-hook #'lsp-deferred)
+(cond ((eq use-eglot t)
+       (add-hook 'c-mode-hook #'eglot-ensure)
+       (add-hook 'c++-mode-hook #'eglot-ensure)
+       (add-hook 'objc-mode-hook #'eglot-ensure)
+       (add-hook 'swift-mode-hook #'eglot-ensure)
+       (add-hook 'csharp-mode-hook #'eglot-ensure)
+       (add-hook 'python-mode-hook #'eglot-ensure)
+       (add-hook 'js-mode-hook #'eglot-ensure)
+       (add-hook 'lua-mode-hook #'eglot-ensure)
+       (add-hook 'glsl-mode-hook #'eglot-ensure))
+      (t
+       (add-hook 'c-mode-hook #'lsp-deferred)
+       (add-hook 'c++-mode-hook #'lsp-deferred)
+       (add-hook 'objc-mode-hook #'lsp-deferred)
+       (add-hook 'swift-mode-hook #'lsp-deferred)
+       (add-hook 'csharp-mode-hook #'lsp-deferred)
+       (add-hook 'python-mode-hook #'lsp-deferred)
+       (add-hook 'js-mode-hook #'lsp-deferred)
+       (add-hook 'lua-mode-hook #'lsp-deferred)
+       (add-hook 'glsl-mode-hook #'lsp-deferred)))
+
+;; EGLOT hooks.
 
 (if can-use-tree-sitter
     (setq c-ts-mode-hook c-mode-hook
@@ -534,7 +551,10 @@
          (progn
            (require 'lsp-sourcekit)
            (setq lsp-sourcekit-executable (string-trim (shell-command-to-string
-                                                        "xcrun --find sourcekit-lsp")))))))
+                                                        "xcrun --find sourcekit-lsp")))))
+       (with-eval-after-load 'eglot
+         (add-to-list 'eglot-server-programs
+                      '(swift-mode . ("xcrun" "sourcekit-lsp"))))))
 
 (setq lsp-glsl-executable '("~/.emacs.d/glsl-language-server/build/glslls" "--stdin"))
 
