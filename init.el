@@ -51,7 +51,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(helm-xref treesit-auto emojify cmake-font-lock cmake-mode company-dict helm-company objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(helm-xref emojify cmake-font-lock cmake-mode company-dict helm-company objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -135,13 +135,6 @@
        (setq can-use-tree-sitter t))
       (t
        (setq can-use-tree-sitter nil)))
-
-(if can-use-tree-sitter
-    (use-package treesit-auto
-      :ensure t
-      :config
-      (setq treesit-auto-install t)
-      (global-treesit-auto-mode)))
 
 (use-package emojify
   :ensure t)
@@ -535,17 +528,17 @@
        (add-hook 'lua-mode-hook #'lsp-deferred)
        (add-hook 'glsl-mode-hook #'lsp-deferred)))
 
-;; EGLOT hooks.
-
+;; Use tree-sitter.
 (if can-use-tree-sitter
-    (setq c-ts-mode-hook c-mode-hook
-          c++-ts-mode-hook c++-mode-hook
-          objc-ts-mode-hook objc-mode-hook
-          swift-ts-mode-hook swift-mode-hook
-          csharp-ts-mode-hook csharp-mode-hook
-          python-ts-mode-hook python-mode-hook
-          js-ts-mode-hook js-mode-hook
-          lua-ts-mode-hook lua-mode-hook))
+    (setq major-mode-remap-alist
+          '((c++-mode . c++-ts-mode)
+            (c-mode . c-ts-mode)
+            (objc-mode . objc-ts-mode)
+            (swift-mode . swift-ts-mode)
+            (csharp-mode . csharp-ts-mode)
+            (python-mode . python-ts-mode)
+            (js-mode . js-ts-mode)
+            (lua-mode . lua-ts-mode))))
 
 (cond ((string= system-type "darwin")
        (eval-after-load 'lsp-mode
