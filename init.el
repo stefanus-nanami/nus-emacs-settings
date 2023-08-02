@@ -51,7 +51,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(helm-xref emojify cmake-font-lock cmake-mode company-dict helm-company objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(treesit-auto tree-sitter-langs tree-sitter helm-xref emojify cmake-font-lock cmake-mode company-dict helm-company objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -127,14 +127,6 @@
 (require 'hlsl-mode)
 (require 'nus-snippets)
 (require 'fw-ops)
-
-(cond ((string= system-type "windows-nt")
-       ;; Cannot use tree sitter for Windows.
-       (setq can-use-tree-sitter nil))
-      ((>= emacs-major-version 29)
-       (setq can-use-tree-sitter t))
-      (t
-       (setq can-use-tree-sitter nil)))
 
 (use-package emojify
   :ensure t)
@@ -528,18 +520,6 @@
        (add-hook 'lua-mode-hook #'lsp-deferred)
        (add-hook 'glsl-mode-hook #'lsp-deferred)))
 
-;; Use tree-sitter.
-(if can-use-tree-sitter
-    (setq major-mode-remap-alist
-          '((c++-mode . c++-ts-mode)
-            (c-mode . c-ts-mode)
-            (objc-mode . objc-ts-mode)
-            (swift-mode . swift-ts-mode)
-            (csharp-mode . csharp-ts-mode)
-            (python-mode . python-ts-mode)
-            (js-mode . js-ts-mode)
-            (lua-mode . lua-ts-mode))))
-
 (cond ((string= system-type "darwin")
        (eval-after-load 'lsp-mode
          (progn
@@ -552,10 +532,13 @@
 
 (setq lsp-glsl-executable '("~/.emacs.d/glsl-language-server/build/glslls" "--stdin"))
 
+;; Tree sitter
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+
 (provide 'init)
 ;;; init.el ends here
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
-
