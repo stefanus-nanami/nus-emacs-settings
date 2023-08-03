@@ -28,6 +28,7 @@
  '(display-line-numbers-width 5)
  '(doom-themes-enable-italic nil)
  '(dynamic-completion-mode t)
+ '(eglot-ignored-server-capabilities '(:hoverProvider))
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
  '(exec-path-from-shell-arguments nil)
@@ -51,7 +52,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(tree-sitter-langs tree-sitter helm-xref emojify cmake-font-lock cmake-mode company-dict helm-company objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
+   '(helm-tree-sitter tree-sitter-langs tree-sitter helm-xref emojify cmake-font-lock cmake-mode company-dict helm-company objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -80,6 +81,7 @@
  '(mode-line ((t (:background "dark slate blue" :box nil))))
  '(mode-line-inactive ((t (:background "dark slate blue" :foreground "light slate blue" :box nil))))
  '(region ((t (:extend t :background "#4d377b"))))
+ '(tree-sitter-hl-face:operator ((t (:inherit default))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
  '(whitespace-tab ((t (:foreground "gray24")))))
 
@@ -333,7 +335,7 @@
 (bind-key "C-c b" 'helm-do-ag-buffers)
 (bind-key "<f2>" 'helm-mini)
 (bind-key "<f8>" 'helm-browse-project)
-(bind-key "<f5>" 'helm-imenu)
+(bind-key "<f5>" 'helm-tree-sitter-or-imenu)
 (bind-key "C-<f5>" 'helm-imenu-in-all-buffers)
 (bind-key "<f6>" 'helm-show-kill-ring)
 (bind-key "C-<f6>" 'helm-all-mark-rings)
