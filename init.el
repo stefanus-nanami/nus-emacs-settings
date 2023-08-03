@@ -28,7 +28,7 @@
  '(display-line-numbers-width 5)
  '(doom-themes-enable-italic nil)
  '(dynamic-completion-mode t)
- '(eglot-ignored-server-capabilities '(:hoverProvider))
+ '(eglot-connect-timeout 180)
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
  '(exec-path-from-shell-arguments nil)
