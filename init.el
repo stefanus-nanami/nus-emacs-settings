@@ -34,8 +34,6 @@
  '(exec-path-from-shell-arguments nil)
  '(global-display-fill-column-indicator-mode t)
  '(global-hl-line-mode t)
- '(global-whitespace-mode t)
- '(global-whitespace-newline-mode t)
  '(gnus-inhibit-startup-message t)
  '(gnus-thread-sort-functions
    '(gnus-thread-sort-by-most-recent-date
@@ -463,6 +461,7 @@
 
 (add-hook 'prog-mode-hook
           (lambda ()
+            (whitespace-mode)
             (display-line-numbers-mode)))
 
 (add-hook 'js-mode-hook
