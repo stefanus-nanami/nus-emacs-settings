@@ -58,7 +58,19 @@
  '(truncate-lines t)
  '(warning-suppress-log-types '((comp) (lsp-mode)))
  '(warning-suppress-types '((emacs)))
- '(whitespace-style '(face trailing tabs tab-mark)))
+ '(whitespace-display-mappings
+   '((space-mark 32
+                 [183]
+                 [46])
+     (space-mark 160
+                 [164]
+                 [95])
+     (newline-mark 10
+                   [8629 10])
+     (tab-mark 9
+               [187 9]
+               [92 9])))
+ '(whitespace-style '(face trailing tabs newline tab-mark newline-mark)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -78,7 +90,8 @@
  '(region ((t (:extend t :background "#4d377b"))))
  '(tree-sitter-hl-face:operator ((t (:inherit default))))
  '(whitespace-empty ((t (:foreground "firebrick"))))
- '(whitespace-tab ((t (:foreground "gray24")))))
+ '(whitespace-tab ((t (:foreground "gray24"))))
+ '(whitespace-newline ((t (:foreground "gray24")))))
 
 (setq load-prefer-newer t)
 
