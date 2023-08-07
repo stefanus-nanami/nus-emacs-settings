@@ -70,7 +70,7 @@
      (tab-mark 9
                [187 9]
                [92 9])))
- '(whitespace-style '(face trailing tabs newline tab-mark newline-mark)))
+ '(whitespace-style '(face tabs newline tab-mark newline-mark)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -98,7 +98,7 @@
 (defconst use-eglot t "Use eglot instead of LSP mode.")
 
 ;; Activate all the packages.
-;; (package-initialize)
+(package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/local")
 (add-to-list 'load-path "~/.emacs.d/emacs-w3m")
@@ -546,8 +546,7 @@
 
 (add-hook 'prog-mode-hook
           (lambda ()
-            (setq show-trailing-whitespace t)
-            (whitespace-mode)
+            (whitespace-toggle-options 'trailing)
             (display-line-numbers-mode)))
 
 (add-hook 'js-mode-hook
@@ -618,6 +617,9 @@
                       '(swift-mode . ("xcrun" "sourcekit-lsp"))))))
 
 (setq lsp-glsl-executable '("~/.emacs.d/glsl-language-server/build/glslls" "--stdin"))
+
+;; Visualize whitespaces.
+(global-whitespace-mode)
 
 (provide 'init)
 ;;; init.el ends here
