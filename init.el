@@ -70,7 +70,7 @@
      (tab-mark 9
                [187 9]
                [92 9])))
- '(whitespace-style '(face tabs newline tab-mark newline-mark)))
+ '(whitespace-style '(face tabs newline empty tab-mark newline-mark)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -89,9 +89,9 @@
  '(mode-line-inactive ((t (:background "dark slate blue" :foreground "light slate blue" :box nil))))
  '(region ((t (:extend t :background "#4d377b"))))
  '(tree-sitter-hl-face:operator ((t (:inherit default))))
- '(whitespace-empty ((t (:foreground "firebrick"))))
+ '(whitespace-newline ((t (:foreground "gray24"))))
  '(whitespace-tab ((t (:foreground "gray24"))))
- '(whitespace-newline ((t (:foreground "gray24")))))
+ '(whitespace-trailing ((t (:foreground "OrangeRed2" :background "firebrick")))))
 
 (setq load-prefer-newer t)
 
