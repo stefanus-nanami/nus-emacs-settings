@@ -49,8 +49,6 @@
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
- '(package-selected-packages
-   '(helm-tree-sitter tree-sitter-langs tree-sitter helm-xref emojify cmake-font-lock cmake-mode company-dict helm-company objc-font-lock lsp-sourcekit all-the-icons-dired lsp-ui magit doom-themes all-the-icons doom-modeline lua-mode exec-path-from-shell atom-one-dark-theme swift-mode helm-projectile projectile helm-lsp lsp-mode csharp-mode glsl-mode json-mode helm-ag helm-ls-git helm bind-key))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -88,7 +86,7 @@
 (defconst use-eglot t "Use eglot instead of LSP mode.")
 
 ;; Activate all the packages.
-(package-initialize)
+;; (package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/local")
 (add-to-list 'load-path "~/.emacs.d/emacs-w3m")
@@ -131,8 +129,12 @@
 (use-package emojify
   :ensure t)
 
+(use-package company-dict
+  :ensure t)
+
 (use-package company
   :ensure t
+  :requires company-dict
   :init
   (setq company-backends
         '(company-capf
@@ -143,8 +145,7 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case nil)
   :config
-  (global-company-mode t)
-)
+  (global-company-mode t))
 
 (cond ((eq use-eglot nil)
        (use-package lsp-mode
@@ -163,10 +164,21 @@
                lsp-ui-doc-enable nil
                lsp-ui-sideline-show-diagnostics nil
                lsp-warn-no-matched-clients nil
-               lsp-clients-clangd-args '("--header-insertion=never")))))
+               lsp-clients-clangd-args '("--header-insertion=never")))
+       (use-package lsp-ui
+         :ensure t)
+       (use-package lsp-sourcekit
+         :ensure t)))
+
+(use-package helm-company
+  :ensure t)
+
+(use-package helm-ag
+  :ensure t)
 
 (use-package helm
   :ensure t
+  :requires (helm-company helm-ag)
   :init
   (setq helm-ag-insert-at-point 'symbol
         helm-ag-use-agignore 1
@@ -275,6 +287,70 @@
   :config
   (helm-projectile-on))
 
+(use-package helm-lsp
+  :ensure t)
+
+(use-package tree-sitter
+  :ensure t
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :requires tree-sitter)
+
+(use-package helm-tree-sitter
+  :ensure t
+  :requires tree-sitter)
+
+(use-package helm-xref
+  :ensure t)
+
+(use-package helm-ls-git
+  :ensure t)
+
+(use-package cmake-mode
+  :ensure t)
+
+(use-package cmake-font-lock
+  :ensure t
+  :requires cmake-mode)
+
+(use-package magit
+  :ensure t
+  :init
+  (bind-key "C-c m s" 'magit-status)
+  (bind-key "C-c m d" 'magit-dispatch)
+  (bind-key "C-c m f" 'magit-file-dispatch))
+
+(use-package objc-font-lock
+  :ensure t)
+
+(use-package doom-themes
+  :ensure t)
+
+(use-package doom-modeline
+  :ensure t)
+
+(use-package lua-mode
+  :ensure t)
+
+(use-package atom-one-dark-theme
+  :ensure t)
+
+(use-package swift-mode
+  :ensure t)
+
+(use-package csharp-mode
+  :ensure t)
+
+(use-package glsl-mode
+  :ensure t)
+
+(use-package json-mode
+  :ensure t)
+
 (when (executable-find "w3m")
   (require 'w3m-load))
 
@@ -375,11 +451,6 @@
 (bind-key "C-M-'" 'dabbrev-expand)
 (unbind-key "M-/")
 (unbind-key "C-M-/")
-
-;; Magit
-(bind-key "C-c m s" 'magit-status)
-(bind-key "C-c m d" 'magit-dispatch)
-(bind-key "C-c m f" 'magit-file-dispatch)
 
 ;; Replace
 (unbind-key "C-M-%")
@@ -532,10 +603,6 @@
                       '(swift-mode . ("xcrun" "sourcekit-lsp"))))))
 
 (setq lsp-glsl-executable '("~/.emacs.d/glsl-language-server/build/glslls" "--stdin"))
-
-;; Tree sitter
-(global-tree-sitter-mode)
-(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
 (provide 'init)
 ;;; init.el ends here
