@@ -416,6 +416,8 @@
 (bind-key "M-n" 'forward-paragraph)
 (bind-key "M-p" 'backward-paragraph)
 
+(bind-key "C-c k" 'kill-this-buffer)
+
 ;; Helm related keys.
 (bind-key "C-c g" 'helm-do-ag)
 (bind-key "C-c b" 'helm-do-ag-buffers)
