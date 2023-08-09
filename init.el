@@ -211,7 +211,6 @@
           "\\`\\*Flymake"
           "\\`\\*gcc"
           "\\`\\*omnisharp"
-          "\\`\\*glslls"
           "\\`\\*Compile-Log"
           "\\`\\*Customize"
           "\\`\\*Async-native-compile-log"
@@ -567,8 +566,7 @@
        (add-hook 'csharp-mode-hook #'eglot-ensure)
        (add-hook 'python-mode-hook #'eglot-ensure)
        (add-hook 'js-mode-hook #'eglot-ensure)
-       (add-hook 'lua-mode-hook #'eglot-ensure)
-       (add-hook 'glsl-mode-hook #'eglot-ensure))
+       (add-hook 'lua-mode-hook #'eglot-ensure))
       (t
        ;; LSP hooks.
        (add-hook 'c-mode-hook #'lsp-deferred)
@@ -578,8 +576,7 @@
        (add-hook 'csharp-mode-hook #'lsp-deferred)
        (add-hook 'python-mode-hook #'lsp-deferred)
        (add-hook 'js-mode-hook #'lsp-deferred)
-       (add-hook 'lua-mode-hook #'lsp-deferred)
-       (add-hook 'glsl-mode-hook #'lsp-deferred)))
+       (add-hook 'lua-mode-hook #'lsp-deferred)))
 
 (cond ((string= system-type "darwin")
        (eval-after-load 'lsp-mode
@@ -590,8 +587,6 @@
        (with-eval-after-load 'eglot
          (add-to-list 'eglot-server-programs
                       '(swift-mode . ("xcrun" "sourcekit-lsp"))))))
-
-(setq lsp-glsl-executable '("~/.emacs.d/glsl-language-server/build/glslls" "--stdin"))
 
 ;; Visualize whitespaces.
 (global-whitespace-mode)
