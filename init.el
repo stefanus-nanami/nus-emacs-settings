@@ -559,7 +559,11 @@
 
 (cond ((eq use-eglot t)
        ;; EGLOT hooks.
-       (add-hook 'c-mode-hook #'eglot-ensure)
+       (add-hook 'c-mode-hook
+                 (lambda ()
+                   (cond ((eq major-mode 'hlsl-mode))
+                         (t
+                          (eglot-ensure)))))
        (add-hook 'c++-mode-hook #'eglot-ensure)
        (add-hook 'objc-mode-hook #'eglot-ensure)
        (add-hook 'swift-mode-hook #'eglot-ensure)
@@ -569,7 +573,11 @@
        (add-hook 'lua-mode-hook #'eglot-ensure))
       (t
        ;; LSP hooks.
-       (add-hook 'c-mode-hook #'lsp-deferred)
+       (add-hook 'c-mode-hook
+                 (lambda ()
+                   (cond ((eq major-mode 'hlsl-mode))
+                         (t
+                          (lsp-deferred)))))
        (add-hook 'c++-mode-hook #'lsp-deferred)
        (add-hook 'objc-mode-hook #'lsp-deferred)
        (add-hook 'swift-mode-hook #'lsp-deferred)
