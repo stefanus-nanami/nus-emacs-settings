@@ -22,6 +22,7 @@
  '(custom-enabled-themes '(doom-outrun-electric))
  '(custom-safe-themes
    '("8b6506330d63e7bc5fb940e7c177a010842ecdda6e1d1941ac5a81b13191020e" default))
+ '(dabbrev-case-replace nil)
  '(display-fill-column-indicator-column 100)
  '(display-line-numbers-major-tick 50)
  '(display-line-numbers-minor-tick 10)
@@ -196,9 +197,7 @@
         helm-ag-use-agignore 1
         helm-buffer-max-length 40
         helm-command-prefix-key "C-c h"
-        helm-commands-using-frame '(completion-at-point helm-company)
-        helm-dabbrev-cycle-threshold 0
-        helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^"
+        helm-commands-using-frame '(completion-at-point helm-company helm-apropos)
         helm-ff-file-name-history-use-recentf t
         helm-recentf-fuzzy-match t
         helm-display-header-line nil)
@@ -225,29 +224,6 @@
           "\\`\\*csharp-ls"
           "\\`\\*json-ls"
           "\\`\\*sourcekit-ls"))
-  (setq helm-dabbrev-ignored-buffers-regexps
-        '("\\*helm"
-          "\\*Messages"
-          "\\*Echo Area"
-          "\\*Buffer List"
-          "\\*lsp"
-          "\\*clangd"
-          "\\*Flymake"
-          "\\*gcc"
-          "\\*omnisharp"
-          "\\*glslls"
-          "\\*Compile-Log"
-          "\\*Customize"
-          "\\*Async-native-compile-log"
-          "\\*Packages"
-          "\\*Warnings"
-          "\\*Colors"
-          "\\*EGLOT"
-          "\\*pylsp"
-          "\\*clang"
-          "\\*csharp-ls"
-          "\\*json-ls"
-          "\\*sourcekit-ls"))
   (setq helm-source-names-using-follow '("Helm Xref"))
   (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
   :config
@@ -445,7 +421,6 @@
            ([remap execute-extended-command] . helm-M-x)
            ([remap occur] . helm-occur)
            ([remap list-buffers] . helm-buffers-list)
-           ([remap dabbrev-expand] . helm-dabbrev)
            ([remap apropos-command] . helm-apropos))
 
 (unbind-key "C-c C-c" c-mode-map)
@@ -461,7 +436,7 @@
 
 ;; Completions.
 (bind-key "C-;" 'helm-company)
-(bind-key "C-'" 'helm-dabbrev)
+(bind-key "C-'" 'dabbrev-completion)
 (bind-key "C-M-'" 'dabbrev-expand)
 (unbind-key "M-/")
 (unbind-key "C-M-/")
