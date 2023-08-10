@@ -393,6 +393,10 @@
 
 (bind-key "C-c k" 'kill-this-buffer)
 
+(unbind-key "C-M-<backspace>")
+(unbind-key "C-M-<delete>")
+(bind-key "M-DEL" 'backward-kill-sexp)
+
 ;; Helm related keys.
 (bind-key "C-c g" 'helm-do-ag)
 (bind-key "C-c b" 'helm-do-ag-buffers)
