@@ -211,6 +211,7 @@
           "\\`\\*Flymake"
           "\\`\\*gcc"
           "\\`\\*omnisharp"
+          "\\`\\*company"
           "\\`\\*Compile-Log"
           "\\`\\*Customize"
           "\\`\\*Async-native-compile-log"
