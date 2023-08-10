@@ -197,7 +197,7 @@
         helm-ag-use-agignore 1
         helm-buffer-max-length 40
         helm-command-prefix-key "C-c h"
-        helm-commands-using-frame '(completion-at-point helm-company helm-apropos)
+        helm-commands-using-frame '(completion-at-point helm-company)
         helm-ff-file-name-history-use-recentf t
         helm-recentf-fuzzy-match t
         helm-display-header-line nil)
@@ -395,7 +395,7 @@
 
 (unbind-key "C-M-<backspace>")
 (unbind-key "C-M-<delete>")
-(bind-key "M-DEL" 'backward-kill-sexp)
+(bind-key "C-<backspace>" 'backward-kill-sexp)
 
 ;; Helm related keys.
 (bind-key "C-c g" 'helm-do-ag)
@@ -406,6 +406,7 @@
 (bind-key "C-<f5>" 'helm-imenu-in-all-buffers)
 (bind-key "<f6>" 'helm-show-kill-ring)
 (bind-key "C-<f6>" 'helm-all-mark-rings)
+(bind-key "M-s g" 'helm-occur-visible-buffers)
 
 ;; Binding LSP related keys.
 (cond ((eq use-eglot t)
@@ -438,11 +439,7 @@
            ("M-<f9>" . helm-projectile-find-file))
 
 ;; Completions.
-(bind-key "C-;" 'helm-company)
-(bind-key "C-'" 'dabbrev-completion)
-(bind-key "C-M-'" 'dabbrev-expand)
-(unbind-key "M-/")
-(unbind-key "C-M-/")
+(bind-key [remap complete] 'helm-company)
 
 ;; Replace
 (unbind-key "C-M-%")
