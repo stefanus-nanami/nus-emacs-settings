@@ -482,6 +482,14 @@
 
 (add-to-list 'interpreter-mode-alist '("node" . js-mode))
 
+;; No treesit for now...
+(add-to-list 'auto-mode-alist
+             '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
+(add-to-list 'auto-mode-alist
+             '("\\(\\.[chi]\\|\\.lex\\|\\.y\\(acc\\)?\\)\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.x[pb]m\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c-or-c++-mode))
+
 (cond ((string= localhost-name "Lyka")
        (setq-default tab-width 2)
        (setq-default indent-tabs-mode nil)
