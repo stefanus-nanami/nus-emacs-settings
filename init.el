@@ -226,6 +226,17 @@
           "\\`\\*sourcekit-ls"))
   (setq helm-source-names-using-follow '("Helm Xref"))
   (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
+
+  :bind (("C-c g" . helm-do-ag)
+         ("C-c b" . helm-do-ag-buffers)
+         ("<f2>" . helm-mini)
+         ("<f8>" . helm-browse-project)
+         ("<f5>" . helm-tree-sitter-or-imenu)
+         ("C-<f5>" . helm-imenu-in-all-buffers)
+         ("<f6>" . helm-show-kill-ring)
+         ("C-<f6>" . helm-all-mark-rings)
+         ("M-s g" . helm-occur-visible-buffers))
+
   :config
   (helm-mode 1))
 
@@ -272,6 +283,9 @@
 (use-package helm-projectile
   :ensure t
   :requires projectile
+  :bind (("<f9>" . helm-projectile-find-other-file)
+         ("C-<f9>" . helm-projectile)
+         ("M-<f9>" . helm-projects-find-files))
   :config
   (helm-projectile-on))
 
@@ -308,9 +322,9 @@
 (use-package magit
   :ensure t
   :init
-  (bind-key "C-c m s" 'magit-status)
-  (bind-key "C-c m d" 'magit-dispatch)
-  (bind-key "C-c m f" 'magit-file-dispatch))
+  :bind (("C-c m s" . magit-status)
+         ("C-c m d" . magit-dispatch)
+         ("C-c m f" . magit-file-dispatch)))
 
 (use-package objc-font-lock
   :ensure t)
@@ -357,10 +371,11 @@
 (bind-key "C-<tab>" 'other-window)
 
 ;; Kill word at point.
-(bind-key "C-c d" (lambda()
-                    (interactive)
-                    (backward-word)
-                    (kill-word 1)))
+(bind-key "C-c d" (lambda (&optional arg)
+                    "Kill word at point."
+                    (interactive "^p")
+                    (backward-word 1)
+                    (kill-word (or arg 1))))
 
 ;; Pixel scroll everything!
 (cond ((>= emacs-major-version 29)
@@ -398,17 +413,6 @@
 (unbind-key "C-M-<delete>")
 (bind-key "C-<backspace>" 'backward-kill-sexp)
 
-;; Helm related keys.
-(bind-key "C-c g" 'helm-do-ag)
-(bind-key "C-c b" 'helm-do-ag-buffers)
-(bind-key "<f2>" 'helm-mini)
-(bind-key "<f8>" 'helm-browse-project)
-(bind-key "<f5>" 'helm-tree-sitter-or-imenu)
-(bind-key "C-<f5>" 'helm-imenu-in-all-buffers)
-(bind-key "<f6>" 'helm-show-kill-ring)
-(bind-key "C-<f6>" 'helm-all-mark-rings)
-(bind-key "M-s g" 'helm-occur-visible-buffers)
-
 ;; Binding LSP related keys.
 (cond ((eq use-eglot t)
        (bind-keys ("<f12>" . xref-find-definitions)
@@ -434,10 +438,7 @@
 (bind-key "C-c C-c" 'comment-or-uncomment-region)
 
 (bind-keys :map projectile-mode-map
-           ("C-c p" . projectile-command-map)
-           ("<f9>" . projectile-find-other-file)
-           ("C-<f9>" . helm-projectile)
-           ("M-<f9>" . helm-projectile-find-file))
+           ("C-c p" . projectile-command-map))
 
 ;; Completions.
 (bind-key [remap complete] 'helm-company)
@@ -467,8 +468,6 @@
        (bind-key "s-<f9>" 'fw-ops-swap-buffers)))
 
 ;; Map extensions to modes.
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-
 (add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.vs\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
