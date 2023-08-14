@@ -372,9 +372,9 @@
 
 ;; Kill word at point.
 (bind-key "C-c d" (lambda (&optional arg)
-                    "Kill word at point."
+                    "Kill word(s) at point."
                     (interactive "^p")
-                    (backward-word 1)
+                    (backward-word (or arg 1))
                     (kill-word (or arg 1))))
 
 ;; Pixel scroll everything!
