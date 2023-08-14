@@ -608,6 +608,8 @@
 ;; Visualize whitespaces.
 (global-whitespace-mode)
 
+(winner-mode 1)
+
 (provide 'init)
 ;;; init.el ends here
 
