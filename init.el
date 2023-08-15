@@ -30,6 +30,7 @@
  '(doom-themes-enable-italic nil)
  '(dynamic-completion-mode t)
  '(eglot-connect-timeout 180)
+ '(eldoc-idle-delay 2)
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
  '(exec-path-from-shell-arguments nil)
