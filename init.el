@@ -414,6 +414,8 @@
 (unbind-key "C-M-<delete>")
 (bind-key "C-<backspace>" 'backward-kill-sexp)
 
+(bind-key "C-c l" 'duplicate-dwim)
+
 ;; Binding LSP related keys.
 (cond ((eq use-eglot t)
        (bind-keys ("<f12>" . xref-find-definitions)
