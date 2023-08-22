@@ -525,6 +525,8 @@
                 (inexpr-class-close before)
                 (arglist-cont-nonempty)))
 
+(setq c-auto-align-backslashes nil)
+
 ;; Python.
 (setq-default python-indent-offset 4)
 
@@ -582,7 +584,10 @@
        (add-hook 'csharp-ts-mode-hook #'eglot-ensure)
        (add-hook 'python-mode-hook #'eglot-ensure)
        (add-hook 'js-mode-hook #'eglot-ensure)
-       (add-hook 'lua-mode-hook #'eglot-ensure))
+       (add-hook 'lua-mode-hook #'eglot-ensure)
+       (add-hook 'eglot-managed-mode-hook
+                 (lambda ()
+                   (flymake-mode -1))))
       (t
        ;; LSP hooks.
        (add-hook 'c-mode-hook
