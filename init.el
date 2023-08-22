@@ -489,14 +489,12 @@
 (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-ts-mode))
 
 ;; No treesit for now...
-;; Treesit is not working properly on Windows.
-(cond ((string= system-type "windows-nt")
-       (add-to-list 'auto-mode-alist
-                    '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
-       (add-to-list 'auto-mode-alist
-                    '("\\(\\.[chi]\\|\\.lex\\|\\.y\\(acc\\)?\\)\\'" . c-mode))
-       (add-to-list 'auto-mode-alist '("\\.x[pb]m\\'" . c-mode))
-       (add-to-list 'auto-mode-alist '("\\.h\\'" . c-or-c++-mode))))
+(add-to-list 'auto-mode-alist
+             '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
+(add-to-list 'auto-mode-alist
+             '("\\(\\.[chi]\\|\\.lex\\|\\.y\\(acc\\)?\\)\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.x[pb]m\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c-or-c++-mode))
 
 (cond ((string= localhost-name "Lyka")
        (setq-default tab-width 2)
