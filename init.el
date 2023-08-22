@@ -51,6 +51,8 @@
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
+ '(package-selected-packages
+   '(tree-sitter-indent yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode lsp-ui lsp-sourcekit json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-lsp helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -300,8 +302,10 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package tree-sitter-langs
-  :ensure t
-  :requires tree-sitter)
+  :ensure t)
+
+(use-package tree-sitter-indent
+  :ensure t)
 
 (use-package helm-tree-sitter
   :ensure t
@@ -343,9 +347,6 @@
   :ensure t)
 
 (use-package swift-mode
-  :ensure t)
-
-(use-package csharp-mode
   :ensure t)
 
 (use-package glsl-mode
@@ -485,6 +486,8 @@
 
 (add-to-list 'interpreter-mode-alist '("node" . js-mode))
 
+(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-ts-mode))
+
 ;; No treesit for now...
 (add-to-list 'auto-mode-alist
              '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
@@ -540,7 +543,7 @@
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
 
-(add-hook 'csharp-mode-hook
+(add-hook 'csharp-ts-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)))
 
@@ -579,7 +582,7 @@
        (add-hook 'c++-mode-hook #'eglot-ensure)
        (add-hook 'objc-mode-hook #'eglot-ensure)
        (add-hook 'swift-mode-hook #'eglot-ensure)
-       (add-hook 'csharp-mode-hook #'eglot-ensure)
+       (add-hook 'csharp-ts-mode-hook #'eglot-ensure)
        (add-hook 'python-mode-hook #'eglot-ensure)
        (add-hook 'js-mode-hook #'eglot-ensure)
        (add-hook 'lua-mode-hook #'eglot-ensure))
@@ -593,7 +596,7 @@
        (add-hook 'c++-mode-hook #'lsp-deferred)
        (add-hook 'objc-mode-hook #'lsp-deferred)
        (add-hook 'swift-mode-hook #'lsp-deferred)
-       (add-hook 'csharp-mode-hook #'lsp-deferred)
+       (add-hook 'csharp-ts-mode-hook #'lsp-deferred)
        (add-hook 'python-mode-hook #'lsp-deferred)
        (add-hook 'js-mode-hook #'lsp-deferred)
        (add-hook 'lua-mode-hook #'lsp-deferred)))
