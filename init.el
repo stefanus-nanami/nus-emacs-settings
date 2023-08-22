@@ -52,7 +52,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(tree-sitter-indent yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode lsp-ui lsp-sourcekit json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-lsp helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
+   '(yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode lsp-ui lsp-sourcekit json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-lsp helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -302,9 +302,6 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package tree-sitter-langs
-  :ensure t)
-
-(use-package tree-sitter-indent
   :ensure t)
 
 (use-package helm-tree-sitter
