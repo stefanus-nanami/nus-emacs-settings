@@ -421,6 +421,11 @@
 
 (bind-key "C-c l" 'duplicate-dwim)
 
+(bind-key "M-f" 'forward-to-word)
+(bind-key "M-b" 'backward-word)
+(bind-key "M-F" 'forward-word)
+(bind-key "M-B" 'backward-to-word)
+
 ;; Binding LSP related keys.
 (cond ((eq use-eglot t)
        (bind-keys ("<f12>" . xref-find-definitions)
