@@ -30,6 +30,7 @@
  '(doom-themes-enable-italic nil)
  '(dynamic-completion-mode t)
  '(eglot-connect-timeout 180)
+ '(eglot-ignored-server-capabilities '(:inlayHintProvider))
  '(eldoc-idle-delay 2)
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
@@ -92,7 +93,12 @@
  '(mode-line ((t (:background "dark slate blue" :box nil))))
  '(mode-line-inactive ((t (:background "dark slate blue" :foreground "light slate blue" :box nil))))
  '(region ((t (:extend t :background "#4d377b"))))
+ '(tree-sitter-hl-face:function.call ((t (:inherit font-lock-function-call-face))))
  '(tree-sitter-hl-face:operator ((t (:inherit default))))
+ '(tree-sitter-hl-face:property ((t (:weight bold :inherit font-lock-property-use-face))))
+ '(tree-sitter-hl-face:property.definition ((t (:inherit font-lock-property-name-face))))
+ '(tree-sitter-hl-face:punctuation ((t (:inherit font-lock-bracket-face))))
+ '(tree-sitter-hl-face:punctuation.special ((t (:inherit font-lock-misc-punctuation-face))))
  '(whitespace-newline ((t (:foreground "gray24"))))
  '(whitespace-tab ((t (:foreground "gray24"))))
  '(whitespace-trailing ((t (:foreground "OrangeRed2" :background "firebrick")))))
@@ -224,6 +230,7 @@
           "\\`\\*EGLOT"
           "\\`\\*pylsp"
           "\\`\\*clang"
+          "\\`\\*tree-sitter"
           "\\`\\*csharp-ls"
           "\\`\\*json-ls"
           "\\`\\*sourcekit-ls"))
@@ -488,10 +495,10 @@
 ;; No treesit for now...
 (add-to-list 'auto-mode-alist
              '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
-(add-to-list 'auto-mode-alist
-             '("\\(\\.[chi]\\|\\.lex\\|\\.y\\(acc\\)?\\)\\'" . c-mode))
-(add-to-list 'auto-mode-alist '("\\.x[pb]m\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-or-c++-mode))
+(add-to-list 'auto-mode-alist
+             '("\\(\\.[ci]\\|\\.lex\\|\\.y\\(acc\\)?\\)\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.x[pb]m\\'" . c-mode))
 
 (cond ((string= localhost-name "Lyka")
        (setq-default tab-width 2)
