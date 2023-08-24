@@ -576,8 +576,6 @@
             (add-to-list 'current-indent-rules '((node-is "case_statement") parent-bol 0))
             (add-to-list 'current-indent-rules '((parent-is "case_statement") parent-bol c-ts-mode-indent-offset))
             (add-to-list 'current-indent-rules '((parent-is "else_clause") parent-bol 0))
-            (add-to-list 'current-indent-rules '((node-is "field_initializer") first-sibling 2))
-            (add-to-list 'current-indent-rules '((node-is "field_initializer_list") parent-bol c-ts-mode-indent-offset))
             (setf (alist-get 'cpp treesit-simple-indent-rules) current-indent-rules)))
 
 ;; EGLOT hooks.
