@@ -490,8 +490,6 @@
 
 (add-to-list 'interpreter-mode-alist '("node" . js-mode))
 
-(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-ts-mode))
-
 ;; No treesit for now...
 (add-to-list 'auto-mode-alist
              '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
@@ -553,6 +551,10 @@
           (lambda ()
             (setq indent-tabs-mode nil)))
 
+(add-hook 'csharp-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)))
+
 (add-hook 'lua-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
@@ -588,6 +590,7 @@
        (add-hook 'c++-mode-hook #'eglot-ensure)
        (add-hook 'objc-mode-hook #'eglot-ensure)
        (add-hook 'swift-mode-hook #'eglot-ensure)
+       (add-hook 'csharp-mode-hook #'eglot-ensure)
        (add-hook 'csharp-ts-mode-hook #'eglot-ensure)
        (add-hook 'python-mode-hook #'eglot-ensure)
        (add-hook 'js-mode-hook #'eglot-ensure)
@@ -605,6 +608,7 @@
        (add-hook 'c++-mode-hook #'lsp-deferred)
        (add-hook 'objc-mode-hook #'lsp-deferred)
        (add-hook 'swift-mode-hook #'lsp-deferred)
+       (add-hook 'csharp-mode-hook #'lsp-deferred)
        (add-hook 'csharp-ts-mode-hook #'lsp-deferred)
        (add-hook 'python-mode-hook #'lsp-deferred)
        (add-hook 'js-mode-hook #'lsp-deferred)
