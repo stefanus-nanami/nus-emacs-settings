@@ -57,7 +57,7 @@
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
- '(sentence-end-base "[.?!…‽;][]\"'”’)}»›]*")
+ '(sentence-end-base "[.?!…‽;:{][]\"'”’)}»›]*")
  '(smtpmail-default-smtp-server "smtp.gmail.com")
  '(smtpmail-smtp-service 587)
  '(swift-mode:basic-offset 2)
@@ -423,9 +423,9 @@
 (bind-key "C-c l" 'duplicate-dwim)
 
 (bind-key "M-f" 'forward-to-word)
-(bind-key "M-b" 'backward-word)
+(bind-key "M-b" 'backward-to-word)
 (bind-key "M-F" 'forward-word)
-(bind-key "M-B" 'backward-to-word)
+(bind-key "M-B" 'backward-word)
 
 ;; Binding LSP related keys.
 (cond ((eq use-eglot t)
@@ -632,6 +632,8 @@
 
 ;; Visualize whitespaces.
 (global-whitespace-mode)
+
+(global-subword-mode 1)
 
 (winner-mode 1)
 
