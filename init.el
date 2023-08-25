@@ -72,11 +72,12 @@
                  [164]
                  [95])
      (newline-mark 10
-                   [8629 10])
+                   [8626 10])
      (tab-mark 9
                [187 9]
                [92 9])))
- '(whitespace-style '(face tabs newline empty tab-mark newline-mark)))
+ '(whitespace-style
+   '(face trailing tabs newline missing-newline-at-eof empty tab-mark newline-mark)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -101,7 +102,8 @@
  '(tree-sitter-hl-face:punctuation ((t (:inherit font-lock-bracket-face))))
  '(tree-sitter-hl-face:punctuation.special ((t (:inherit font-lock-misc-punctuation-face))))
  '(whitespace-newline ((t (:foreground "gray24"))))
- '(whitespace-tab ((t (:foreground "gray24"))))
+ '(whitespace-space ((t (:inherit whitespace-newline))))
+ '(whitespace-tab ((t (:inherit whitespace-newline))))
  '(whitespace-trailing ((t (:foreground "OrangeRed2" :background "firebrick")))))
 
 (setq load-prefer-newer t)
