@@ -605,7 +605,10 @@
        (add-hook 'lua-mode-hook #'eglot-ensure)
        (add-hook 'eglot-managed-mode-hook
                  (lambda ()
-                   (flymake-mode -1))))
+                   (flymake-mode -1)))
+       (with-eval-after-load 'eglot
+                (add-to-list 'eglot-server-programs
+                    `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))))
       (t
        ;; LSP hooks.
        (add-hook 'c-mode-hook
