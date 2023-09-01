@@ -31,6 +31,8 @@ Besides the default key bindings, here are several key bindings that I usually u
 | F12         | xref-find-definitions           |
 | C-F12       | xref-find-references            |
 | C-c C-c     | comment-or-uncomment-region     |
-| M-*         | replace-string                  |
-| C-*         | replace-regexp                  |
-| C-%         | query-replace-regexp            |
+| C-c r s     | replace-string                  |
+| C-c r r     | replace-regexp                  |
+| C-c r q     | query-replace-regexp            |
+| C-c r p     | project-query-replace-regexp    |
+

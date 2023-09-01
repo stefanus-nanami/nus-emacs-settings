@@ -236,7 +236,8 @@
           "\\`\\*tree-sitter"
           "\\`\\*csharp-ls"
           "\\`\\*json-ls"
-          "\\`\\*sourcekit-ls"))
+          "\\`\\*sourcekit-ls"
+          "\\`\\*projectile"))
   (setq helm-source-names-using-follow '("Helm Xref"))
   (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
 
@@ -256,6 +257,7 @@
 (use-package projectile
   :ensure t
   :init
+  (setq projectile-indexing-method 'hybrid)
   (setq projectile-completion-system 'helm)
   (setq projectile-globally-ignored-directories
         '("^\\.idea$"
@@ -291,7 +293,7 @@
         '("TAGS"
           ".git*"))
   :config
-  (projectile-mode +1))
+  (projectile-mode 1))
 
 (use-package helm-projectile
   :ensure t
@@ -460,10 +462,10 @@
 (bind-key [remap complete] 'helm-company)
 
 ;; Replace
-(unbind-key "C-M-%")
-(bind-keys ("M-*" . replace-string)
-           ("C-*" . replace-regexp)
-           ("C-%" . query-replace-regexp))
+(bind-keys ("C-c r s" . replace-string)
+           ("C-c r r" . replace-regexp)
+           ("C-c r q" . query-replace-regexp)
+           ("C-c r p" . project-query-replace-regexp))
 
 (cond ((string= system-type "windows-nt")
        (setq w32-pass-lwindow-to-system nil)
