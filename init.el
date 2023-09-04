@@ -53,7 +53,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode lsp-ui lsp-sourcekit json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-lsp helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
+   '(ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode lsp-ui lsp-sourcekit json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-lsp helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -237,7 +237,8 @@
           "\\`\\*csharp-ls"
           "\\`\\*json-ls"
           "\\`\\*sourcekit-ls"
-          "\\`\\*projectile"))
+          "\\`\\*projectile"
+          "\\`\\*ag'"))
   (setq helm-source-names-using-follow '("Helm Xref"))
   (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
 
