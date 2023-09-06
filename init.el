@@ -53,7 +53,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode lsp-ui lsp-sourcekit json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-lsp helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
+   '(ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -62,7 +62,6 @@
  '(smtpmail-smtp-service 587)
  '(swift-mode:basic-offset 2)
  '(truncate-lines t)
- '(warning-suppress-log-types '((comp) (lsp-mode)))
  '(warning-suppress-types '((emacs)))
  '(whitespace-display-mappings
    '((space-mark 32
@@ -107,8 +106,6 @@
  '(whitespace-trailing ((t (:foreground "OrangeRed2" :background "firebrick")))))
 
 (setq load-prefer-newer t)
-
-(defconst use-eglot t "Use eglot instead of LSP mode.")
 
 ;; Activate all the packages.
 (package-initialize)
@@ -171,31 +168,6 @@
         company-dabbrev-ignore-case nil)
   :config
   (global-company-mode t))
-
-(cond ((eq use-eglot t)
-       (require 'eglot))
-      (t
-       (use-package lsp-mode
-         :ensure t
-         :init
-         (setq lsp-eldoc-enable-hover nil
-               lsp-enable-file-watchers nil
-               lsp-enable-indentation nil
-               lsp-enable-on-type-formatting nil
-               lsp-enable-snippet nil
-               lsp-headerline-breadcrumb-enable nil
-               lsp-keymap-prefix "C-c l"
-               lsp-lens-enable nil
-               lsp-modeline-diagnostics-enable nil
-               lsp-signature-auto-activate nil
-               lsp-ui-doc-enable nil
-               lsp-ui-sideline-show-diagnostics nil
-               lsp-warn-no-matched-clients nil
-               lsp-clients-clangd-args '("--header-insertion=never")))
-       (use-package lsp-ui
-         :ensure t)
-       (use-package lsp-sourcekit
-         :ensure t)))
 
 (use-package helm-company
   :ensure t)
@@ -305,9 +277,6 @@
          ("M-<f9>" . helm-projects-find-files))
   :config
   (helm-projectile-on))
-
-(use-package helm-lsp
-  :ensure t)
 
 (use-package tree-sitter
   :ensure t
@@ -434,17 +403,8 @@
 (bind-key "M-B" 'backward-word)
 
 ;; Binding LSP related keys.
-(cond ((eq use-eglot t)
-       (bind-keys ("<f12>" . xref-find-definitions)
-                  ("C-<f12>" . xref-find-references)))
-      (t
-       (bind-keys :map lsp-mode-map
-                  ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-                  ([remap xref-find-references] . lsp-ui-peek-find-references)
-                  ("<f12>" . lsp-find-definition)
-                  ("C-<f12>" . lsp-find-references)
-                  ("M-<f12>" . helm-lsp-workspace-symbol)
-                  ("s-<f12>" . helm-lsp-global-workspace-symbol))))
+(bind-keys ("<f12>" . xref-find-definitions)
+           ("C-<f12>" . xref-find-references))
 
 (bind-keys ([remap find-file] . helm-find-files)
            ([remap execute-extended-command] . helm-M-x)
@@ -520,11 +480,6 @@
        (setq-default indent-tabs-mode t)
        (setq-default c-basic-offset 4)))
 
-(cond ((eq use-eglot nil)
-       ;; Improving LSP performance.
-       (setq gc-cons-threshold (* 128 1024 1024))
-       (setq read-process-output-max (* 1024 1024))))
-
 ;; C offsets.
 (setq-default c-offsets-alist
               '((brace-list-open . 0)
@@ -593,62 +548,41 @@
           (lambda ()
             (setq fill-column 100)))
 
-(cond ((eq use-eglot t)
-       ;; EGLOT hooks.
-       (add-hook 'c-mode-hook
-                 (lambda ()
-                   (cond ((eq major-mode 'hlsl-mode))
-                         (t
-                          (eglot-ensure)))))
-       (add-hook 'c++-mode-hook 'eglot-ensure)
-       (add-hook 'objc-mode-hook 'eglot-ensure)
-       (add-hook 'swift-mode-hook 'eglot-ensure)
-       (add-hook 'csharp-mode-hook 'eglot-ensure)
-       (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
-       (add-hook 'python-mode-hook 'eglot-ensure)
-       (add-hook 'js-mode-hook 'eglot-ensure)
-       (add-hook 'lua-mode-hook 'eglot-ensure)
-       (add-hook 'eglot-managed-mode-hook
-                 (lambda ()
-                   (flymake-mode -1)))
-       (with-eval-after-load 'eglot
-         (add-to-list 'eglot-server-programs
-                      `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))
-         (add-to-list 'eglot-server-programs
-                      `((c-mode c++-mode c-ts-mode c++ts-mode) . ("clangd"
-                                                                  "-j=8"
-                                                                  "--log=error"
-                                                                  "--background-index"
-                                                                  "--clang-tidy"
-                                                                  "--completion-style=detailed"
-                                                                  "--pch-storage=memory"
-                                                                  "--header-insertion=never"
-                                                                  "--header-insertion-decorators=0")))))
-      (t
-       ;; LSP hooks.
-       (add-hook 'c-mode-hook
-                 (lambda ()
-                   (cond ((eq major-mode 'hlsl-mode))
-                         (t
-                          (lsp-deferred)))))
-       (add-hook 'c++-mode-hook 'lsp-deferred)
-       (add-hook 'objc-mode-hook 'lsp-deferred)
-       (add-hook 'swift-mode-hook 'lsp-deferred)
-       (add-hook 'csharp-mode-hook 'lsp-deferred)
-       (add-hook 'csharp-ts-mode-hook 'lsp-deferred)
-       (add-hook 'python-mode-hook 'lsp-deferred)
-       (add-hook 'js-mode-hook 'lsp-deferred)
-       (add-hook 'lua-mode-hook 'lsp-deferred)))
+;; EGLOT hooks.
+(add-hook 'c-mode-hook
+          (lambda ()
+            (cond ((eq major-mode 'hlsl-mode))
+                  (t
+                   (eglot-ensure)))))
+(add-hook 'c++-mode-hook 'eglot-ensure)
+(add-hook 'objc-mode-hook 'eglot-ensure)
+(add-hook 'swift-mode-hook 'eglot-ensure)
+(add-hook 'csharp-mode-hook 'eglot-ensure)
+(add-hook 'csharp-ts-mode-hook 'eglot-ensure)
+(add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'js-mode-hook 'eglot-ensure)
+(add-hook 'lua-mode-hook 'eglot-ensure)
+(add-hook 'eglot-managed-mode-hook
+          (lambda ()
+            (flymake-mode -1)))
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))
+  (add-to-list 'eglot-server-programs
+               `((c-mode c++-mode c-ts-mode c++ts-mode) . ("clangd"
+                                                           "-j=8"
+                                                           "--log=error"
+                                                           "--background-index"
+                                                           "--clang-tidy"
+                                                           "--completion-style=detailed"
+                                                           "--pch-storage=memory"
+                                                           "--header-insertion=never"
+                                                           "--header-insertion-decorators=0"))))
 
 (cond ((string= system-type "darwin")
-       (eval-after-load 'lsp-mode
-         (progn
-           (require 'lsp-sourcekit)
-           (setq lsp-sourcekit-executable (string-trim (shell-command-to-string
-                                                        "xcrun --find sourcekit-lsp")))))
        (with-eval-after-load 'eglot
          (add-to-list 'eglot-server-programs
-                      '(swift-mode . ("xcrun" "sourcekit-lsp"))))))
+                      `(swift-mode . ("xcrun" "sourcekit-lsp"))))))
 
 ;; Visualize whitespaces.
 (global-whitespace-mode)

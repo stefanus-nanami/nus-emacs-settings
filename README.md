@@ -35,4 +35,3 @@ Besides the default key bindings, here are several key bindings that I usually u
 | C-c r r     | replace-regexp                  |
 | C-c r q     | query-replace-regexp            |
 | C-c r p     | project-query-replace-regexp    |
-
