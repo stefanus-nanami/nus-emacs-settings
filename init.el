@@ -172,7 +172,9 @@
   :config
   (global-company-mode t))
 
-(cond ((eq use-eglot nil)
+(cond ((eq use-eglot t)
+       (require 'eglot))
+      (t
        (use-package lsp-mode
          :ensure t
          :init
@@ -258,7 +260,6 @@
 (use-package projectile
   :ensure t
   :init
-  (setq projectile-indexing-method 'hybrid)
   (setq projectile-completion-system 'helm)
   (setq projectile-globally-ignored-directories
         '("^\\.idea$"
@@ -599,20 +600,30 @@
                    (cond ((eq major-mode 'hlsl-mode))
                          (t
                           (eglot-ensure)))))
-       (add-hook 'c++-mode-hook #'eglot-ensure)
-       (add-hook 'objc-mode-hook #'eglot-ensure)
-       (add-hook 'swift-mode-hook #'eglot-ensure)
-       (add-hook 'csharp-mode-hook #'eglot-ensure)
-       (add-hook 'csharp-ts-mode-hook #'eglot-ensure)
-       (add-hook 'python-mode-hook #'eglot-ensure)
-       (add-hook 'js-mode-hook #'eglot-ensure)
-       (add-hook 'lua-mode-hook #'eglot-ensure)
+       (add-hook 'c++-mode-hook 'eglot-ensure)
+       (add-hook 'objc-mode-hook 'eglot-ensure)
+       (add-hook 'swift-mode-hook 'eglot-ensure)
+       (add-hook 'csharp-mode-hook 'eglot-ensure)
+       (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
+       (add-hook 'python-mode-hook 'eglot-ensure)
+       (add-hook 'js-mode-hook 'eglot-ensure)
+       (add-hook 'lua-mode-hook 'eglot-ensure)
        (add-hook 'eglot-managed-mode-hook
                  (lambda ()
                    (flymake-mode -1)))
        (with-eval-after-load 'eglot
-                (add-to-list 'eglot-server-programs
-                    `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))))
+         (add-to-list 'eglot-server-programs
+                      `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))
+         (add-to-list 'eglot-server-programs
+                      `((c-mode c++-mode c-ts-mode c++ts-mode) . ("clangd"
+                                                                  "-j=8"
+                                                                  "--log=error"
+                                                                  "--background-index"
+                                                                  "--clang-tidy"
+                                                                  "--completion-style=detailed"
+                                                                  "--pch-storage=memory"
+                                                                  "--header-insertion=never"
+                                                                  "--header-insertion-decorators=0")))))
       (t
        ;; LSP hooks.
        (add-hook 'c-mode-hook
@@ -620,14 +631,14 @@
                    (cond ((eq major-mode 'hlsl-mode))
                          (t
                           (lsp-deferred)))))
-       (add-hook 'c++-mode-hook #'lsp-deferred)
-       (add-hook 'objc-mode-hook #'lsp-deferred)
-       (add-hook 'swift-mode-hook #'lsp-deferred)
-       (add-hook 'csharp-mode-hook #'lsp-deferred)
-       (add-hook 'csharp-ts-mode-hook #'lsp-deferred)
-       (add-hook 'python-mode-hook #'lsp-deferred)
-       (add-hook 'js-mode-hook #'lsp-deferred)
-       (add-hook 'lua-mode-hook #'lsp-deferred)))
+       (add-hook 'c++-mode-hook 'lsp-deferred)
+       (add-hook 'objc-mode-hook 'lsp-deferred)
+       (add-hook 'swift-mode-hook 'lsp-deferred)
+       (add-hook 'csharp-mode-hook 'lsp-deferred)
+       (add-hook 'csharp-ts-mode-hook 'lsp-deferred)
+       (add-hook 'python-mode-hook 'lsp-deferred)
+       (add-hook 'js-mode-hook 'lsp-deferred)
+       (add-hook 'lua-mode-hook 'lsp-deferred)))
 
 (cond ((string= system-type "darwin")
        (eval-after-load 'lsp-mode
