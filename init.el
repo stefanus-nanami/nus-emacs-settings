@@ -212,7 +212,8 @@
           "\\`\\*json-ls"
           "\\`\\*sourcekit-ls"
           "\\`\\*projectile"
-          "\\`\\*ag'"))
+          "\\`\\*ag"
+          "\\`\\*eldoc"))
   (setq helm-source-names-using-follow '("Helm Xref"))
   (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
 
@@ -446,6 +447,7 @@
        (bind-key "M-`" 'other-frame)
        (unbind-key "s-`"))
       (t
+       (bind-key "<f22>" 'scroll-lock-mode)
        (bind-key "s-<f9>" 'fw-ops-swap-buffers)))
 
 ;; Map extensions to modes.
@@ -565,6 +567,7 @@
 (add-hook 'eglot-managed-mode-hook
           (lambda ()
             (flymake-mode -1)))
+
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))
