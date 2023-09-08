@@ -31,7 +31,6 @@
  '(dynamic-completion-mode t)
  '(eglot-connect-timeout 180)
  '(eglot-ignored-server-capabilities '(:inlayHintProvider))
- '(eldoc-idle-delay 2)
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
  '(exec-path-from-shell-arguments nil)
@@ -53,7 +52,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
+   '(eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -150,6 +149,12 @@
 
 (use-package emojify
   :ensure t)
+
+(use-package eldoc-box
+  :ensure t
+  :bind (("C-h C-SPC" . 'eldoc-box-help-at-point))
+  :init
+  (setq eldoc-box-clear-with-C-g t))
 
 (use-package company-dict
   :ensure t)
@@ -510,7 +515,8 @@
 (add-hook 'prog-mode-hook
           (lambda ()
             (whitespace-toggle-options 'trailing)
-            (display-line-numbers-mode)))
+            (display-line-numbers-mode)
+            (eldoc-box-hover-mode 1)))
 
 (add-hook 'js-mode-hook
           (lambda ()
