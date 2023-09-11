@@ -515,8 +515,7 @@
 (add-hook 'prog-mode-hook
           (lambda ()
             (whitespace-toggle-options 'trailing)
-            (display-line-numbers-mode)
-            (eldoc-box-hover-mode 1)))
+            (display-line-numbers-mode)))
 
 (add-hook 'js-mode-hook
           (lambda ()
@@ -556,6 +555,10 @@
           (lambda ()
             (setq fill-column 100)))
 
+(add-hook 'eldoc-mode-hook
+          (lambda ()
+            (eldoc-box-hover-mode -1)))
+
 ;; EGLOT hooks.
 (add-hook 'c-mode-hook
           (lambda ()
@@ -586,7 +589,9 @@
                                                            "--completion-style=detailed"
                                                            "--pch-storage=memory"
                                                            "--header-insertion=never"
-                                                           "--header-insertion-decorators=0"))))
+                                                           "--header-insertion-decorators=0")))
+  (add-to-list 'eglot-server-programs
+               `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio"))))
 
 (cond ((string= system-type "darwin")
        (with-eval-after-load 'eglot
