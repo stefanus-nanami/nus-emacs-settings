@@ -31,6 +31,7 @@
  '(dynamic-completion-mode t)
  '(eglot-connect-timeout 180)
  '(eglot-ignored-server-capabilities '(:inlayHintProvider))
+ '(eglot-prefer-plaintext t)
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
  '(exec-path-from-shell-arguments nil)
