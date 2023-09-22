@@ -29,6 +29,8 @@
        (cond ((string= system-type "gnu/linux")
               (add-to-list 'default-frame-alist `(height . 85)))
              (t
+              (add-to-list 'default-frame-alist `(left . 704))
+              (add-to-list 'default-frame-alist `(top . 53))
               (add-to-list 'default-frame-alist `(height . 97))))
        (add-to-list 'default-frame-alist `(width . 140)))
       (t

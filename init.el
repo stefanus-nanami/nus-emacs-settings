@@ -578,6 +578,10 @@
           (lambda ()
             (flymake-mode -1)))
 
+(add-hook 'eldoc-box-buffer-hook
+          (lambda ()
+            (add-to-list 'default-frame-alist '(alpha . (95 . 95)))))
+
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))
