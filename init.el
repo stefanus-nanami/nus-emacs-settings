@@ -472,21 +472,30 @@
 (add-to-list 'interpreter-mode-alist '("node" . js-mode))
 
 ;; No treesit for now...
-(add-to-list 'auto-mode-alist
-             '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c-or-c++-mode))
-(add-to-list 'auto-mode-alist
-             '("\\(\\.[ci]\\|\\.lex\\|\\.y\\(acc\\)?\\)\\'" . c-mode))
-(add-to-list 'auto-mode-alist '("\\.x[pb]m\\'" . c-mode))
+(cond ((string= system-type "windows-nt")
+       (add-to-list 'auto-mode-alist
+                    '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
+       (add-to-list 'auto-mode-alist '("\\.h\\'" . c-or-c++-mode))
+       (add-to-list 'auto-mode-alist
+                    '("\\(\\.[ci]\\|\\.lex\\|\\.y\\(acc\\)?\\)\\'" . c-mode))
+       (add-to-list 'auto-mode-alist '("\\.x[pb]m\\'" . c-mode)))
+      (t
+       (add-to-list 'major-mode-remap-alist '(csharp-mode . csharp-ts-mode))
+       (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
+       (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))))
+
+(setq-default c-ts-mode-indent-style 'bsd)
 
 (cond ((string= localhost-name "Lyka")
        (setq-default tab-width 2)
        (setq-default indent-tabs-mode nil)
-       (setq-default c-basic-offset 2))
+       (setq-default c-basic-offset 2)
+       (setq-default c-ts-mode-indent-offset 2))
       (t
        (setq-default tab-width 4)
        (setq-default indent-tabs-mode t)
-       (setq-default c-basic-offset 4)))
+       (setq-default c-basic-offset 4)
+       (setq-default c-ts-mode-indent-offset 4)))
 
 ;; C offsets.
 (setq-default c-offsets-alist
@@ -559,6 +568,17 @@
 (add-hook 'eldoc-mode-hook
           (lambda ()
             (eldoc-box-hover-mode -1)))
+
+(add-hook 'c++-ts-mode-hook
+          (lambda ()
+            (setq-local current-indent-rules
+                        (alist-get 'cpp treesit-simple-indent-rules))
+            (add-to-list 'current-indent-rules '((node-is "case_statement") parent-bol 0))
+            (add-to-list 'current-indent-rules '((parent-is "case_statement") parent-bol c-ts-mode-indent-offset))
+            (add-to-list 'current-indent-rules '((parent-is "else_clause") parent-bol 0))
+            (add-to-list 'current-indent-rules '((node-is "field_initializer") first-sibling 2))
+            (add-to-list 'current-indent-rules '((node-is "field_initializer_list") parent-bol c-ts-mode-indent-offset))
+            (setf (alist-get 'cpp treesit-simple-indent-rules) current-indent-rules)))
 
 ;; EGLOT hooks.
 (add-hook 'c-mode-hook
