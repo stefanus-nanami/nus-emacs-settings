@@ -89,7 +89,7 @@
  '(font-lock-doc-face ((t (:foreground "slate gray" :inherit font-lock-comment-face))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(hl-line ((t (:extend t :background "#202040"))))
- '(line-number ((t (:inherit default :foreground "PaleVioletRed4" :slant italic))))
+ '(line-number ((t (:weight normal :foreground "PaleVioletRed4" :background "#202040" :inherit default))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gainsboro" :weight bold))))
  '(line-number-major-tick ((t (:inherit line-number :foreground "PaleVioletRed1" :weight bold))))
  '(line-number-minor-tick ((t (:inherit line-number :foreground "PaleVioletRed3"))))
@@ -209,6 +209,7 @@
           "\\`\\*company"
           "\\`\\*Compile-Log"
           "\\`\\*Customize"
+          "\\`\\*Emoji"
           "\\`\\*Async-native-compile-log"
           "\\`\\*Packages"
           "\\`\\*Warnings"
