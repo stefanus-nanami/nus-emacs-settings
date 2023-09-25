@@ -27,7 +27,6 @@
  '(display-line-numbers-major-tick 50)
  '(display-line-numbers-minor-tick 10)
  '(display-line-numbers-width 5)
- '(doom-themes-enable-italic nil)
  '(dynamic-completion-mode t)
  '(eglot-connect-timeout 180)
  '(eglot-ignored-server-capabilities '(:inlayHintProvider))
@@ -83,6 +82,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(doom-modeline-bar-inactive ((t (:background "#6f066c"))))
  '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
  '(font-lock-builtin-face ((t (:foreground "DeepSkyBlue3"))))
  '(font-lock-comment-face ((t (:foreground "DimGrey"))))
@@ -136,6 +136,7 @@
 (use-package doom-modeline
   :ensure t
   :config
+  (setq doom-modeline-height 23)
   (doom-modeline-mode 1))
 
 (when (display-graphic-p)
@@ -324,10 +325,9 @@
   :ensure t)
 
 (use-package doom-themes
-  :ensure t)
-
-(use-package doom-modeline
-  :ensure t)
+  :ensure t
+  :config
+  (setq doom-themes-enable-italic nil))
 
 (use-package lua-mode
   :ensure t)
