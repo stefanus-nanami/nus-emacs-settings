@@ -32,7 +32,6 @@
  '(electric-pair-mode t)
  '(epa-file-cache-passphrase-for-symmetric-encryption t)
  '(exec-path-from-shell-arguments nil)
- '(global-display-fill-column-indicator-mode t)
  '(global-hl-line-mode t)
  '(gnus-inhibit-startup-message t)
  '(gnus-thread-sort-functions
@@ -526,7 +525,8 @@
 (add-hook 'prog-mode-hook
           (lambda ()
             (whitespace-toggle-options 'trailing)
-            (display-line-numbers-mode)))
+            (display-line-numbers-mode)
+            (display-fill-column-indicator-mode 1)))
 
 (add-hook 'js-mode-hook
           (lambda ()
@@ -564,7 +564,9 @@
 
 (add-hook 'markdown-mode-hook
           (lambda ()
-            (setq fill-column 100)))
+            (setq display-fill-column-indicator-column 100)
+            (setq fill-column 100)
+            (global-display-fill-column-indicator-mode 1)))
 
 (add-hook 'eldoc-mode-hook
           (lambda ()
