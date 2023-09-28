@@ -409,6 +409,15 @@
 (bind-key "M-F" 'forward-word)
 (bind-key "M-B" 'backward-word)
 
+(bind-key "M-<up>" (lambda (&optional arg)
+                     "Move 5*arg lines up."
+                     (interactive "^p")
+                     (previous-line (* (or arg 1) 5))))
+(bind-key "M-<down>" (lambda (&optional arg)
+                     "Move 5*arg lines up."
+                     (interactive "^p")
+                     (next-line (* (or arg 1) 5))))
+
 ;; Binding LSP related keys.
 (bind-keys ("<f12>" . xref-find-definitions)
            ("C-<f12>" . xref-find-references))
