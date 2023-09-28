@@ -566,7 +566,7 @@
           (lambda ()
             (setq display-fill-column-indicator-column 100)
             (setq fill-column 100)
-            (global-display-fill-column-indicator-mode 1)))
+            (display-fill-column-indicator-mode 1)))
 
 (add-hook 'eldoc-mode-hook
           (lambda ()
