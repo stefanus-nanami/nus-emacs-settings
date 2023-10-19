@@ -378,8 +378,18 @@
              pixel-scroll-precision-mode t
              pixel-scroll-precision-use-momentum t)
        (pixel-scroll-mode t)
-       (bind-key "C-v" 'pixel-scroll-interpolate-down)
-       (bind-key "M-v" 'pixel-scroll-interpolate-up)))
+       (defun interpolate-page-up (&optional arg)
+         "Interpolate page up."
+         (interactive "^p")
+         (dotimes (or arg 1) (pixel-scroll-interpolate-up)))
+       (defun interpolate-page-down (&optional arg)
+         "Interpolate page down."
+         (interactive "^p")
+         (dotimes (or arg 1) (pixel-scroll-interpolate-down)))
+       (bind-key "C-v" 'interpolate-page-down)
+       (bind-key "M-v" 'interpolate-page-up)
+       (bind-key "<next>" 'interpolate-page-down)
+       (bind-key "<prior>" 'interpolate-page-up)))
 
 ;; Undo/redo.
 (unbind-key "C-_")
@@ -390,9 +400,8 @@
 (bind-key "C-|" 'undo-redo)
 (bind-key "s-Z" 'undo-redo)
 
-(unbind-key "C-<prior>")
-(unbind-key "C-<next>")
-
+(unbind-key "C-M-S-v")
+(unbind-key "C-M-v")
 (bind-key "M-[" 'scroll-other-window-down)
 (bind-key "M-]" 'scroll-other-window)
 
@@ -414,6 +423,24 @@
 (bind-key "C-M-b" 'backward-sexp)
 (bind-key "C-M-<backspace>" 'backward-kill-sexp)
 (bind-key "C-M-<delete>" 'kill-sexp)
+
+(bind-key "C-<prior>" (lambda (&optional arg)
+                        "Scroll arg lines down."
+                        (interactive "^p")
+                        (pixel-scroll-down (or arg 1))))
+(bind-key "C-<next>" (lambda (&optional arg)
+                       "Scroll arg lines up."
+                       (interactive "^p")
+                       (pixel-scroll-up (or arg 1))))
+
+(bind-key "C-M-<prior>" (lambda (&optional arg)
+                          "Scroll 5*arg lines down."
+                          (interactive "^p")
+                          (pixel-scroll-down (* (or arg 1) 5))))
+(bind-key "C-M-<next>" (lambda (&optional arg)
+                         "Scroll 5*arg lines up."
+                         (interactive "^p")
+                         (pixel-scroll-up (* (or arg 1) 5))))
 
 (bind-key "M-<up>" (lambda (&optional arg)
                      "Move 5*arg lines up."
