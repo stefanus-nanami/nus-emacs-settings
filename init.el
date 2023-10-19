@@ -413,7 +413,7 @@
 (bind-key "C-M-f" 'forward-sexp)
 (bind-key "C-M-b" 'backward-sexp)
 (bind-key "C-M-<backspace>" 'backward-kill-sexp)
-(bind-key "C-M-<delete>" 'backward-kill-sexp)
+(bind-key "C-M-<delete>" 'kill-sexp)
 
 (bind-key "M-<up>" (lambda (&optional arg)
                      "Move 5*arg lines up."
