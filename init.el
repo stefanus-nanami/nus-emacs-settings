@@ -398,16 +398,17 @@
 
 (bind-key "C-c k" 'kill-this-buffer)
 
-(unbind-key "C-M-<backspace>")
-(unbind-key "C-M-<delete>")
-(bind-key "C-<backspace>" 'backward-kill-sexp)
-
 (bind-key "C-c l" 'duplicate-dwim)
 
 (bind-key "M-f" 'forward-to-word)
 (bind-key "M-b" 'backward-to-word)
-(bind-key "M-F" 'forward-word)
-(bind-key "M-B" 'backward-word)
+(bind-key "M-<right>" 'forward-to-word)
+(bind-key "M-<left>" 'backward-to-word)
+
+(bind-key "C-M-f" 'forward-sexp)
+(bind-key "C-M-b" 'backward-sexp)
+(bind-key "C-M-<backspace>" 'backward-kill-sexp)
+(bind-key "C-M-<delete>" 'backward-kill-sexp)
 
 (bind-key "M-<up>" (lambda (&optional arg)
                      "Move 5*arg lines up."
@@ -507,22 +508,22 @@
        (setq-default c-ts-mode-indent-offset 4)))
 
 ;; C offsets.
-(setq-default c-offsets-alist
-              '((brace-list-open . 0)
-                (substatement-open . 0)))
+(setq c-offsets-alist
+      '((brace-list-open . 0)
+        (substatement-open . 0)))
 
-(setq-default c-hanging-braces-alist
-              '((block-close . c-snug-do-while)
-                (statement-cont)
-                (brace-list-open)
-                (brace-entry-open)
-                (extern-lang-open after)
-                (namespace-open after)
-                (module-open after)
-                (composition-open after)
-                (inexpr-class-open after)
-                (inexpr-class-close before)
-                (arglist-cont-nonempty)))
+(setq c-hanging-braces-alist
+      '((block-close . c-snug-do-while)
+        (statement-cont)
+        (brace-list-open)
+        (brace-entry-open)
+        (extern-lang-open after)
+        (namespace-open after)
+        (module-open after)
+        (composition-open after)
+        (inexpr-class-open after)
+        (inexpr-class-close before)
+        (arglist-cont-nonempty)))
 
 (setq c-auto-align-backslashes nil)
 
@@ -597,6 +598,7 @@
             (cond ((eq major-mode 'hlsl-mode))
                   (t
                    (eglot-ensure)))))
+
 (add-hook 'c++-mode-hook 'eglot-ensure)
 (add-hook 'objc-mode-hook 'eglot-ensure)
 (add-hook 'swift-mode-hook 'eglot-ensure)
