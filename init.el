@@ -49,7 +49,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
+   '(ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -220,9 +220,11 @@
           "\\`\\*sourcekit-ls"
           "\\`\\*projectile"
           "\\`\\*ag"
-          "\\`\\*eldoc"))
+          "\\`\\*eldoc"
+          "\\`\\*ellama"))
   (setq helm-source-names-using-follow '("Helm Xref"))
-  (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"))
+  (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"
+                                        "\\`\\*ellama\\*$"))
 
   :bind (("C-c g" . helm-do-ag)
          ("C-c b" . helm-do-ag-buffers)
@@ -346,6 +348,11 @@
 
 (use-package json-mode
   :ensure t)
+
+(use-package ellama
+  :ensure t
+  :config
+  (setq ellama-model "llama2"))
 
 (when (executable-find "w3m")
   (require 'w3m-load))
@@ -608,7 +615,8 @@
           (lambda ()
             (setq display-fill-column-indicator-column 100)
             (setq fill-column 100)
-            (display-fill-column-indicator-mode 1)))
+            (display-fill-column-indicator-mode 1)
+            (visual-line-mode 1)))
 
 (add-hook 'eldoc-mode-hook
           (lambda ()
