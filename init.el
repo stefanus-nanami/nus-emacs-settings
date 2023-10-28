@@ -58,7 +58,7 @@
  '(smtpmail-smtp-service 587)
  '(swift-mode:basic-offset 2)
  '(truncate-lines t)
- '(warning-suppress-types '((emacs)))
+ '(warning-suppress-types '((emacs comp)))
  '(whitespace-display-mappings
    '((space-mark 32
                  [183]
@@ -351,8 +351,12 @@
 
 (use-package ellama
   :ensure t
-  :config
-  (setq ellama-model "llama2"))
+  :init
+  (require 'llm-ollama)
+  (setopt ellama-provider
+          (make-llm-ollama
+           :chat-model "llama2"
+           :embedding-model "codellama")))
 
 (when (executable-find "w3m")
   (require 'w3m-load))
