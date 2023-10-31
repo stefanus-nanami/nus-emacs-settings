@@ -687,6 +687,15 @@
 
 (winner-mode 1)
 
+;; Ellama instant buffer workaround.
+(with-eval-after-load 'ellama
+  (defun ellama-instant (prompt)
+    "Prompt ellama for PROMPT to reply instantly."
+    (let ((buffer (get-buffer-create (make-temp-name ellama-buffer))))
+      (display-buffer buffer)
+      (with-current-buffer buffer (funcall ellama-buffer-mode))
+      (ellama-stream prompt :buffer buffer (point-min)))))
+
 (provide 'init)
 ;;; init.el ends here
 
