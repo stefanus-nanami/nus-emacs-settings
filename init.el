@@ -49,7 +49,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
+   '(markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -348,6 +348,13 @@
 
 (use-package json-mode
   :ensure t)
+
+(use-package markdown-mode
+  :ensure t
+  :mode
+  ("README\\.md\\'" . gfm-mode)
+  :init
+  (setq markdown-command "multimarkdown"))
 
 (use-package ellama
   :ensure t
