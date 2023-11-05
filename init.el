@@ -477,18 +477,13 @@
            ([remap execute-extended-command] . helm-M-x)
            ([remap occur] . helm-occur)
            ([remap list-buffers] . helm-buffers-list)
-           ([remap apropos-command] . helm-apropos))
+           ([remap apropos-command] . helm-apropos)
+           ([remap complete] . helm-company))
 
-(unbind-key "C-c C-c" c-mode-map)
-(unbind-key "C-c C-c" c++-mode-map)
-(unbind-key "C-c C-c" python-mode-map)
-(bind-key "C-c C-c" 'comment-or-uncomment-region)
+(bind-keys ([remap comment-region] . comment-or-uncomment-region))
 
 (bind-keys :map projectile-mode-map
            ("C-c p" . projectile-command-map))
-
-;; Completions.
-(bind-key [remap complete] 'helm-company)
 
 ;; Replace
 (bind-keys ("C-c r s" . replace-string)
@@ -650,6 +645,9 @@
                   (t
                    (eglot-ensure)))))
 
+(add-hook 'c-ts-mode-hook 'eglot-ensure)
+(add-hook 'c++-ts-mode-hook 'eglot-ensure)
+(add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
 (add-hook 'objc-mode-hook 'eglot-ensure)
 (add-hook 'swift-mode-hook 'eglot-ensure)
@@ -670,15 +668,15 @@
   (add-to-list 'eglot-server-programs
                `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
-               `((c-mode c++-mode c-ts-mode c++ts-mode) . ("clangd"
-                                                           "-j=8"
-                                                           "--log=error"
-                                                           "--background-index"
-                                                           "--clang-tidy"
-                                                           "--completion-style=detailed"
-                                                           "--pch-storage=memory"
-                                                           "--header-insertion=never"
-                                                           "--header-insertion-decorators=0")))
+               `((c-mode c++-mode c-ts-mode c++-ts-mode) . ("clangd"
+                                                            "-j=8"
+                                                            "--log=error"
+                                                            "--background-index"
+                                                            "--clang-tidy"
+                                                            "--completion-style=detailed"
+                                                            "--pch-storage=memory"
+                                                            "--header-insertion=never"
+                                                            "--header-insertion-decorators=0")))
   (add-to-list 'eglot-server-programs
                `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio"))))
 
