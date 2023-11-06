@@ -478,7 +478,8 @@
            ([remap occur] . helm-occur)
            ([remap list-buffers] . helm-buffers-list)
            ([remap apropos-command] . helm-apropos)
-           ([remap complete] . helm-company))
+           ([remap complete] . helm-company)
+           ([remap dabbrev-completion] . helm-dabbrev))
 
 (bind-keys ([remap comment-region] . comment-or-uncomment-region))
 
