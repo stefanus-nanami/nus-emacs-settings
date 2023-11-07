@@ -209,6 +209,7 @@
           "\\`\\*Compile-Log"
           "\\`\\*Customize"
           "\\`\\*Emoji"
+          "\\`\\*Native-compile-Log"
           "\\`\\*Async-native-compile-log"
           "\\`\\*Packages"
           "\\`\\*Warnings"
@@ -237,6 +238,7 @@
           "\\*company"
           "\\*Compile-Log"
           "\\*Customize"
+          "\\*Native-compile-Log"
           "\\*Async-native-compile-log"
           "\\*Packages"
           "\\*Warnings"
@@ -457,8 +459,6 @@
 (unbind-key "M-}")
 (bind-key "M-n" 'forward-paragraph)
 (bind-key "M-p" 'backward-paragraph)
-
-(bind-key "C-c k" 'kill-this-buffer)
 
 (bind-key "C-c l" 'duplicate-dwim)
 
