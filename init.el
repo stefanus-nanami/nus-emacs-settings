@@ -272,6 +272,8 @@
 
 (use-package helm-descbinds
   :ensure t
+  :bind
+  (("M-<f1>" . helm-descbinds))
   :config
   (helm-descbinds-mode))
 
