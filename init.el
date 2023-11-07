@@ -192,7 +192,9 @@
         helm-commands-using-frame '(completion-at-point helm-company)
         helm-ff-file-name-history-use-recentf t
         helm-recentf-fuzzy-match t
-        helm-display-header-line nil)
+        helm-display-header-line nil
+        helm-dabbrev-cycle-threshold 0
+        helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^")
   (setq helm-boring-buffer-regexp-list
         '("\\` "
           "\\`\\*helm"
@@ -222,14 +224,41 @@
           "\\`\\*ag"
           "\\`\\*eldoc"
           "\\`\\*ellama"))
+  (setq helm-dabbrev-ignored-buffers-regexps
+        '("\\*helm"
+          "\\*Messages"
+          "\\*Echo Area"
+          "\\*Buffer List"
+          "\\*lsp"
+          "\\*clangd"
+          "\\*Flymake"
+          "\\*gcc"
+          "\\*omnisharp"
+          "\\*company"
+          "\\*Compile-Log"
+          "\\*Customize"
+          "\\*Async-native-compile-log"
+          "\\*Packages"
+          "\\*Warnings"
+          "\\*Colors"
+          "\\*EGLOT"
+          "\\*pylsp"
+          "\\*clang"
+          "\\*tree-sitter"
+          "\\*csharp-ls"
+          "\\*json-ls"
+          "\\*sourcekit-ls"
+          "\\*projectile"
+          "\\*ag"
+          "\\*eldoc"
+          "\\*ellama"))
   (setq helm-source-names-using-follow '("Helm Xref"))
   (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"
                                         "\\`\\*ellama\\*$"))
-
   :bind (("C-c g" . helm-do-ag)
          ("C-c b" . helm-do-ag-buffers)
          ("<f2>" . helm-mini)
-         ("<f8>" . helm-browse-project)
+         ("<f7>" . helm-occur)
          ("<f5>" . helm-tree-sitter-or-imenu)
          ("C-<f5>" . helm-imenu-in-all-buffers)
          ("<f6>" . helm-show-kill-ring)
@@ -322,7 +351,8 @@
 (use-package magit
   :ensure t
   :init
-  :bind (("C-c m s" . magit-status)
+  :bind (("<f8>" . magit)
+         ("C-c m s" . magit-status)
          ("C-c m d" . magit-dispatch)
          ("C-c m f" . magit-file-dispatch)))
 
@@ -478,8 +508,7 @@
            ([remap occur] . helm-occur)
            ([remap list-buffers] . helm-buffers-list)
            ([remap apropos-command] . helm-apropos)
-           ([remap complete] . helm-company)
-           ([remap dabbrev-completion] . helm-dabbrev))
+           ([remap complete] . helm-company))
 
 (bind-keys ([remap comment-region] . comment-or-uncomment-region))
 
