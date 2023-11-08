@@ -53,7 +53,6 @@
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
- '(sentence-end-base "[.?!…‽;:{][]\"'”’)}»›]*")
  '(smtpmail-default-smtp-server "smtp.gmail.com")
  '(smtpmail-smtp-service 587)
  '(swift-mode:basic-offset 2)
@@ -461,6 +460,8 @@
 (unbind-key "M-}")
 (bind-key "M-n" 'forward-paragraph)
 (bind-key "M-p" 'backward-paragraph)
+
+(bind-key "C-<f4>" 'kill-this-buffer)
 
 (bind-key "C-c l" 'duplicate-dwim)
 
