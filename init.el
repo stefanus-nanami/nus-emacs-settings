@@ -265,7 +265,6 @@
          ("<f6>" . helm-show-kill-ring)
          ("C-<f6>" . helm-all-mark-rings)
          ("M-s g" . helm-occur-visible-buffers))
-
   :config
   (helm-mode 1))
 
@@ -523,6 +522,14 @@
            ("C-c r r" . replace-regexp)
            ("C-c r q" . query-replace-regexp)
            ("C-c r p" . project-query-replace-regexp))
+
+;; Locate
+(cond ((string= system-type "darwin")
+       (setq helm-locate-command "mdfind -name %s %s 2> /dev/null")
+       (setq helm-locate-fuzzy-match nil))
+      ((string= system-type "windows-nt")
+       (setq helm-locate-command "es %s -sort run-count %s")))
+(bind-key "M-<f2>" 'helm-for-files)
 
 (cond ((string= system-type "windows-nt")
        (setq w32-pass-lwindow-to-system nil)
