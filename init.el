@@ -528,7 +528,8 @@
        (setq helm-locate-command "mdfind -name %s %s 2> /dev/null")
        (setq helm-locate-fuzzy-match nil))
       ((string= system-type "windows-nt")
-       (setq helm-locate-command "es %s -sort run-count %s")))
+       (setq helm-locate-command "es -full-path-and-name %s %s")
+       (setq helm-locate-fuzzy-match nil))
 (bind-key "M-<f2>" 'helm-for-files)
 
 (cond ((string= system-type "windows-nt")
