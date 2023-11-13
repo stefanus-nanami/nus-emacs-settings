@@ -98,6 +98,7 @@
  '(tree-sitter-hl-face:property.definition ((t (:inherit font-lock-property-name-face))))
  '(tree-sitter-hl-face:punctuation ((t (:inherit font-lock-bracket-face))))
  '(tree-sitter-hl-face:punctuation.special ((t (:inherit font-lock-misc-punctuation-face))))
+ '(whitespace-missing-newline-at-eof ((t (:inherit whitespace-trailing))))
  '(whitespace-newline ((t (:foreground "gray24"))))
  '(whitespace-space ((t (:inherit whitespace-newline))))
  '(whitespace-tab ((t (:inherit whitespace-newline))))
@@ -529,8 +530,10 @@
        (setq helm-locate-fuzzy-match nil))
       ((string= system-type "windows-nt")
        (setq helm-locate-command "es -full-path-and-name %s %s")
-       (setq helm-locate-fuzzy-match nil))
+       (setq helm-locate-fuzzy-match nil)))
+
 (bind-key "M-<f2>" 'helm-for-files)
+(bind-key "C-<f1>" 'dictionary-search)
 
 (cond ((string= system-type "windows-nt")
        (setq w32-pass-lwindow-to-system nil)
