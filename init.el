@@ -461,7 +461,7 @@
 (bind-key "M-n" 'forward-paragraph)
 (bind-key "M-p" 'backward-paragraph)
 
-(if (string= system-type "windows-nt")
+(if (= os-type os-windows)
     (bind-key "C-<f4>" 'kill-this-buffer))
 
 (bind-key "C-c l" 'duplicate-dwim)
@@ -526,16 +526,16 @@
            ("C-c r p" . project-query-replace-regexp))
 
 ;; Locate
-(cond ((string= system-type "darwin")
+(cond ((= os-type os-macos)
        (setq helm-locate-command "mdfind -name %s %s 2> /dev/null")
        (setq helm-locate-fuzzy-match nil))
-      ((string= system-type "windows-nt")
+      ((= os-type os-windows)
        (setq helm-locate-command "es -full-path-and-name %s %s")
        (setq helm-locate-fuzzy-match nil)))
 
 (bind-key "M-<f2>" 'helm-for-files)
 
-(cond ((string= system-type "darwin")
+(cond ((= os-type os-macos)
        (defun lookup-word-on-macos-dictionary()
          "Lookup word at point in macOS dictionary."
          (interactive)
@@ -544,17 +544,17 @@
       (t
        (bind-key "C-c <f1>" 'dictionary-search)))
 
-(cond ((string= system-type "windows-nt")
+(cond ((= os-type os-windows)
        (setq w32-pass-lwindow-to-system nil)
        (setq w32-lwindow-modifier 'super)
        (setq w32-pass-rwindow-to-system nil)
        (setq w32-rwindow-modifier 'super)
        (setq find-program "C:\\cygwin64\\bin\\find.exe"))
-      ((string= system-type "darwin")
+      ((= os-type os-macos)
        (setq mac-command-modifier 'meta)
        (setq mac-option-modifier 'super)))
 
-(cond ((string= system-type "darwin")
+(cond ((= os-type os-macos)
        (bind-key "M-," 'customize)
        (bind-key "C-s-<f12>" 'scroll-lock-mode)
        (bind-key "s-<up>" 'fw-ops-swap-buffers)
@@ -580,7 +580,7 @@
 (add-to-list 'interpreter-mode-alist '("node" . js-mode))
 
 ;; No treesit for now...
-(cond ((string= system-type "windows-nt")
+(cond ((= os-type os-windows)
        (add-to-list 'auto-mode-alist
                     '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
        (add-to-list 'auto-mode-alist '("\\.h\\'" . c-or-c++-mode))
@@ -734,10 +734,10 @@
   (add-to-list 'eglot-server-programs
                `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio"))))
 
-(cond ((string= system-type "darwin")
-       (with-eval-after-load 'eglot
-         (add-to-list 'eglot-server-programs
-                      `(swift-mode . ("xcrun" "sourcekit-lsp"))))))
+(if (= os-type os-macos)
+    (with-eval-after-load 'eglot
+      (add-to-list 'eglot-server-programs
+                   `(swift-mode . ("xcrun" "sourcekit-lsp")))))
 
 ;; Visualize whitespaces.
 (global-whitespace-mode)

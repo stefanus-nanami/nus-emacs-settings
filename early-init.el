@@ -6,12 +6,27 @@
 (defvar localhost-name)
 (setq localhost-name (nth 0 (split-string (system-name) "\\.")))
 
+;; Define OS type.
+(setq os-unknown 0)
+(setq os-windows 1)
+(setq os-macos 2)
+(setq os-unix 3)
+
+(cond ((string= system-type "windows-nt")
+       (setq os-type os-windows))
+      ((string= system-type "darwin")
+       (setq os-type os-macos))
+      ((string= system-type "gnu/linux")
+       (setq os-type os-macos))
+      (t
+       (setq os-type os-unknown)))
+
 (setq default-frame-alist nil)
 
 ;; No menu bar on Windows.
-(cond ((or (string= system-type "windows-nt") (string= system-type "gnu/linux"))
+(cond ((or (= os-type os-windows) (= os-type os-unix))
        (add-to-list 'default-frame-alist '(menu-bar-lines . 0)))
-      ((string= system-type "darwin")
+      ((= os-type os-macos)
        (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))))
 
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
@@ -26,7 +41,7 @@
        (add-to-list 'default-frame-alist `(width . 130)))
       ((string= localhost-name "CT058231")
        (add-to-list 'default-frame-alist '(font . "Hack-10"))
-       (cond ((string= system-type "gnu/linux")
+       (cond ((= os-type os-unix)
               (add-to-list 'default-frame-alist `(height . 85)))
              (t
               (add-to-list 'default-frame-alist `(left . 20))
