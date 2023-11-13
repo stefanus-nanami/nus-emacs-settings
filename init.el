@@ -262,9 +262,9 @@
          ("<f2>" . helm-mini)
          ("<f7>" . helm-occur)
          ("<f5>" . helm-tree-sitter-or-imenu)
-         ("C-<f5>" . helm-imenu-in-all-buffers)
+         ("M-<f5>" . helm-imenu-in-all-buffers)
          ("<f6>" . helm-show-kill-ring)
-         ("C-<f6>" . helm-all-mark-rings)
+         ("M-<f6>" . helm-all-mark-rings)
          ("M-s g" . helm-occur-visible-buffers))
   :config
   (helm-mode 1))
@@ -461,7 +461,8 @@
 (bind-key "M-n" 'forward-paragraph)
 (bind-key "M-p" 'backward-paragraph)
 
-(bind-key "C-<f4>" 'kill-this-buffer)
+(if (string= system-type "windows-nt")
+    (bind-key "C-<f4>" 'kill-this-buffer))
 
 (bind-key "C-c l" 'duplicate-dwim)
 
@@ -539,9 +540,9 @@
          "Lookup word at point in macOS dictionary."
          (interactive)
          (call-process-shell-command (format "open dict:///%s/" (word-at-point))))
-       (bind-key "C-<f1>" 'lookup-word-on-macos-dictionary))
+       (bind-key "C-c <f1>" 'lookup-word-on-macos-dictionary))
       (t
-       (bind-key "C-<f1>" 'dictionary-search)))
+       (bind-key "C-c <f1>" 'dictionary-search)))
 
 (cond ((string= system-type "windows-nt")
        (setq w32-pass-lwindow-to-system nil)
