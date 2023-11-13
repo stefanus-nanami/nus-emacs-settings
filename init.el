@@ -533,7 +533,15 @@
        (setq helm-locate-fuzzy-match nil)))
 
 (bind-key "M-<f2>" 'helm-for-files)
-(bind-key "C-<f1>" 'dictionary-search)
+
+(cond ((string= system-type "darwin")
+       (defun lookup-word-on-macos-dictionary()
+         "Lookup word at point in macOS dictionary."
+         (interactive)
+         (call-process-shell-command (format "open dict:///%s/" (word-at-point))))
+       (bind-key "C-<f1>" 'lookup-word-on-macos-dictionary))
+      (t
+       (bind-key "C-<f1>" 'dictionary-search)))
 
 (cond ((string= system-type "windows-nt")
        (setq w32-pass-lwindow-to-system nil)
