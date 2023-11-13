@@ -8,6 +8,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ad-redefinition-action 'accept)
  '(auto-hscroll-mode 'current-line)
  '(backup-directory-alist '(("" . "~/.emacs.d/backups")))
  '(blink-cursor-mode nil)
