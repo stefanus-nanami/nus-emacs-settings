@@ -50,7 +50,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
+   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
  '(recentf-auto-cleanup 300)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
@@ -466,18 +466,21 @@
 (unbind-key "M-}")
 (bind-key "M-n" 'forward-paragraph)
 (bind-key "M-p" 'backward-paragraph)
-(bind-key "C-s-<right>" 'forward-word)
-(bind-key "C-s-<left>" 'backward-word)
+
+(bind-keys ("C-s-<right>" . forward-word)
+           ("C-." . forward-word)
+           ("C-s-<left>" . backward-word)
+           ("C-," . backward-word))
+
+(bind-keys ("M-f" . forward-to-word)
+           ("M-<right>" . forward-to-word)
+           ("M-b" . backward-to-word)
+           ("M-<left>" . backward-to-word))
 
 (if (= os-type os-windows)
     (bind-key "C-<f4>" 'kill-this-buffer))
 
 (bind-key "C-c l" 'duplicate-dwim)
-
-(bind-key "M-f" 'forward-to-word)
-(bind-key "M-b" 'backward-to-word)
-(bind-key "M-<right>" 'forward-to-word)
-(bind-key "M-<left>" 'backward-to-word)
 
 (bind-key "C-M-f" 'forward-sexp)
 (bind-key "C-M-b" 'backward-sexp)
