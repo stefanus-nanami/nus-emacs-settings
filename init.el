@@ -399,6 +399,11 @@
            :chat-model "llama2"
            :embedding-model "codellama")))
 
+(use-package jaword
+  :ensure t
+  :init
+  (global-jaword-mode))
+
 (when (executable-find "w3m")
   (require 'w3m-load))
 
@@ -461,6 +466,8 @@
 (unbind-key "M-}")
 (bind-key "M-n" 'forward-paragraph)
 (bind-key "M-p" 'backward-paragraph)
+(bind-key "C-s-<right>" 'forward-word)
+(bind-key "C-s-<left>" 'backward-word)
 
 (if (= os-type os-windows)
     (bind-key "C-<f4>" 'kill-this-buffer))
@@ -742,8 +749,6 @@
 
 ;; Visualize whitespaces.
 (global-whitespace-mode)
-
-(global-subword-mode 1)
 
 (winner-mode 1)
 
