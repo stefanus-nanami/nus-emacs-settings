@@ -8,15 +8,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(backup-directory-alist '(("" . "~/.emacs.d/backups")))
- '(current-language-environment "Japanese")
- '(custom-enabled-themes '(doom-outrun-electric))
+ '(custom-enabled-themes '(doom-tokyo-night))
  '(custom-safe-themes
-   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" "d397a4a1de18fdc62c4a386592c453fde5a7028d9e9ab3fc3ae97196a83faea3" "7cca2c451baf1b20a0ce37a0343e6d858c85c7f9c978818879946ee3b74dcd25" "a516ba1fcae2b12f6c981f41d43c3648dff51fe75397ddabeae51aeb27bb99e2" "36f5df6a61d6269ab289ed86f93d4def909aa8c5d2c3e3f7507a7e22924e03c0" "3de5c795291a145452aeb961b1151e63ef1cb9565e3cdbd10521582b5fd02e9a" "ffafb0e9f63935183713b204c11d22225008559fa62133a69848835f4f4a758c" "0c83e0b50946e39e237769ad368a08f2cd1c854ccbcd1a01d39fdce4d6f86478" "4b6cc3b60871e2f4f9a026a5c86df27905fb1b0e96277ff18a76a39ca53b82e1" "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" "be84a2e5c70f991051d4aaf0f049fa11c172e5d784727e0b525565bb1533ec78" default))
- '(package-archives
-   '(("melpa-stable" . "https://stable.melpa.org/packages/")
-     ("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa" . "https://melpa.org/packages/")))
+   '("3de5c795291a145452aeb961b1151e63ef1cb9565e3cdbd10521582b5fd02e9a" default))
  '(package-selected-packages
    '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
 
@@ -25,20 +19,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(doom-modeline-bar-inactive ((t (:background "#6f066c"))))
  '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
- '(font-lock-builtin-face ((t (:foreground "DeepSkyBlue3"))))
- '(font-lock-comment-face ((t (:foreground "DimGrey"))))
- '(font-lock-doc-face ((t (:foreground "slate gray" :inherit font-lock-comment-face))))
+ '(font-lock-keyword-face ((t (:foreground "#bb9af7" :weight bold))))
+ '(font-lock-type-face ((t (:foreground "#c0caf5" :weight bold))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(hl-line ((t (:extend t :background "#202040"))))
  '(line-number ((t (:weight normal :foreground "PaleVioletRed4" :background "#202040" :inherit default))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gainsboro" :weight bold))))
  '(line-number-major-tick ((t (:inherit line-number :foreground "PaleVioletRed1" :weight bold))))
  '(line-number-minor-tick ((t (:inherit line-number :foreground "PaleVioletRed3"))))
- '(mode-line ((t (:background "dark slate blue" :box nil))))
- '(mode-line-inactive ((t (:background "dark slate blue" :foreground "light slate blue" :box nil))))
- '(region ((t (:extend t :background "#4d377b"))))
+ '(mode-line ((t (:background "RoyalBlue4" :box nil))))
+ '(mode-line-inactive ((t (:background "gray20" :foreground "#9099c0" :box nil))))
  '(tree-sitter-hl-face:function.call ((t (:inherit font-lock-function-call-face))))
  '(tree-sitter-hl-face:operator ((t (:inherit default))))
  '(tree-sitter-hl-face:property ((t (:weight bold :inherit font-lock-property-use-face))))
@@ -58,6 +49,14 @@
 
 (add-to-list 'load-path "~/.emacs.d/local")
 (add-to-list 'load-path "~/.emacs.d/emacs-w3m")
+
+;; Environment.
+(setq-default backup-directory-alist '(("" . "~/.emacs.d/backups")))
+(setq-default current-language-environment "Japanese")
+(setq-default package-archives
+              '(("melpa-stable" . "https://stable.melpa.org/packages/")
+                ("gnu" . "https://elpa.gnu.org/packages/")
+                ("melpa" . "https://melpa.org/packages/")))
 
 ;; Completion.
 (setq-default dabbrev-case-replace nil)
