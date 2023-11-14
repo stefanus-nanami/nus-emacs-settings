@@ -10,9 +10,9 @@
  ;; If there is more than one, they won't work right.
  '(backup-directory-alist '(("" . "~/.emacs.d/backups")))
  '(current-language-environment "Japanese")
- '(custom-enabled-themes '(doom-tokyo-night))
+ '(custom-enabled-themes '(doom-outrun-electric))
  '(custom-safe-themes
-   '("d397a4a1de18fdc62c4a386592c453fde5a7028d9e9ab3fc3ae97196a83faea3" "7cca2c451baf1b20a0ce37a0343e6d858c85c7f9c978818879946ee3b74dcd25" "a516ba1fcae2b12f6c981f41d43c3648dff51fe75397ddabeae51aeb27bb99e2" "36f5df6a61d6269ab289ed86f93d4def909aa8c5d2c3e3f7507a7e22924e03c0" "3de5c795291a145452aeb961b1151e63ef1cb9565e3cdbd10521582b5fd02e9a" "ffafb0e9f63935183713b204c11d22225008559fa62133a69848835f4f4a758c" "0c83e0b50946e39e237769ad368a08f2cd1c854ccbcd1a01d39fdce4d6f86478" "4b6cc3b60871e2f4f9a026a5c86df27905fb1b0e96277ff18a76a39ca53b82e1" "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" "be84a2e5c70f991051d4aaf0f049fa11c172e5d784727e0b525565bb1533ec78" default))
+   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" "d397a4a1de18fdc62c4a386592c453fde5a7028d9e9ab3fc3ae97196a83faea3" "7cca2c451baf1b20a0ce37a0343e6d858c85c7f9c978818879946ee3b74dcd25" "a516ba1fcae2b12f6c981f41d43c3648dff51fe75397ddabeae51aeb27bb99e2" "36f5df6a61d6269ab289ed86f93d4def909aa8c5d2c3e3f7507a7e22924e03c0" "3de5c795291a145452aeb961b1151e63ef1cb9565e3cdbd10521582b5fd02e9a" "ffafb0e9f63935183713b204c11d22225008559fa62133a69848835f4f4a758c" "0c83e0b50946e39e237769ad368a08f2cd1c854ccbcd1a01d39fdce4d6f86478" "4b6cc3b60871e2f4f9a026a5c86df27905fb1b0e96277ff18a76a39ca53b82e1" "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" "be84a2e5c70f991051d4aaf0f049fa11c172e5d784727e0b525565bb1533ec78" default))
  '(package-archives
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
