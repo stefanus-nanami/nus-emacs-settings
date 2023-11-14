@@ -8,71 +8,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ad-redefinition-action 'accept)
- '(auto-hscroll-mode 'current-line)
  '(backup-directory-alist '(("" . "~/.emacs.d/backups")))
- '(blink-cursor-mode nil)
- '(column-number-mode t)
- '(completion-search-distance nil)
- '(completion-styles '(helm basic partial-completion emacs22))
  '(current-language-environment "Japanese")
  '(custom-enabled-themes '(doom-tokyo-night))
  '(custom-safe-themes
-   '("36f5df6a61d6269ab289ed86f93d4def909aa8c5d2c3e3f7507a7e22924e03c0" "3de5c795291a145452aeb961b1151e63ef1cb9565e3cdbd10521582b5fd02e9a" "ffafb0e9f63935183713b204c11d22225008559fa62133a69848835f4f4a758c" "0c83e0b50946e39e237769ad368a08f2cd1c854ccbcd1a01d39fdce4d6f86478" "4b6cc3b60871e2f4f9a026a5c86df27905fb1b0e96277ff18a76a39ca53b82e1" "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" "be84a2e5c70f991051d4aaf0f049fa11c172e5d784727e0b525565bb1533ec78" default))
- '(dabbrev-case-replace nil)
- '(display-fill-column-indicator-column 100)
- '(display-line-numbers-major-tick 50)
- '(display-line-numbers-minor-tick 10)
- '(display-line-numbers-width 5)
- '(dynamic-completion-mode t)
- '(eglot-connect-timeout 300)
- '(eglot-events-buffer-size 0)
- '(eglot-ignored-server-capabilities '(:inlayHintProvider))
- '(eglot-prefer-plaintext t)
- '(eglot-sync-connect nil)
- '(electric-pair-mode t)
- '(epa-file-cache-passphrase-for-symmetric-encryption t)
- '(exec-path-from-shell-arguments nil)
- '(global-hl-line-mode t)
- '(gnus-inhibit-startup-message t)
- '(gnus-thread-sort-functions
-   '(gnus-thread-sort-by-most-recent-date
-     (not gnus-thread-sort-by-number)))
- '(gnus-use-cache t)
- '(inhibit-startup-screen t)
- '(js-indent-level 2)
- '(lua-indent-level 2)
- '(max-lisp-eval-depth 65536)
- '(message-send-mail-function 'smtpmail-send-it)
- '(mm-text-html-renderer 'w3m)
+   '("d397a4a1de18fdc62c4a386592c453fde5a7028d9e9ab3fc3ae97196a83faea3" "7cca2c451baf1b20a0ce37a0343e6d858c85c7f9c978818879946ee3b74dcd25" "a516ba1fcae2b12f6c981f41d43c3648dff51fe75397ddabeae51aeb27bb99e2" "36f5df6a61d6269ab289ed86f93d4def909aa8c5d2c3e3f7507a7e22924e03c0" "3de5c795291a145452aeb961b1151e63ef1cb9565e3cdbd10521582b5fd02e9a" "ffafb0e9f63935183713b204c11d22225008559fa62133a69848835f4f4a758c" "0c83e0b50946e39e237769ad368a08f2cd1c854ccbcd1a01d39fdce4d6f86478" "4b6cc3b60871e2f4f9a026a5c86df27905fb1b0e96277ff18a76a39ca53b82e1" "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" "be84a2e5c70f991051d4aaf0f049fa11c172e5d784727e0b525565bb1533ec78" default))
  '(package-archives
    '(("melpa-stable" . "https://stable.melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired))
- '(recentf-auto-cleanup 300)
- '(recentf-mode t)
- '(scroll-bar-mode nil)
- '(smtpmail-default-smtp-server "smtp.gmail.com")
- '(smtpmail-smtp-service 587)
- '(swift-mode:basic-offset 2)
- '(truncate-lines t)
- '(warning-suppress-types '((emacs comp)))
- '(whitespace-display-mappings
-   '((space-mark 32
-                 [183]
-                 [46])
-     (space-mark 160
-                 [164]
-                 [95])
-     (newline-mark 10
-                   [8626 10])
-     (tab-mark 9
-               [187 9]
-               [92 9])))
- '(whitespace-style
-   '(face trailing tabs newline missing-newline-at-eof empty tab-mark newline-mark)))
+   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -112,6 +58,75 @@
 
 (add-to-list 'load-path "~/.emacs.d/local")
 (add-to-list 'load-path "~/.emacs.d/emacs-w3m")
+
+;; Completion.
+(setq-default dabbrev-case-replace nil)
+(dynamic-completion-mode 1)
+
+;; Display.
+(setq-default display-fill-column-indicator-column 100)
+(setq-default display-line-numbers-major-tick 50)
+(setq-default display-line-numbers-minor-tick 10)
+(setq-default display-line-numbers-width 5)
+
+;; Eglot.
+(setq-default eglot-connect-timeout 300)
+(setq-default eglot-events-buffer-size 0)
+(setq-default eglot-ignored-server-capabilities '(:inlayHintProvider))
+(setq-default eglot-prefer-plaintext t)
+(setq-default eglot-sync-connect nil)
+
+;; GNUS
+(setq-default gnus-inhibit-startup-message t)
+(setq-default gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date
+                                           (not gnus-thread-sort-by-number)))
+(setq-default gnus-use-cache t)
+
+;; History file list.
+(setq-default recentf-auto-cleanup 300)
+(recentf-mode t)
+
+;; Mail.
+(setq-default smtpmail-default-smtp-server "smtp.gmail.com")
+(setq-default smtpmail-smtp-service 587)
+
+;; Whitespace.
+(setq-default whitespace-display-mappings '((space-mark 32 [183] [46])
+                                            (space-mark 160 [164] [95])
+                                            (newline-mark 10 [8626 10])
+                                            (tab-mark 9 [187 9] [92 9])))
+(setq-default whitespace-style '(face
+                                 trailing
+                                 tabs
+                                 newline
+                                 missing-newline-at-eof
+                                 empty
+                                 tab-mark
+                                 newline-mark))
+
+;; Miscellaneous variables.
+(setq-default ad-redefinition-action 'accept)
+(setq-default auto-hscroll-mode 'current-line)
+(setq-default blink-cursor-mode nil)
+(setq-default epa-file-cache-passphrase-for-symmetric-encryption t)
+(setq-default exec-path-from-shell-arguments nil)
+(setq-default inhibit-startup-screen t)
+(setq-default js-indent-level 2)
+(setq-default lua-indent-level 2)
+(setq-default max-lisp-eval-depth 65536)
+(setq-default message-send-mail-function 'smtpmail-send-it)
+(setq-default mm-text-html-renderer 'w3m)
+(setq-default truncate-lines t)
+(setq-default warning-suppress-types '((emacs comp)))
+
+;; No scroll bar.
+(set-scroll-bar-mode nil)
+;; Column number.
+(column-number-mode 1)
+;; Electric pair
+(electric-pair-mode 1)
+;; Highlight line.
+(global-hl-line-mode 1)
 
 ;; Fetch the list of packages available.
 (unless package-archive-contents
@@ -209,6 +224,7 @@
           "\\`\\*company"
           "\\`\\*Compile-Log"
           "\\`\\*Customize"
+          "\\`\\*Custom"
           "\\`\\*Emoji"
           "\\`\\*Native-compile-Log"
           "\\`\\*Async-native-compile-log"
@@ -239,6 +255,7 @@
           "\\*company"
           "\\*Compile-Log"
           "\\*Customize"
+          "\\*Custom"
           "\\*Native-compile-Log"
           "\\*Async-native-compile-log"
           "\\*Packages"
@@ -258,6 +275,7 @@
   (setq helm-source-names-using-follow '("Helm Xref"))
   (setq helm-white-buffer-regexp-list '("\\`\\*helm ag results"
                                         "\\`\\*ellama\\*$"))
+  (add-to-list 'completion-styles 'helm)
   :bind (("C-c g" . helm-do-ag)
          ("C-c b" . helm-do-ag-buffers)
          ("<f2>" . helm-mini)
@@ -375,7 +393,9 @@
   :ensure t)
 
 (use-package swift-mode
-  :ensure t)
+  :ensure t
+  :init
+  (setq swift-mode:basic-offset 2))
 
 (use-package glsl-mode
   :ensure t)
