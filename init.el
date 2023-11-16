@@ -8,9 +8,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(doom-tokyo-night))
- '(custom-safe-themes
-   '("3de5c795291a145452aeb961b1151e63ef1cb9565e3cdbd10521582b5fd02e9a" default))
  '(package-selected-packages
    '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
 
@@ -24,7 +21,7 @@
  '(font-lock-type-face ((t (:foreground "#c0caf5" :weight bold))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(hl-line ((t (:extend t :background "#202040"))))
- '(line-number ((t (:weight normal :foreground "PaleVioletRed4" :background "#202040" :inherit default))))
+ '(line-number ((t (:weight normal :slant italic :foreground "PaleVioletRed4" :background "#202040" :inherit default))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gainsboro" :weight bold))))
  '(line-number-major-tick ((t (:inherit line-number :foreground "PaleVioletRed1" :weight bold))))
  '(line-number-minor-tick ((t (:inherit line-number :foreground "PaleVioletRed3"))))
@@ -383,7 +380,10 @@
 (use-package doom-themes
   :ensure t
   :config
-  (setq doom-themes-enable-italic nil))
+  (setq doom-themes-enable-italic nil)
+  (setq doom-themes-enable-bold t)
+  (load-theme 'doom-tokyo-night t)
+  (doom-themes-org-config))
 
 (use-package lua-mode
   :ensure t)
