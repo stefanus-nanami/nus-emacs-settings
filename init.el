@@ -47,6 +47,9 @@
 (add-to-list 'load-path "~/.emacs.d/local")
 (add-to-list 'load-path "~/.emacs.d/emacs-w3m")
 
+(if (eq (require 'user-profile nil t) nil)
+    (message "No user profile available."))
+
 ;; Environment.
 (setq-default backup-directory-alist '(("" . "~/.emacs.d/backups")))
 (setq-default current-language-environment "Japanese")
