@@ -772,7 +772,11 @@
 ;; Visualize whitespaces.
 (global-whitespace-mode)
 
+;; Window history.
 (winner-mode 1)
+
+;; Auto-revert buffer.
+(global-auto-revert-mode t)
 
 ;; Ellama instant buffer workaround.
 (with-eval-after-load 'ellama
