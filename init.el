@@ -45,6 +45,7 @@
 (package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/local")
+(add-to-list 'load-path "~/.emacs.d/private")
 (add-to-list 'load-path "~/.emacs.d/emacs-w3m")
 
 (if (eq (require 'user-profile nil t) nil)
@@ -118,8 +119,6 @@
 (setq-default truncate-lines t)
 (setq-default warning-suppress-types '((emacs comp)))
 
-;; No scroll bar.
-(set-scroll-bar-mode nil)
 ;; Column number.
 (column-number-mode 1)
 ;; Electric pair
@@ -581,8 +580,7 @@
        (setq w32-pass-lwindow-to-system nil)
        (setq w32-lwindow-modifier 'super)
        (setq w32-pass-rwindow-to-system nil)
-       (setq w32-rwindow-modifier 'super)
-       (setq find-program "C:\\cygwin64\\bin\\find.exe"))
+       (setq w32-rwindow-modifier 'super))
       ((= os-type os-macos)
        (setq mac-command-modifier 'meta)
        (setq mac-option-modifier 'super)))
