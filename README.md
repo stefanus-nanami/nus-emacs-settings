@@ -5,7 +5,7 @@ Contains all items of my .emacs.d directory.
 I use Hack font for all my text editors. Download it [here](https://sourcefoundry.org/hack/).
 
 # Key Bindings
-Check what keys available by using `helm-descbinds` or M-<f1>.
+Check what keys available by using `helm-descbinds` or M-F1.
 
 # User profile
 Provide user profile by creating `~/.emacs.d/local/user-profile.el`. The content should be something
