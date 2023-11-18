@@ -30,3 +30,7 @@ line tool to do so.
 Due to our company restriction, I rely on [Ollama](https://ollama.ai) to use LLM for my coding
 works.
 
+# Dictionary
+On macOS, I use default dictionary service provided by the OS. On UNIX, I use
+[dictd](https://github.com/cheusov/dictd) that runs locally on my PC. On Windows, I also use dictd
+that runs on WSL2.
