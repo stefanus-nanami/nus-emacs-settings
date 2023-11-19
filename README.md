@@ -34,3 +34,12 @@ works.
 On macOS, I use default dictionary service provided by the OS. On UNIX, I use
 [dictd](https://github.com/cheusov/dictd) that runs locally on my PC. On Windows, I also use dictd
 that runs on WSL2.
+
+# EGLOT
+Still rely heavily on dabbrev for auto completion, but recently I also use EGLOT. EGLOT's
+performance is actually quite good. But still it lacks behind the "dumb completion" of dabbrev.
+
+# Tree-sitter
+Cannot make the built-in tree-sitter (treesit) to work on my PC. So I use
+[tree-sitter.el](https://github.com/emacs-tree-sitter/elisp-tree-sitter) on Windows and built-in
+tree-sitter on macOS.
