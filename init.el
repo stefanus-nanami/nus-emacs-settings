@@ -577,26 +577,21 @@
        (bind-key "C-c <f1>" 'dictionary-search)))
 
 (cond ((= os-type os-windows)
-       (setq w32-pass-lwindow-to-system nil)
        (setq w32-lwindow-modifier 'super)
-       (setq w32-pass-rwindow-to-system nil)
-       (setq w32-rwindow-modifier 'alt)
-       (w32-register-hot-key [s-]))
+       (setq w32-apps-modifier 'hyper)
+       (w32-register-hot-key [s-])
+       (w32-register-hot-key [H-]))
       ((= os-type os-macos)
        (setq mac-command-modifier 'meta)
        (setq mac-option-modifier 'super)
        (setq mac-right-option-modifier 'alt)
-       (setq mac-right-command-modifier 'hyper)))
-
-(cond ((= os-type os-macos)
+       (setq mac-right-command-modifier 'hyper)
        (bind-key "M-," 'customize)
-       (bind-key "H-l" 'scroll-lock-mode)
-       (bind-key "s-<up>" 'fw-ops-swap-buffers)
        (bind-key "M-`" 'other-frame)
-       (unbind-key "s-`"))
-      (t
-       (bind-key "<f22>" 'scroll-lock-mode)
-       (bind-key "s-<f9>" 'fw-ops-swap-buffers)))
+       (unbind-key "s-`")))
+
+(bind-key "H-l" 'scroll-lock-mode)
+(bind-key "s-<up>" 'fw-ops-swap-buffers)
 
 ;; Map extensions to modes.
 (add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
