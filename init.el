@@ -9,7 +9,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils tree-sitter-langs swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-tree-sitter helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
+   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -27,12 +27,6 @@
  '(line-number-minor-tick ((t (:inherit line-number :foreground "PaleVioletRed3"))))
  '(mode-line ((t (:background "RoyalBlue4" :box nil))))
  '(mode-line-inactive ((t (:background "gray20" :foreground "#9099c0" :box nil))))
- '(tree-sitter-hl-face:function.call ((t (:inherit font-lock-function-call-face))))
- '(tree-sitter-hl-face:operator ((t (:inherit default))))
- '(tree-sitter-hl-face:property ((t (:weight bold :inherit font-lock-property-use-face))))
- '(tree-sitter-hl-face:property.definition ((t (:inherit font-lock-property-name-face))))
- '(tree-sitter-hl-face:punctuation ((t (:inherit font-lock-bracket-face))))
- '(tree-sitter-hl-face:punctuation.special ((t (:inherit font-lock-misc-punctuation-face))))
  '(whitespace-missing-newline-at-eof ((t (:inherit whitespace-trailing))))
  '(whitespace-newline ((t (:foreground "gray24"))))
  '(whitespace-space ((t (:inherit whitespace-newline))))
@@ -118,6 +112,9 @@
 (setq-default mm-text-html-renderer 'w3m)
 (setq-default truncate-lines t)
 (setq-default warning-suppress-types '((emacs comp)))
+
+;; Imenu
+(setq-default imenu-max-item-length nil)
 
 ;; Column number.
 (column-number-mode 1)
@@ -208,7 +205,9 @@
         helm-recentf-fuzzy-match t
         helm-display-header-line nil
         helm-dabbrev-cycle-threshold 0
-        helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^")
+        helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^"
+        helm-imenu-delimiter " ▶ "
+        helm-imenu-use-icon t)
   (setq helm-boring-buffer-regexp-list
         '("\\` "
           "\\`\\*helm"
@@ -278,7 +277,7 @@
          ("C-c b" . helm-do-ag-buffers)
          ("<f2>" . helm-mini)
          ("<f7>" . helm-occur)
-         ("<f5>" . helm-tree-sitter-or-imenu)
+         ("<f5>" . helm-imenu)
          ("M-<f5>" . helm-imenu-in-all-buffers)
          ("<f6>" . helm-show-kill-ring)
          ("M-<f6>" . helm-all-mark-rings)
@@ -341,19 +340,6 @@
          ("M-<f9>" . helm-projects-find-files))
   :config
   (helm-projectile-on))
-
-(use-package tree-sitter
-  :ensure t
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-(use-package tree-sitter-langs
-  :ensure t)
-
-(use-package helm-tree-sitter
-  :ensure t
-  :requires tree-sitter)
 
 (use-package helm-xref
   :ensure t)
@@ -606,20 +592,14 @@
 (add-to-list 'auto-mode-alist '("\\.fx\\'" . hlsl-mode))
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
 
-(add-to-list 'interpreter-mode-alist '("node" . js-mode))
-
-;; No treesit for now...
-(cond ((= os-type os-windows)
-       (add-to-list 'auto-mode-alist
-                    '("\\(\\.ii\\|\\.\\(CC?\\|HH?\\)\\|\\.[ch]\\(pp\\|xx\\|\\+\\+\\)\\|\\.\\(cc\\|hh\\)\\)\\'" . c++-mode))
-       (add-to-list 'auto-mode-alist '("\\.h\\'" . c-or-c++-mode))
-       (add-to-list 'auto-mode-alist
-                    '("\\(\\.[ci]\\|\\.lex\\|\\.y\\(acc\\)?\\)\\'" . c-mode))
-       (add-to-list 'auto-mode-alist '("\\.x[pb]m\\'" . c-mode)))
-      (t
-       (add-to-list 'major-mode-remap-alist '(csharp-mode . csharp-ts-mode))
-       (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
-       (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))))
+;; Tree sitter.
+(add-to-list 'major-mode-remap-alist '(csharp-mode . csharp-ts-mode))
+(add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
+(add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
+(add-to-list 'major-mode-remap-alist '(js-mode . typescript-ts-mode))
+(add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
+(add-to-list 'major-mode-remap-alist '(sh-mode . bash-ts-mode))
+(add-to-list 'major-mode-remap-alist '(cmake-mode . cmake-ts-mode))
 
 (setq-default c-ts-mode-indent-style 'bsd)
 
@@ -670,6 +650,16 @@
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
 
+(add-hook 'js-ts-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 2)))
+
+(add-hook 'typescript-ts-mode
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 2)))
+
 (add-hook 'csharp-ts-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)))
@@ -684,6 +674,12 @@
             (setq tab-width 2)))
 
 (add-hook 'python-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 4)
+            (setq display-fill-column-indicator-column 80)))
+
+(add-hook 'python-ts-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 4)
@@ -724,20 +720,20 @@
 ;; EGLOT hooks.
 (add-hook 'c-mode-hook
           (lambda ()
-            (cond ((eq major-mode 'hlsl-mode))
-                  (t
-                   (eglot-ensure)))))
-
+            (if (not (eq major-mode 'hlsl-mode))
+                (eglot-ensure))))
 (add-hook 'c-ts-mode-hook 'eglot-ensure)
 (add-hook 'c++-ts-mode-hook 'eglot-ensure)
-(add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
 (add-hook 'objc-mode-hook 'eglot-ensure)
 (add-hook 'swift-mode-hook 'eglot-ensure)
 (add-hook 'csharp-mode-hook 'eglot-ensure)
 (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
 (add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'python-ts-mode-hook 'eglot-ensure)
 (add-hook 'js-mode-hook 'eglot-ensure)
+(add-hook 'js-ts-mode-hook 'eglot-ensure)
+(add-hook 'typescript-ts-mode 'eglot-ensure)
 (add-hook 'lua-mode-hook 'eglot-ensure)
 (add-hook 'eglot-managed-mode-hook
           (lambda ()
