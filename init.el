@@ -714,6 +714,8 @@
             (add-to-list 'current-indent-rules '((node-is "case_statement") parent-bol 0))
             (add-to-list 'current-indent-rules '((parent-is "case_statement") parent-bol c-ts-mode-indent-offset))
             (add-to-list 'current-indent-rules '((parent-is "else_clause") parent-bol 0))
+            (add-to-list 'current-indent-rules '((node-is "preproc_if") column-0 0))
+            (add-to-list 'current-indent-rules '((node-is "preproc_ifdef") column-0 0))
             (add-to-list 'current-indent-rules '((node-is "preproc_arg") parent-bol c-ts-mode-indent-offset))
             (add-to-list 'current-indent-rules '((and no-node (parent-is "preproc_arg")) parent-bol 0))
             (setf (alist-get 'cpp treesit-simple-indent-rules) current-indent-rules)))
