@@ -207,7 +207,8 @@
         helm-dabbrev-cycle-threshold 0
         helm-dabbrev-separator-regexp "\\s-\\|[(\\[\\{\"'`=<>$:;,@.#+]\\|\\s\\\\|^\\|^"
         helm-imenu-delimiter " ▶ "
-        helm-imenu-use-icon t)
+        helm-imenu-use-icon t
+        helm-imenu-fuzzy-match t)
   (setq helm-boring-buffer-regexp-list
         '("\\` "
           "\\`\\*helm"
