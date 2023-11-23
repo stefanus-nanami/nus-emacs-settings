@@ -30,7 +30,6 @@
        (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))))
 
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
-(add-to-list 'default-frame-alist '(alpha . (95 . 80)))
 (add-to-list 'default-frame-alist '(vertical-scroll-bars . nil))
 (add-to-list 'default-frame-alist '(horizontal-scroll-bars . nil))
 

@@ -166,7 +166,8 @@
   :ensure t
   :bind (("C-h C-SPC" . 'eldoc-box-help-at-point))
   :init
-  (setq eldoc-box-clear-with-C-g t))
+  (setq eldoc-box-clear-with-C-g t)
+  (eldoc-box-hover-mode -1))
 
 (use-package company-dict
   :ensure t)
@@ -703,10 +704,6 @@
             (display-fill-column-indicator-mode 1)
             (visual-line-mode 1)))
 
-(add-hook 'eldoc-mode-hook
-          (lambda ()
-            (eldoc-box-hover-mode -1)))
-
 (add-hook 'c++-ts-mode-hook
           (lambda ()
             (setq-local current-indent-rules
@@ -740,10 +737,6 @@
 (add-hook 'eglot-managed-mode-hook
           (lambda ()
             (flymake-mode -1)))
-
-(add-hook 'eldoc-box-buffer-hook
-          (lambda ()
-            (add-to-list 'default-frame-alist '(alpha . (95 . 95)))))
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
