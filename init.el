@@ -714,6 +714,14 @@
             (add-to-list 'current-indent-rules '((node-is "preproc\\(_\\(if|ifdef|call|else|elif\\)\\)?") column-0 0))
             (add-to-list 'current-indent-rules '((node-is "preproc_arg") parent-bol c-ts-mode-indent-offset))
             (add-to-list 'current-indent-rules '((and no-node (parent-is "preproc_arg")) parent-bol 0))
+            (add-to-list 'current-indent-rules '((and (node-is "expression_statement") (parent-is "if_statement"))
+                                                 parent-bol c-ts-mode-indent-offset))
+            (add-to-list 'current-indent-rules '((and (node-is "expression_statement") (parent-is "for_statement"))
+                                                 parent-bol c-ts-mode-indent-offset))
+            (add-to-list 'current-indent-rules '((and (node-is "expression_statement") (parent-is "while_statement"))
+                                                 parent-bol c-ts-mode-indent-offset))
+            (add-to-list 'current-indent-rules '((and (node-is "expression_statement") (parent-is "do_statement"))
+                                                 parent-bol c-ts-mode-indent-offset))
             (setf (alist-get 'cpp treesit-simple-indent-rules) current-indent-rules)))
 
 ;; EGLOT hooks.
