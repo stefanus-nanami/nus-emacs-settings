@@ -9,7 +9,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils flycheck exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
+   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -744,9 +744,6 @@
 (add-hook 'js-ts-mode-hook 'eglot-ensure)
 (add-hook 'typescript-ts-mode 'eglot-ensure)
 (add-hook 'lua-mode-hook 'eglot-ensure)
-(add-hook 'eglot-managed-mode-hook
-          (lambda ()
-            (flymake-mode -1)))
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
@@ -762,7 +759,8 @@
                                                             "--header-insertion=never"
                                                             "--header-insertion-decorators=0")))
   (add-to-list 'eglot-server-programs
-               `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio"))))
+               `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio")))
+  (add-to-list 'eglot-stay-out-of 'flymake))
 
 (if (= os-type os-macos)
     (with-eval-after-load 'eglot
@@ -786,6 +784,18 @@
       (display-buffer buffer)
       (with-current-buffer buffer (funcall ellama-buffer-mode))
       (ellama-stream prompt :buffer buffer (point-min)))))
+
+(defun toggle-tree-sitter ()
+  "Change major mode to tree-sitter version."
+  (interactive)
+  (cond ((eq major-mode 'c-mode)
+         (c-ts-mode))
+        ((eq major-mode 'c++-mode)
+         (c++-ts-mode))
+        ((eq major-mode 'c-ts-mode)
+         (c-mode))
+        ((eq major-mode 'c++-ts-mode)
+         (c++-mode))))
 
 (provide 'init)
 ;;; init.el ends here
