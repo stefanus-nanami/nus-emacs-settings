@@ -18,7 +18,7 @@
  ;; If there is more than one, they won't work right.
  '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
  '(font-lock-keyword-face ((t (:foreground "MediumPurple" :weight bold))))
- '(font-lock-type-face ((t (:foreground "Slategray4" :weight bold))))
+ '(font-lock-type-face ((t (:foreground "Skyblue3"))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(hl-line ((t (:extend t :background "#202040"))))
  '(line-number ((t (:weight normal :slant italic :foreground "PaleVioletRed4" :background "#202040" :inherit default))))
