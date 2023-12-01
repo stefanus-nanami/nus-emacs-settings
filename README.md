@@ -36,7 +36,7 @@ on localhost.
 (setopt ellama-provider
         (make-llm-ollama
          :host "your-ollama-server"
-         :port "port-no"
+         :port port_no
          :chat-model "model-name"
          :embedding-model "model-name"))
 
