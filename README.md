@@ -18,7 +18,7 @@ like this.
 (provide 'user-profile)
 ```
 
-The content below `~/.emacs.d/local` will be automatically ignored by Git.
+The contents below `~/.emacs.d/local` will be automatically ignored by Git.
 
 # Locating file(s).
 UNIX variants will use locate for locating files. macOS will rely on Spotlight to locating files,
@@ -42,6 +42,8 @@ on localhost.
 
 (provide 'llm-provider)
 ```
+
+The contents below `~/.emacs.d/local` will be automatically ignored by Git.
 
 # Dictionary
 On macOS, I use default dictionary service provided by the OS. On UNIX, I use
