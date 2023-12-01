@@ -402,11 +402,14 @@
 (use-package ellama
   :ensure t
   :init
-  (require 'llm-ollama)
-  (setopt ellama-provider
-          (make-llm-ollama
-           :chat-model "llama2"
-           :embedding-model "codellama")))
+  (if (eq (require 'llm-provider nil t) nil)
+      (lambda ()
+        "Default LLM provider."
+        (require 'llm-ollama)
+        (setopt ellama-provider
+                (make-llm-ollama
+                 :chat-model "codellama"
+                 :embedding-model "codellama")))))
 
 (use-package jaword
   :ensure t

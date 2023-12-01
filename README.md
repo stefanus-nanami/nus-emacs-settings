@@ -18,7 +18,7 @@ like this.
 (provide 'user-profile)
 ```
 
-The content below `~/.emacs.d/local` will be automatically ignored by Git.
+The contents below `~/.emacs.d/local` will be automatically ignored by Git.
 
 # Locating file(s).
 UNIX variants will use locate for locating files. macOS will rely on Spotlight to locating files,
@@ -28,7 +28,22 @@ line tool to do so.
 
 # Using LLM
 Due to our company restriction, I rely on [Ollama](https://ollama.ai) to use LLM for my coding
-works.
+works. Create `~/.emacs.d/local/llm-provider.el` to customize. The default is to use Ollama running
+on localhost.
+
+``` emacs-lisp
+(require 'llm-ollama)
+(setopt ellama-provider
+        (make-llm-ollama
+         :host "your-ollama-server"
+         :port port_no
+         :chat-model "model-name"
+         :embedding-model "model-name"))
+
+(provide 'llm-provider)
+```
+
+The contents below `~/.emacs.d/local` will be automatically ignored by Git.
 
 # Dictionary
 On macOS, I use default dictionary service provided by the OS. On UNIX, I use
@@ -40,6 +55,6 @@ Still rely heavily on dabbrev for auto completion, but recently I also use EGLOT
 performance is actually quite good. But still it lacks behind the "dumb completion" of dabbrev.
 
 # Tree-sitter
-Cannot make the built-in tree-sitter (treesit) to work on my PC. So I use
-[tree-sitter.el](https://github.com/emacs-tree-sitter/elisp-tree-sitter) on Windows and built-in
-tree-sitter on macOS.
+There are problems with tree-sitter handling C/C++ preprocessor/macros. If you encounter strange
+behavior on indentation or syntax-highlighting, you can toggle tree-sitter mode using
+`toggle-tree-sitter`.
