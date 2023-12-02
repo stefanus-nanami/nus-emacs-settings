@@ -403,13 +403,11 @@
   :ensure t
   :init
   (if (eq (require 'llm-provider nil t) nil)
-      (lambda ()
-        "Default LLM provider."
-        (require 'llm-ollama)
-        (setopt ellama-provider
-                (make-llm-ollama
-                 :chat-model "codellama"
-                 :embedding-model "codellama")))))
+      (progn (require 'llm-ollama)
+             (setopt ellama-provider
+                     (make-llm-ollama
+                      :chat-model "codellama"
+                      :embedding-model "codellama")))))
 
 (use-package jaword
   :ensure t
@@ -799,6 +797,10 @@
          (c-mode))
         ((eq major-mode 'c++-ts-mode)
          (c++-mode))))
+
+(cond ((= os-type os-macos)
+       (set-fontset-font "fontset-default" 'kana (font-spec :family "BIZ UDGothic") nil 'prepend)
+       (set-fontset-font "fontset-default" 'han (font-spec :family "BIZ UDGothic") nil 'prepend)))
 
 (provide 'init)
 ;;; init.el ends here
