@@ -798,9 +798,13 @@
         ((eq major-mode 'c++-ts-mode)
          (c++-mode))))
 
+;; Set fonts for かな & 漢字
 (cond ((= os-type os-macos)
-       (set-fontset-font "fontset-default" 'kana (font-spec :family "BIZ UDGothic") nil 'prepend)
-       (set-fontset-font "fontset-default" 'han (font-spec :family "BIZ UDGothic") nil 'prepend)))
+       (let ((gothic (font-spec :family "BIZ UDGothic")))
+         (set-fontset-font "fontset-default" 'kana gothic nil 'prepend)
+         (set-fontset-font "fontset-default" 'han gothic nil 'prepend)
+         (set-fontset-font "fontset-default" 'cjk-misc gothic nil 'prepend)
+         (set-fontset-font "fontset-default" 'symbol gothic nil 'prepend))))
 
 (provide 'init)
 ;;; init.el ends here
