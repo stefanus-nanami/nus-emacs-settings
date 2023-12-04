@@ -41,7 +41,7 @@
        (add-to-list 'default-frame-alist '(fullscreen . fullheight))
        (add-to-list 'default-frame-alist `(width . 130)))
       ((string= localhost-name "CT058231")
-       (set-face-attribute 'default nil :family "Hack" :height 100)
+       (set-face-attribute 'default nil :family "Hack")
        (cond ((= os-type os-unix)
               (add-to-list 'default-frame-alist `(height . 85)))
              (t
