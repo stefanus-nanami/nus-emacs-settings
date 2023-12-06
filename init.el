@@ -9,7 +9,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils exec-path-from-shell emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
+   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -17,6 +17,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
+ '(font-lock-comment-face ((t (:foreground "SteelBlue4"))))
  '(font-lock-keyword-face ((t (:foreground "MediumPurple" :weight bold))))
  '(font-lock-type-face ((t (:foreground "Skyblue3"))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
@@ -103,7 +104,6 @@
 (setq-default auto-hscroll-mode 'current-line)
 (setq-default blink-cursor-mode nil)
 (setq-default epa-file-cache-passphrase-for-symmetric-encryption t)
-(setq-default exec-path-from-shell-arguments nil)
 (setq-default inhibit-startup-screen t)
 (setq-default js-indent-level 2)
 (setq-default lua-indent-level 2)
@@ -112,6 +112,7 @@
 (setq-default mm-text-html-renderer 'w3m)
 (setq-default truncate-lines t)
 (setq-default warning-suppress-types '((emacs comp)))
+(setq-default mouse-wheel-progressive-speed nil)
 
 ;; Imenu
 (setq-default imenu-max-item-length nil)
@@ -134,12 +135,6 @@
 
 (use-package bind-key
   :ensure t)
-
-(when (memq window-system '(mac ns))
-  (use-package exec-path-from-shell
-    :ensure t
-    :config
-    (exec-path-from-shell-initialize)))
 
 (use-package doom-modeline
   :ensure t

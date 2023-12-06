@@ -35,7 +35,7 @@
 
 (cond ((or (string= localhost-name "CT043472")
            (string= localhost-name "Lyka"))
-       (set-face-attribute 'default nil :family "Hack" :height 100)
+       (set-face-attribute 'default nil :family "Hack")
        (add-to-list 'default-frame-alist `(left . 0))
        (add-to-list 'default-frame-alist `(top . 0))
        (add-to-list 'default-frame-alist '(fullscreen . fullheight))
