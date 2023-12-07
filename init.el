@@ -112,7 +112,6 @@
 (setq-default mm-text-html-renderer 'w3m)
 (setq-default truncate-lines t)
 (setq-default warning-suppress-types '((emacs comp)))
-(setq-default mouse-wheel-progressive-speed nil)
 
 ;; Imenu
 (setq-default imenu-max-item-length nil)
