@@ -35,11 +35,10 @@
 
 (cond ((or (string= localhost-name "CT043472")
            (string= localhost-name "Lyka"))
-       (set-face-attribute 'default nil :family "Hack")
        (add-to-list 'default-frame-alist `(left . 0))
        (add-to-list 'default-frame-alist `(top . 0))
        (add-to-list 'default-frame-alist '(fullscreen . fullheight))
-       (add-to-list 'default-frame-alist `(width . 130)))
+       (add-to-list 'default-frame-alist '(width . (text-pixels . 1024))))
       ((string= localhost-name "CT058231")
        (cond ((= os-type os-unix)
               (add-to-list 'default-frame-alist `(height . 85)))
