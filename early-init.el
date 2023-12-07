@@ -41,19 +41,18 @@
        (add-to-list 'default-frame-alist '(fullscreen . fullheight))
        (add-to-list 'default-frame-alist `(width . 130)))
       ((string= localhost-name "CT058231")
-       (set-face-attribute 'default nil :family "Hack")
        (cond ((= os-type os-unix)
               (add-to-list 'default-frame-alist `(height . 85)))
              (t
               (add-to-list 'default-frame-alist `(left . 20))
               (add-to-list 'default-frame-alist `(top . 20))
-              (add-to-list 'default-frame-alist `(height . 97))))
-       (add-to-list 'default-frame-alist `(width . 140)))
+              (add-to-list 'default-frame-alist '(height . (text-pixels . 1455)))))
+       (add-to-list 'default-frame-alist '(width . (text-pixels . 1136))))
       (t
        (add-to-list 'default-frame-alist `(left . 0))
        (add-to-list 'default-frame-alist `(top . 0))
-       (add-to-list 'default-frame-alist `(height . 60))
-       (add-to-list 'default-frame-alist `(width . 120))))
+       (add-to-list 'default-frame-alist '(height . (text-pixels . 1024)))
+       (add-to-list 'default-frame-alist '(width . (text-pixels . 768)))))
 
 (setq initial-frame-alist (copy-alist default-frame-alist))
 (add-to-list 'initial-frame-alist '(background-color . "#000000"))

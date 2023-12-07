@@ -793,7 +793,8 @@
         ((eq major-mode 'c++-ts-mode)
          (c++-mode))))
 
-;; Set fonts for かな & 漢字
+;; Set default face font and font for かな & 漢字.
+(set-face-attribute 'default nil :family "Hack")
 (cond ((= os-type os-macos)
        (let ((gothic (font-spec :family "BIZ UDGothic")))
          (set-fontset-font "fontset-default" 'kana gothic nil 'prepend)
