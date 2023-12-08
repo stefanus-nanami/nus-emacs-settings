@@ -527,6 +527,15 @@
                      (interactive "^p")
                      (next-line (* (or arg 1) 5))))
 
+(bind-key "C-o" (lambda (&optional arg)
+                  "Insert new line(s) below cursor."
+                  (interactive "^p")
+                  (let ((current-point (point)))
+                    (next-line)
+                    (move-beginning-of-line 1)
+                    (open-line (or arg 1))
+                    (goto-char current-point))))
+
 ;; Binding LSP related keys.
 (bind-keys ("<f12>" . xref-find-definitions)
            ("C-<f12>" . xref-find-references))
