@@ -746,7 +746,7 @@
             (add-to-list 'current-indent-rules '((and (node-is ",") (parent-is "field_initializer_list")) parent-bol 0))
             (add-to-list 'current-indent-rules '((and (node-is "field_initializer_list") (parent-is "function_definition"))
                                                  parent-bol c-ts-mode-indent-offset))
-            (add-to-list 'current-indent-rules '((match nil "function_definition" nil 0 0)
+            (add-to-list 'current-indent-rules '((match nil "field_initializer_list" nil 0 0)
                                                  parent-bol initializer-offset-function))
             (setf (alist-get 'cpp treesit-simple-indent-rules) current-indent-rules)))
 
