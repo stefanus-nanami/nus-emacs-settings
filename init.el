@@ -491,7 +491,8 @@
            ("M-<left>" . backward-to-word))
 
 (if (or (= os-type os-windows) (= os-type os-unix))
-    (bind-key "C-<f4>" 'kill-this-buffer))
+    (bind-key "C-<f4>" 'kill-this-buffer)
+  (unbind-key "s-k"))
 
 (bind-key "C-c l" 'duplicate-dwim)
 
@@ -721,6 +722,9 @@
           (lambda ()
             (setq-local current-indent-rules
                         (alist-get 'cpp treesit-simple-indent-rules))
+            (defun initializer-offset-function (node parent bol)
+              "Initializer offset for tree-sitter."
+              (+ c-ts-mode-indent-offset 2))
             (add-to-list 'current-indent-rules '((node-is "case_statement") parent-bol 0))
             (add-to-list 'current-indent-rules '((parent-is "case_statement") parent-bol c-ts-mode-indent-offset))
             (add-to-list 'current-indent-rules '((parent-is "else_clause") parent-bol 0))
@@ -737,9 +741,15 @@
                                                  parent-bol c-ts-mode-indent-offset))
             (add-to-list 'current-indent-rules '((and (node-is "expression_statement") (parent-is "else_clause"))
                                                  parent-bol c-ts-mode-indent-offset))
-            (add-to-list 'current-indent-rules '((and (node-is "field_initializer_list") (parent-is "function_definition")) parent-bol c-ts-mode-indent-offset))
+            (add-to-list 'current-indent-rules '((and (node-is "field_initializer") (parent-is "field_initializer_list"))
+                                                 grand-parent initializer-offset-function))
             (add-to-list 'current-indent-rules '((and (node-is ",") (parent-is "field_initializer_list")) parent-bol 0))
-            (add-to-list 'current-indent-rules '((and (node-is "field_initializer") (parent-is "field_initializer_list")) first-sibling 2))
+            (add-to-list 'current-indent-rules '((and (node-is "field_initializer_list") (parent-is "function_definition"))
+                                                 parent-bol c-ts-mode-indent-offset))
+            (add-to-list 'current-indent-rules '((match nil "function_definition" nil 0 0)
+                                                 parent-bol initializer-offset-function))
+            ;; (add-to-list 'current-indent-rules '((match nil "field_initializer_list" nil 1 1) grand-parent 8))
+            ;; (add-to-list 'current-indent-rules '((match "field_initializer" nil nil 1 1) grand-parent c-ts-mode-indent-offset))
             (setf (alist-get 'cpp treesit-simple-indent-rules) current-indent-rules)))
 
 ;; EGLOT hooks.

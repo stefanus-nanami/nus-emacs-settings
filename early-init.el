@@ -51,8 +51,8 @@
        (add-to-list 'default-frame-alist '(width . (text-pixels . 768)))))
 
 (setq initial-frame-alist (copy-alist default-frame-alist))
-(add-to-list 'initial-frame-alist '(background-color . "#000000"))
-(add-to-list 'initial-frame-alist '(foreground-color . "#E0E0E0"))
+(add-to-list 'initial-frame-alist '(background-color . "#1a1b26"))
+(add-to-list 'initial-frame-alist '(foreground-color . "#a9b1d6"))
 
 (provide 'early-init)
 ;;; early-init.el ends here
