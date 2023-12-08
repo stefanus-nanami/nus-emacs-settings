@@ -408,6 +408,12 @@
 
 (use-package jaword
   :ensure t
+  :bind (("s-f" . 'jaword-forward)
+         ("s-<right>" . 'jaword-forward)
+         ("s-b" . 'jaword-backward)
+         ("s-<left>" . 'jaword-backward)
+         ("C-s-k" . 'jaword-kill)
+         ("C-s-<backspace>" . 'jaword-backward-kill))
   :init
   (global-jaword-mode))
 
