@@ -16,12 +16,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cursor ((t (:background "LightSkyBlue1"))))
  '(fill-column-indicator ((t (:stipple nil :foreground "midnight blue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin))))
  '(font-lock-comment-face ((t (:foreground "SteelBlue4"))))
  '(font-lock-keyword-face ((t (:foreground "MediumPurple" :weight bold))))
  '(font-lock-type-face ((t (:foreground "Skyblue3"))))
  '(highlight ((t (:background "#808000" :foreground "#2e3436"))))
  '(hl-line ((t (:extend t :background "#202040"))))
+ '(isearch ((t (:weight normal :background "LightSkyBlue1" :inherit lazy-highlight))))
+ '(lazy-highlight ((t (:background "LightSkyBlue3" :foreground "navy" :weight normal))))
  '(line-number ((t (:weight normal :slant italic :foreground "PaleVioletRed4" :background "#202040" :inherit default))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gainsboro" :weight bold))))
  '(line-number-major-tick ((t (:inherit line-number :foreground "PaleVioletRed1" :weight bold))))
@@ -794,6 +797,7 @@
 
 ;; Set default face font and font for かな & 漢字.
 (set-face-attribute 'default nil :family "Hack")
+(set-fontset-font "fontset-default" nil "Hack" nil 'prepend)
 (cond ((= os-type os-macos)
        (let ((gothic (font-spec :family "BIZ UDGothic")))
          (set-fontset-font "fontset-default" 'kana gothic nil 'prepend)
