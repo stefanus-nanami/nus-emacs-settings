@@ -17,7 +17,7 @@
       ((string= system-type "darwin")
        (setq os-type os-macos))
       ((string= system-type "gnu/linux")
-       (setq os-type os-macos))
+       (setq os-type os-unix))
       (t
        (setq os-type os-unknown)))
 
@@ -40,12 +40,9 @@
        (add-to-list 'default-frame-alist '(fullscreen . fullheight))
        (add-to-list 'default-frame-alist '(width . (text-pixels . 1024))))
       ((string= localhost-name "CT058231")
-       (cond ((= os-type os-unix)
-              (add-to-list 'default-frame-alist `(height . 85)))
-             (t
-              (add-to-list 'default-frame-alist `(left . 20))
-              (add-to-list 'default-frame-alist `(top . 20))
-              (add-to-list 'default-frame-alist '(height . (text-pixels . 1455)))))
+       (add-to-list 'default-frame-alist `(left . 20))
+       (add-to-list 'default-frame-alist `(top . 20))
+       (add-to-list 'default-frame-alist '(height . (text-pixels . 1455)))
        (add-to-list 'default-frame-alist '(width . (text-pixels . 1136))))
       (t
        (add-to-list 'default-frame-alist `(left . 0))

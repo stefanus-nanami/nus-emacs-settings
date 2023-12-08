@@ -484,7 +484,7 @@
            ("M-b" . backward-to-word)
            ("M-<left>" . backward-to-word))
 
-(if (= os-type os-windows)
+(if (or (= os-type os-windows) (= os-type os-unix))
     (bind-key "C-<f4>" 'kill-this-buffer))
 
 (bind-key "C-c l" 'duplicate-dwim)
@@ -803,7 +803,9 @@
          (set-fontset-font "fontset-default" 'kana gothic nil 'prepend)
          (set-fontset-font "fontset-default" 'han gothic nil 'prepend)
          (set-fontset-font "fontset-default" 'cjk-misc gothic nil 'prepend)
-         (set-fontset-font "fontset-default" 'symbol gothic nil 'prepend))))
+         (set-fontset-font "fontset-default" 'symbol gothic nil 'prepend)))
+      ((= os-type os-unix)
+       (add-to-list 'face-font-rescale-alist '("Noto Sans Mono CJK JP" . 0.8))))
 
 (provide 'init)
 ;;; init.el ends here
