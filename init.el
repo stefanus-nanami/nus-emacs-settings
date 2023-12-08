@@ -748,8 +748,6 @@
                                                  parent-bol c-ts-mode-indent-offset))
             (add-to-list 'current-indent-rules '((match nil "function_definition" nil 0 0)
                                                  parent-bol initializer-offset-function))
-            ;; (add-to-list 'current-indent-rules '((match nil "field_initializer_list" nil 1 1) grand-parent 8))
-            ;; (add-to-list 'current-indent-rules '((match "field_initializer" nil nil 1 1) grand-parent c-ts-mode-indent-offset))
             (setf (alist-get 'cpp treesit-simple-indent-rules) current-indent-rules)))
 
 ;; EGLOT hooks.
