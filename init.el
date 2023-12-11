@@ -412,9 +412,12 @@
          ("s-<right>" . 'jaword-forward)
          ("s-b" . 'jaword-backward)
          ("s-<left>" . 'jaword-backward)
-         ("C-s-k" . 'jaword-kill)
-         ("C-s-<backspace>" . 'jaword-backward-kill))
+         ("s-k" . 'jaword-kill)
+         ("s-<backspace>" . 'jaword-backward-kill))
   :init
+  ;; Do not use jaword keymap.
+  (setq jaword-mode-map nil)
+  :config
   (global-jaword-mode))
 
 (when (executable-find "w3m")
@@ -490,9 +493,9 @@
            ("M-b" . backward-to-word)
            ("M-<left>" . backward-to-word))
 
+;; Windows cannot use s-& to close a buffer.
 (if (or (= os-type os-windows) (= os-type os-unix))
-    (bind-key "C-<f4>" 'kill-this-buffer)
-  (unbind-key "s-k"))
+    (bind-key "C-<f4>" 'kill-this-buffer))
 
 (bind-key "C-c l" 'duplicate-dwim)
 
