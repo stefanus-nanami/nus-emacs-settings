@@ -280,7 +280,7 @@
          ("M-<f5>" . helm-imenu-in-all-buffers)
          ("<f6>" . helm-show-kill-ring)
          ("M-<f6>" . helm-all-mark-rings)
-         ("M-s g" . helm-occur-visible-buffers))
+         ("M-<f7>" . helm-occur-visible-buffers))
   :config
   (helm-mode 1))
 
@@ -529,13 +529,18 @@
                      (next-line (* (or arg 1) 5))))
 
 (bind-key "C-o" (lambda (&optional arg)
+                  "Insert new line(s) on cursor."
+                  (interactive "^p")
+                  (dotimes (or arg 1)
+                    (move-beginning-of-line 1)
+                    (newline)
+                    (previous-line))))
+(bind-key "M-o" (lambda (&optional arg)
                   "Insert new line(s) below cursor."
                   (interactive "^p")
-                  (let ((current-point (point)))
-                    (next-line)
-                    (move-beginning-of-line 1)
-                    (open-line (or arg 1))
-                    (goto-char current-point))))
+                  (dotimes (or arg 1)
+                    (move-end-of-line 1)
+                    (newline))))
 
 ;; Binding LSP related keys.
 (bind-keys ("<f12>" . xref-find-definitions)
@@ -556,6 +561,8 @@
 ;; Replace
 (bind-keys ("C-c r s" . replace-string)
            ("C-c r r" . replace-regexp)
+           ("s-%" . query-replace)
+           ("s-$" . query-replace-regexp)
            ("C-c r q" . query-replace-regexp)
            ("C-c r p" . project-query-replace-regexp))
 
@@ -772,24 +779,25 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))
-  (add-to-list 'eglot-server-programs
-               `((c-mode c++-mode c-ts-mode c++-ts-mode) . ("clangd"
-                                                            "-j=8"
-                                                            "--log=error"
-                                                            "--background-index"
-                                                            "--clang-tidy"
-                                                            "--completion-style=detailed"
-                                                            "--pch-storage=memory"
-                                                            "--header-insertion=never"
-                                                            "--header-insertion-decorators=0")))
+  (cond ((= os-type os-macos)
+         (add-to-list 'eglot-server-programs
+                      `((swift-mode objc-mode) . ("xcrun" "sourcekit-lsp")))
+         (add-to-list 'eglot-server-programs
+                      `((c-mode c++-mode c-ts-mode c++-ts-mode) . ("xcrun" "sourcekit-lsp"))))
+        (t
+         (add-to-list 'eglot-server-programs
+                      `((c-mode c++-mode c-ts-mode c++-ts-mode) . ("clangd"
+                                                                   "-j=8"
+                                                                   "--log=error"
+                                                                   "--background-index"
+                                                                   "--clang-tidy"
+                                                                   "--completion-style=detailed"
+                                                                   "--pch-storage=memory"
+                                                                   "--header-insertion=never"
+                                                                   "--header-insertion-decorators=0")))))
   (add-to-list 'eglot-server-programs
                `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio")))
   (add-to-list 'eglot-stay-out-of 'flymake))
-
-(if (= os-type os-macos)
-    (with-eval-after-load 'eglot
-      (add-to-list 'eglot-server-programs
-                   `(swift-mode . ("xcrun" "sourcekit-lsp")))))
 
 ;; Visualize whitespaces.
 (global-whitespace-mode)
