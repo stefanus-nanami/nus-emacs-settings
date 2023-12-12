@@ -81,7 +81,7 @@
 (setq-default gnus-use-cache t)
 
 ;; History file list.
-(setq-default recentf-auto-cleanup 300)
+(setq-default recentf-auto-cleanup 3600)
 (recentf-mode t)
 
 ;; Mail.
