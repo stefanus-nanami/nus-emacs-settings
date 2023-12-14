@@ -760,6 +760,13 @@
                                                  parent-bol initializer-offset-function))
             (setf (alist-get 'cpp treesit-simple-indent-rules) current-indent-rules)))
 
+(add-hook 'csharp-ts-mode-hook
+          (lambda ()
+            (setq-local current-indent-rules
+                        (alist-get 'c-sharp treesit-simple-indent-rules))
+            (add-to-list 'current-indent-rules '((node-is "attribute_list") parent-bol 0))
+            (setf (alist-get 'c-sharp treesit-simple-indent-rules) current-indent-rules)))
+
 ;; EGLOT hooks.
 (add-hook 'c-mode-hook
           (lambda ()
