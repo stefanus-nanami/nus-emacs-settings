@@ -413,6 +413,7 @@
          ("s-b" . 'jaword-backward)
          ("s-<left>" . 'jaword-backward)
          ("s-k" . 'jaword-kill)
+         ("s-<delete>" . 'jaword-kill)
          ("s-<backspace>" . 'jaword-backward-kill))
   :init
   ;; Do not use jaword keymap.
