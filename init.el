@@ -273,7 +273,7 @@
                                         "\\`\\*ellama\\*$"))
   (add-to-list 'completion-styles 'helm)
   :bind (("C-c g" . helm-do-ag)
-         ("C-c b" . helm-do-ag-buffers)
+         ("C-c b" . helm-do-ag-this-file)
          ("<f2>" . helm-mini)
          ("<f7>" . helm-occur)
          ("<f5>" . helm-imenu)
