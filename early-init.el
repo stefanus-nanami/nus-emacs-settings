@@ -34,7 +34,8 @@
 (add-to-list 'default-frame-alist '(horizontal-scroll-bars . nil))
 
 (cond ((or (string= localhost-name "CT043472")
-           (string= localhost-name "Lyka"))
+           (string= localhost-name "Lyka")
+           (string= localhost-name "CT054816"))
        (add-to-list 'default-frame-alist `(left . 0))
        (add-to-list 'default-frame-alist `(top . 0))
        (add-to-list 'default-frame-alist '(fullscreen . fullheight))
