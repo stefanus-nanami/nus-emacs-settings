@@ -19,7 +19,6 @@ How to setup my emacs...
     $ autoconf
     $ ./configure
     $ ./make
-    $ ./make install
     ```
 10. Restart emacs.
 
