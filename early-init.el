@@ -52,6 +52,7 @@
        (add-to-list 'default-frame-alist '(width . (text-pixels . 768)))))
 
 (setq initial-frame-alist (copy-alist default-frame-alist))
+(add-to-list 'initial-frame-alist '(font . "Hack"))
 (add-to-list 'initial-frame-alist '(background-color . "#1a1b26"))
 (add-to-list 'initial-frame-alist '(foreground-color . "#a9b1d6"))
 
