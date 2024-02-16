@@ -842,7 +842,11 @@
         ((eq major-mode 'c-ts-mode)
          (c-mode))
         ((eq major-mode 'c++-ts-mode)
-         (c++-mode))))
+         (c++-mode))
+        ((eq major-mode 'csharp-mode)
+         (csharp-ts-mode))
+        ((eq major-mode 'csharp-ts-mode)
+         (csharp-mode))))
 
 ;; Set default face font and font for かな & 漢字.
 (set-face-attribute 'default nil :family "Hack")
