@@ -68,10 +68,9 @@
 (setq-default display-line-numbers-width 5)
 
 ;; Eglot.
-(setq-default eglot-connect-timeout 300)
+(setq-default eglot-connect-timeout nil)
 (setq-default eglot-events-buffer-size 0)
 (setq-default eglot-ignored-server-capabilities '(:inlayHintProvider))
-(setq-default eglot-prefer-plaintext t)
 (setq-default eglot-sync-connect nil)
 
 ;; GNUS
