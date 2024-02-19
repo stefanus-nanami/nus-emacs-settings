@@ -620,7 +620,6 @@
 (add-to-list 'auto-mode-alist '("\\.hlsl\\'" . hlsl-mode))
 
 ;; Tree sitter.
-(add-to-list 'major-mode-remap-alist '(csharp-mode . csharp-ts-mode))
 (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
 (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
 (add-to-list 'major-mode-remap-alist '(js-mode . typescript-ts-mode))
@@ -686,10 +685,6 @@
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
-
-(add-hook 'csharp-ts-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)))
 
 (add-hook 'csharp-mode-hook
           (lambda ()
@@ -765,13 +760,6 @@
                                                  parent-bol initializer-offset-function))
             (setf (alist-get 'cpp treesit-simple-indent-rules) current-indent-rules)))
 
-(add-hook 'csharp-ts-mode-hook
-          (lambda ()
-            (setq-local current-indent-rules
-                        (alist-get 'c-sharp treesit-simple-indent-rules))
-            (add-to-list 'current-indent-rules '((node-is "attribute_list") parent-bol 0))
-            (setf (alist-get 'c-sharp treesit-simple-indent-rules) current-indent-rules)))
-
 ;; EGLOT hooks.
 (add-hook 'c-mode-hook
           (lambda ()
@@ -783,7 +771,6 @@
 (add-hook 'objc-mode-hook 'eglot-ensure)
 (add-hook 'swift-mode-hook 'eglot-ensure)
 (add-hook 'csharp-mode-hook 'eglot-ensure)
-(add-hook 'csharp-ts-mode-hook 'eglot-ensure)
 (add-hook 'python-mode-hook 'eglot-ensure)
 (add-hook 'python-ts-mode-hook 'eglot-ensure)
 (add-hook 'js-mode-hook 'eglot-ensure)
@@ -793,7 +780,7 @@
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               `((csharp-mode csharp-ts-mode) . ("OmniSharp" "--languageserver")))
+               `((csharp-mode) . ("OmniSharp" "--languageserver")))
   (cond ((= os-type os-macos)
          (add-to-list 'eglot-server-programs
                       `((swift-mode objc-mode) . ("xcrun" "sourcekit-lsp")))
@@ -842,11 +829,7 @@
         ((eq major-mode 'c-ts-mode)
          (c-mode))
         ((eq major-mode 'c++-ts-mode)
-         (c++-mode))
-        ((eq major-mode 'csharp-mode)
-         (csharp-ts-mode))
-        ((eq major-mode 'csharp-ts-mode)
-         (csharp-mode))))
+         (c++-mode))))
 
 ;; Set default face font and font for かな & 漢字.
 (set-face-attribute 'default nil :family "Hack")
