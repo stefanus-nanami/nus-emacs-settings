@@ -9,7 +9,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
+   '(eglot jsonrpc jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -69,7 +69,6 @@
 
 ;; Eglot.
 (setq-default eglot-connect-timeout nil)
-(setq-default eglot-events-buffer-size 0)
 (setq-default eglot-ignored-server-capabilities '(:inlayHintProvider))
 (setq-default eglot-sync-connect nil)
 
@@ -133,6 +132,12 @@
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
     (package-install package)))
+
+(use-package eglot
+  :ensure t)
+
+(use-package jsonrpc
+  :ensure t)
 
 (use-package bind-key
   :ensure t)
