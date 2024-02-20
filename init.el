@@ -134,7 +134,8 @@
   (setq eglot-connect-timeout nil
         eglot-ignored-server-capabilities '(:inlayHintProvider)
         eglot-sync-connect nil
-        eglot-events-buffer-config '(:size 0 :format full)))
+        eglot-events-buffer-config '(:size 0 :format full)
+        eglot-report-progress 'messages))
 
 (use-package jsonrpc
   :ensure t)
