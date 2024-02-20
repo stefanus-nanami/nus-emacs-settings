@@ -67,11 +67,6 @@
 (setq-default display-line-numbers-minor-tick 10)
 (setq-default display-line-numbers-width 5)
 
-;; Eglot.
-(setq-default eglot-connect-timeout nil)
-(setq-default eglot-ignored-server-capabilities '(:inlayHintProvider))
-(setq-default eglot-sync-connect nil)
-
 ;; GNUS
 (setq-default gnus-inhibit-startup-message t)
 (setq-default gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date
@@ -134,7 +129,11 @@
     (package-install package)))
 
 (use-package eglot
-  :ensure t)
+  :ensure t
+  :config
+  (setq eglot-connect-timeout nil
+        eglot-ignored-server-capabilities '(:inlayHintProvider)
+        eglot-sync-connect nil))
 
 (use-package jsonrpc
   :ensure t)
