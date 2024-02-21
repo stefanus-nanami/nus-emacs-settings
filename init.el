@@ -9,7 +9,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(eglot jsonrpc jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode ivy helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
+   '(cmake-mode eglot jsonrpc jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -128,17 +128,18 @@
   (unless (package-installed-p package)
     (package-install package)))
 
+(use-package jsonrpc
+  :ensure t)
+
 (use-package eglot
   :ensure t
+  :requires jsonrpc
   :config
   (setq eglot-connect-timeout nil
         eglot-ignored-server-capabilities '(:inlayHintProvider)
         eglot-sync-connect nil
         eglot-events-buffer-config '(:size 0 :format full)
         eglot-report-progress 'messages))
-
-(use-package jsonrpc
-  :ensure t)
 
 (use-package bind-key
   :ensure t)
@@ -160,9 +161,6 @@
 (require 'hlsl-mode)
 (require 'nus-snippets)
 (require 'fw-ops)
-
-(use-package emojify
-  :ensure t)
 
 (use-package eldoc-box
   :ensure t
@@ -345,19 +343,6 @@
   :config
   (helm-projectile-on))
 
-(use-package helm-xref
-  :ensure t)
-
-(use-package helm-ls-git
-  :ensure t)
-
-(use-package cmake-mode
-  :ensure t)
-
-(use-package cmake-font-lock
-  :ensure t
-  :requires cmake-mode)
-
 (use-package magit
   :ensure t
   :init
@@ -365,9 +350,6 @@
          ("C-c m s" . magit-status)
          ("C-c m d" . magit-dispatch)
          ("C-c m f" . magit-file-dispatch)))
-
-(use-package objc-font-lock
-  :ensure t)
 
 (use-package doom-themes
   :ensure t
@@ -377,22 +359,10 @@
   (load-theme 'doom-tokyo-night t)
   (doom-themes-org-config))
 
-(use-package lua-mode
-  :ensure t)
-
-(use-package atom-one-dark-theme
-  :ensure t)
-
 (use-package swift-mode
   :ensure t
   :init
   (setq swift-mode:basic-offset 2))
-
-(use-package glsl-mode
-  :ensure t)
-
-(use-package json-mode
-  :ensure t)
 
 (use-package markdown-mode
   :ensure t
@@ -627,10 +597,6 @@
 ;; Tree sitter.
 (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
 (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
-(add-to-list 'major-mode-remap-alist '(js-mode . js-ts-mode))
-(add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
-(add-to-list 'major-mode-remap-alist '(sh-mode . bash-ts-mode))
-(add-to-list 'major-mode-remap-alist '(cmake-mode . cmake-ts-mode))
 
 (setq-default c-ts-mode-indent-style 'bsd)
 
