@@ -627,7 +627,7 @@
 ;; Tree sitter.
 (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
 (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
-(add-to-list 'major-mode-remap-alist '(js-mode . typescript-ts-mode))
+(add-to-list 'major-mode-remap-alist '(js-mode . js-ts-mode))
 (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
 (add-to-list 'major-mode-remap-alist '(sh-mode . bash-ts-mode))
 (add-to-list 'major-mode-remap-alist '(cmake-mode . cmake-ts-mode))
