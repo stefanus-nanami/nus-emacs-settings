@@ -9,7 +9,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(cmake-mode eglot jsonrpc jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
+   '(typescript-mode cmake-mode eglot jsonrpc jaword markdown-mode ellama helm-descbinds eldoc-box ag yasnippet-snippets ucs-utils swift-mode objc-font-lock magit lua-mode json-mode helm-xref helm-projectile helm-ls-git helm-company helm-ag glsl-mode font-utils emojify doom-themes doom-modeline company-dict cmake-font-lock atom-one-dark-theme all-the-icons-dired)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -647,16 +647,6 @@
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
 
-(add-hook 'js-ts-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)
-            (setq tab-width 2)))
-
-(add-hook 'typescript-ts-mode
-          (lambda ()
-            (setq indent-tabs-mode nil)
-            (setq tab-width 2)))
-
 (add-hook 'csharp-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)))
@@ -667,12 +657,6 @@
             (setq tab-width 2)))
 
 (add-hook 'python-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)
-            (setq tab-width 4)
-            (setq display-fill-column-indicator-column 80)))
-
-(add-hook 'python-ts-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 4)
@@ -743,10 +727,8 @@
 (add-hook 'swift-mode-hook 'eglot-ensure)
 (add-hook 'csharp-mode-hook 'eglot-ensure)
 (add-hook 'python-mode-hook 'eglot-ensure)
-(add-hook 'python-ts-mode-hook 'eglot-ensure)
 (add-hook 'js-mode-hook 'eglot-ensure)
-(add-hook 'js-ts-mode-hook 'eglot-ensure)
-(add-hook 'typescript-ts-mode 'eglot-ensure)
+(add-hook 'typescript-mode-hook 'eglot-ensure)
 (add-hook 'lua-mode-hook 'eglot-ensure)
 
 (with-eval-after-load 'eglot
@@ -769,7 +751,7 @@
                                                                    "--header-insertion=never"
                                                                    "--header-insertion-decorators=0")))))
   (add-to-list 'eglot-server-programs
-               `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio")))
+               `((python-mode) . ("pyright-langserver" "--stdio")))
   (add-to-list 'eglot-stay-out-of 'flymake))
 
 ;; Visualize whitespaces.
