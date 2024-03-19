@@ -138,7 +138,7 @@
   (setq eglot-connect-timeout nil
         eglot-ignored-server-capabilities '(:inlayHintProvider)
         eglot-sync-connect nil
-        eglot-events-buffer-config '(:size 0 :format full)
+        eglot-events-buffer-size 4096
         eglot-report-progress 'messages))
 
 (use-package bind-key
@@ -339,7 +339,7 @@
   :requires projectile
   :bind (("<f9>" . helm-projectile-find-other-file)
          ("C-<f9>" . helm-projectile)
-         ("M-<f9>" . helm-projects-find-files))
+         ("M-<f9>" . helm-projectile-switch-project))
   :config
   (helm-projectile-on))
 
