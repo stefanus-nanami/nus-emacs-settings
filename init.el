@@ -138,8 +138,7 @@
   (setq eglot-connect-timeout nil
         eglot-ignored-server-capabilities '(:inlayHintProvider)
         eglot-sync-connect nil
-        eglot-events-buffer-size 4096
-        eglot-report-progress 'messages))
+        eglot-events-buffer-size 4096))
 
 (use-package bind-key
   :ensure t)
@@ -732,8 +731,10 @@
 (add-hook 'lua-mode-hook 'eglot-ensure)
 
 (with-eval-after-load 'eglot
+  ;; (add-to-list 'eglot-server-programs
+  ;;              `((csharp-mode) . ("omnisharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
-               `((csharp-mode) . ("OmniSharp" "--languageserver")))
+               `((csharp-mode) . ("csharp-ls")))
   (cond ((= os-type os-macos)
          (add-to-list 'eglot-server-programs
                       `((swift-mode objc-mode) . ("xcrun" "sourcekit-lsp")))
